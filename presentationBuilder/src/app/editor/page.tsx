@@ -76,7 +76,7 @@ export default function EditorPage() {
             {/* 1. App Header */}
             <header className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 shrink-0 z-20">
                 <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon" onClick={() => router.push('/outline')}>
+                    <Button variant="ghost" size="icon" onClick={() => router.push('/')}>
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
                     <div className="flex flex-col">

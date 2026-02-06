@@ -45,7 +45,7 @@ export const SlideCanvas: React.FC<SlideCanvasProps> = ({ slide, scale = 1, isEd
             {/* 3. Render Blocks Absolute */}
             {positions.map((pos) => (
                 <div
-                    key={pos.block.block_id}
+                    key={`${slide.slide_number}-${pos.block.block_id}`}
                     className={cn(
                         "absolute transition-all",
                         isEditMode && "hover:ring-2 hover:ring-kelp-accent-start hover:ring-offset-2 hover:z-10 cursor-pointer"

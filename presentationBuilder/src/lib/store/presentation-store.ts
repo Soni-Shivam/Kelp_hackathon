@@ -9,7 +9,7 @@ interface PresentationState {
     isEditMode: boolean;
 
     // Actions
-    setPresentation: (data: Presentation) => void;
+    setPresentation: (data: Presentation | null) => void;
     setCurrentSlideNumber: (num: number) => void;
     startLoading: () => void;
     setLoadingStep: (step: string) => void;
@@ -28,7 +28,7 @@ export const usePresentationStore = create<PresentationState>((set) => ({
 
     setPresentation: (data) => set({
         presentation: data,
-        currentSlideNumber: data.slides[0]?.slide_number || 1
+        currentSlideNumber: data?.slides?.[0]?.slide_number || 1
     }),
     setCurrentSlideNumber: (num) => set({ currentSlideNumber: num }),
     startLoading: () => set({ isLoading: true }),
