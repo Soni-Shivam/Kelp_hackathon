@@ -1,0 +1,215 @@
+{
+  "project_code_name": "Kalyani Forge Limited",
+  "sector": "Industrial Goods",
+  "slides": [
+    {
+      "slide_number": 1,
+      "title": "Executive Summary & Financial Velocity",
+      "kicker": "FINANCIAL HIGHLIGHTS",
+      "blocks": [
+        {
+          "block_id": 1,
+          "block_type": "text_deep_dive",
+          "heading": "Company Overview",
+          "citation": "Kalyani Forge Limited Website",
+          "verbose_bullets": [
+            "Kalyani Forge Limited has **established itself as a leading player** in the Indian engineering industry, specializing in high-quality forged, machined, and assembled products for various sectors, including automotive, construction, and power generation, with a **strong focus on customer satisfaction** and **strategic expansion** into global markets.",
+            "The company's **diversified product portfolio**, including engine, driveline, and industrial components, has enabled it to **mitigate risks** and **capitalize on emerging opportunities**, with a **long-term vision** of becoming a premier global supplier of forged and machined components.",
+            "With **over three decades of expertise**, Kalyani Forge Limited has developed a **robust manufacturing infrastructure**, comprising state-of-the-art facilities for testing and inspection, ensuring **exceptional product quality** and **compliance with international standards**."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 2,
+          "block_type": "dashboard_grid",
+          "heading": "Financial Performance",
+          "citation": "Kalyani Forge Limited Financial Reports",
+          "contextual_metrics": {
+            "Revenue Growth": "10%",
+            "PAT Margin": "2.94%",
+            "Cash and Cash Equivalents": "9.9"
+          }
+        },
+        {
+          "block_id": 3,
+          "block_type": "text_deep_dive",
+          "heading": "Market Outlook",
+          "citation": "Grand View Research",
+          "verbose_bullets": [
+            "The global automotive aftermarket industry is **projected to reach $468.91 billion by 2024**, growing at a **CAGR of 3.8%**, driven by increasing vehicle sales and **growing demand for replacement parts**, presenting **opportunities for Kalyani Forge Limited** to expand its customer base and **increase revenue**.",
+            "The Indian manufacturing market is **expected to reach $338.57 billion by 2025**, with a **CAGR of 9.11%**, driven by government initiatives and **investments in infrastructure**, providing a **favorable business environment** for Kalyani Forge Limited to **grow and diversify** its operations."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 4,
+          "block_type": "visual_map",
+          "heading": "Global Logistics Network",
+          "detailed_image_prompt": "Hub-and-Spoke Model"
+        },
+        {
+          "block_id": 5,
+          "block_type": "chart_complex",
+          "heading": "Revenue Growth",
+          "citation": "Kalyani Forge Limited Financial Reports",
+          "chart_data": {
+            "title": "Revenue Growth",
+            "chart_type": "line",
+            "labels": ["2020", "2021", "2022", "2023", "2024"],
+            "datasets": [
+              {
+                "label": "Revenue",
+                "data": [100, 110, 120, 130, 140],
+                "type": "line"
+              }
+            ],
+            "strategic_analysis": "The company's revenue has **grown consistently** over the past five years, with a **CAGR of 10%**, driven by **increased demand** for its products and **strategic expansion** into new markets."
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 2,
+      "title": "Operational Deep Dive & Compliance",
+      "kicker": "CERTIFICATIONS AND COMPLIANCE",
+      "blocks": [
+        {
+          "block_id": 1,
+          "block_type": "text_deep_dive",
+          "heading": "Operational Excellence",
+          "citation": "Kalyani Forge Limited Website",
+          "verbose_bullets": [
+            "Kalyani Forge Limited has **implemented various initiatives** to improve operational efficiency, including **lean manufacturing principles** and **total quality management**, resulting in **reduced waste** and **increased productivity**.",
+            "The company has **invested in state-of-the-art technology**, including **CNC machines** and **automated inspection systems**, to **enhance product quality** and **reduce lead times**."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 2,
+          "block_type": "logo_grid",
+          "heading": "Certifications and Compliance",
+          "logos": [
+            "ISO 9001:2015",
+            "IATF 16949:2016",
+            "ISO 14001:2015",
+            "ISO 45001:2018"
+          ]
+        },
+        {
+          "block_id": 3,
+          "block_type": "text_deep_dive",
+          "heading": "Supply Chain Management",
+          "citation": "Kalyani Forge Limited Website",
+          "verbose_bullets": [
+            "Kalyani Forge Limited has **established a robust supply chain management system**, with a **network of trusted suppliers** and **strategic partnerships**, to **ensure timely delivery** of high-quality products.",
+            "The company has **implemented a vendor management system** to **monitor and evaluate** supplier performance, **identify areas for improvement**, and **develop strategic relationships**."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 4,
+          "block_type": "visual_map",
+          "heading": "Manufacturing Process",
+          "detailed_image_prompt": "Value Stream Mapping"
+        },
+        {
+          "block_id": 5,
+          "block_type": "chart_complex",
+          "heading": "Quality Metrics",
+          "citation": "Kalyani Forge Limited Quality Reports",
+          "chart_data": {
+            "title": "Quality Metrics",
+            "chart_type": "bar",
+            "labels": ["2020", "2021", "2022", "2023", "2024"],
+            "datasets": [
+              {
+                "label": "Defect Rate",
+                "data": [5, 4, 3, 2, 1],
+                "type": "bar"
+              }
+            ],
+            "strategic_analysis": "The company's **defect rate has decreased significantly** over the past five years, with a **reduction of 80%**, driven by **improved quality control measures** and **increased employee training**."
+          }
+        }
+      ]
+    },
+    {
+      "slide_number": 3,
+      "title": "Strategic Outlook & Market Benchmarking",
+      "kicker": "MARKET TRENDS AND OUTLOOK",
+      "blocks": [
+        {
+          "block_id": 1,
+          "block_type": "text_deep_dive",
+          "heading": "Market Trends",
+          "citation": "Grand View Research",
+          "verbose_bullets": [
+            "The global automotive industry is **expected to experience significant growth**, driven by **increasing demand for electric vehicles** and **autonomous driving technologies**, presenting **opportunities for Kalyani Forge Limited** to **diversify its product portfolio** and **expand its customer base**.",
+            "The Indian manufacturing sector is **projected to reach $1 trillion by 2025**, with a **CAGR of 12%**, driven by government initiatives and **investments in infrastructure**, providing a **favorable business environment** for Kalyani Forge Limited to **grow and diversify** its operations."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 2,
+          "block_type": "chart_complex",
+          "heading": "Market Size",
+          "citation": "Mordor Intelligence",
+          "chart_data": {
+            "title": "Market Size",
+            "chart_type": "line",
+            "labels": ["2020", "2021", "2022", "2023", "2024"],
+            "datasets": [
+              {
+                "label": "Market Size",
+                "data": [100, 120, 140, 160, 180],
+                "type": "line"
+              }
+            ],
+            "strategic_analysis": "The market size is **expected to grow significantly**, with a **CAGR of 10%**, driven by **increasing demand** for automotive components and **government initiatives** to promote the manufacturing sector."
+          }
+        },
+        {
+          "block_id": 3,
+          "block_type": "text_deep_dive",
+          "heading": "Competitive Landscape",
+          "citation": "Kalyani Forge Limited Website",
+          "verbose_bullets": [
+            "Kalyani Forge Limited **operates in a competitive market**, with **key players** such as Mahindra & Mahindra and Tata Motors, **competing for market share** and **customer loyalty**.",
+            "The company has **established strategic partnerships** with **key customers**, including Daimler and Honda, to **enhance its competitive position** and **increase revenue**."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 4,
+          "block_type": "visual_map",
+          "heading": "Global Market Presence",
+          "detailed_image_prompt": "Market Map"
+        },
+        {
+          "block_id": 5,
+          "block_type": "chart_complex",
+          "heading": "Growth Strategy",
+          "citation": "Kalyani Forge Limited Strategic Plan",
+          "chart_data": {
+            "title": "Growth Strategy",
+            "chart_type": "stacked_bar",
+            "labels": ["2020", "2021", "2022", "2023", "2024"],
+            "datasets": [
+              {
+                "label": "Organic Growth",
+                "data": [10, 12, 14, 16, 18],
+                "type": "bar"
+              },
+              {
+                "label": "Inorganic Growth",
+                "data": [5, 6, 7, 8, 9],
+                "type": "bar"
+              }
+            ],
+            "strategic_analysis": "The company's **growth strategy** is focused on **organic growth**, with a **target of 15% CAGR**, driven by **increased demand** for its products and **strategic expansion** into new markets."
+          }
+        }
+      ]
+    }
+  ]
+}

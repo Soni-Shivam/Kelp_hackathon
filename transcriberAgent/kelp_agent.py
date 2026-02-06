@@ -2,6 +2,8 @@ import pandas as pd
 import json
 import os
 import re
+import requests
+import io
 from groq import Groq
 from dotenv import load_dotenv
 
@@ -14,34 +16,70 @@ load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 MODEL_NAME = "llama-3.3-70b-versatile"
 MAX_RETRIES = 3
+API_URL = "http://localhost:8000/trigger-agent"
 
 client = Groq(api_key=GROQ_API_KEY)
 
 # ==========================================================
-# LOAD DATA (WITH UTF-8 FIX)
+# DATA FETCHING
 # ==========================================================
 
-def load_financials():
+def fetch_data_from_api(company_name, md_file_path):
+    print(f"Fetching data for {company_name} from API...")
     try:
+        with open(md_file_path, "r", encoding="utf-8") as f:
+            md_content = f.read()
+        
+        payload = {
+            "company_name": company_name,
+            "md_content": md_content
+        }
+        
+        response = requests.post(API_URL, json=payload)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        print(f"Error fetching data from API: {e}")
+        return None
+
+def extract_financials(api_output):
+    try:
+        # Navigate to financials: output -> private -> typed -> financials
+        fin_data = api_output.get("output", {}).get("private", {}).get("typed", {}).get("financials", {})
+        
+        # Helper to read csv string to dataframe
+        def read_csv_str(filename):
+            content = fin_data.get(filename)
+            if content:
+                return pd.read_csv(io.StringIO(content))
+            return pd.DataFrame()
+
         return (
-            pd.read_csv("financials/income_statement.csv"),
-            pd.read_csv("financials/balance_sheet.csv"),
-            pd.read_csv("financials/cash_flow.csv"),
-            pd.read_csv("financials/ratios.csv"),
+            read_csv_str("income_statement.csv"),
+            read_csv_str("balance_sheet.csv"),
+            read_csv_str("cash_flow.csv"),
+            read_csv_str("ratios.csv"),
         )
-    except FileNotFoundError:
-        print("Warning: CSV files not found. Using empty DataFrames.")
+    except Exception as e:
+        print(f"Error extracting financials: {e}")
         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
 
-def load_private_jsons():
+def extract_private_jsons(api_output):
     try:
-        # Enforcing UTF-8 to handle special characters (e.g., ₹)
-        business = json.load(open("business_description.json", encoding="utf-8"))
-        swot = json.load(open("swot.json", encoding="utf-8"))
-        milestones = json.load(open("key_milestones.json", encoding="utf-8"))
+        # Navigate to typed json: output -> private -> typed
+        typed_data = api_output.get("output", {}).get("private", {}).get("typed", {})
+        
+        # Helper to get json content (which is already parsed dict by the API logic)
+        def get_json(filename):
+            return typed_data.get(filename, {})
+
+        business = get_json("business_description.json")
+        swot = get_json("swot.json")
+        milestones = get_json("key_milestones.json")
+        
         return business, swot, milestones
-    except FileNotFoundError:
-        print("Warning: JSON files not found. Using empty dicts.")
+    except Exception as e:
+        print(f"Error extracting private JSONs: {e}")
         return {}, {}, {}
 
 # ==========================================================
@@ -252,15 +290,29 @@ def generate(prompt):
 # ==========================================================
 
 def main():
-    income, balance, cashflow, ratios = load_financials()
-    business_json, swot_json, milestone_json = load_private_jsons()
+    # 1. Fetch data from API
+    api_data = fetch_data_from_api(
+        company_name="Kalyani Forge Ltd",
+        md_file_path="dataAgent/data/input/private/Company_OnePager.md" 
+    )
+    
+    if not api_data:
+        print("Aborting: Could not fetch data from API.")
+        return
 
+    # 2. Extract DataFrames and JSONs
+    income, balance, cashflow, ratios = extract_financials(api_data)
+    business_json, swot_json, milestone_json = extract_private_jsons(api_data)
+
+    # 3. Process Text
     business_text = extract_text(business_json, "business_description")
     swot_text = extract_text(swot_json, "swot")
     milestone_text = extract_text(milestone_json, "key_milestones")
 
+    # 4. Summarize Financials
     financial_summary = summarize_financials(income, balance, cashflow, ratios)
 
+    # 5. Build Prompt
     prompt = build_prompt(
         financial_summary,
         business_text,
@@ -268,6 +320,7 @@ def main():
         milestone_text
     )
 
+    # 6. Generate Presentation
     try:
         presentation = generate(prompt)
         with open("presentation.json", "w", encoding="utf-8") as f:
