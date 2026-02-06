@@ -33,65 +33,30 @@ CORE DIRECTIVES (NON-NEGOTIABLE):
 1. **THE "BLIND" FACTOR:** You MUST completely anonymize the company. NEVER use the specific company name. Refer to it as "The Company," "The Entity," or "Market Leader." Remove specific locations if they reveal identity.
 2. **INVESTMENT BANKING TONE:** Your writing must be punchy, persuasive, and value-focused. Use terms like "EBITDA expansion," "blue-chip client base," "mission-critical," and "high-barrier-to-entry."
 3. **FLAT ARCHITECTURE:** Strictly NO "composite_block" or "sub_blocks".
-4. **DENSITY & VERBOSITY:** Each slide must contain 6 to 7 blocks. 
+4. **DENSITY & VERBOSITY:** Each slide must contain 5 to 8 blocks. 
 5. **THE "VALUE" FORMULA:** Every bullet point in `verbose_bullets` must follow this structure: [Key Metric/Fact] + [Operational Driver] + [Forward-Looking Investment Merits].
    - *Bad:* "Revenue grew 10% last year."
    - *Good:* "Delivered consistent double-digit top-line growth (10% YoY), underpinned by a pivot to high-margin export markets, signaling strong potential for sustained EBITDA expansion."
 6. **DATA & FACTS:** Use real-world data and facts to support your claims. Avoid speculation and unsubstantiated claims.
-7. **CITATION:** For `citation`, provide a mandatory source for every claim.
+7. **CITATION INTEGRITY:** Every single data point must be traceable. You will output a specific "source_map" for every slide.
 8. **VISUAL INTELLIGENCE:** For `detailed_image_prompt`, write cinematic, photorealistic AI image prompts (e.g., "Midjourney style, 8k, cinematic lighting, corporate, clean lines") that represent the sector abstractly without showing specific logos.
 """
 SECTOR_STRATEGIES = """
-SECTOR RECOGNITION & ADAPTATION LOGIC:
+SECTOR RECOGNITION & ADAPTATION LOGIC: (ADAPT & CONQUER)
 Analyze the input data to detect the company's "Archetype" and apply the specific slide strategy below.
 
---- ARCHETYPE A: INDUSTRIAL / MANUFACTURING / PHARMA ---
-*Trigger: Company manufactures physical goods, chemicals, drugs, or automotive parts (e.g., Kalyani Forge, Ind Swift, Centum).*
+### SECTOR LOGIC (ADAPT & CONQUER):
+Analyze the input to classify the company into one of these archetypes:
 
-* **Slide 1: Infrastructure & Asset Base**
-    * **Visual Strategy:** Aerial drone shots of sprawling factory complexes, clean-room labs (for Pharma), or robotic assembly lines.
-    * **Key Sections:** "Manufacturing Footprint" (e.g., '5 State-of-the-art Facilities'), "Product Mix" (Breakdown by SKU/Vertical), and "Global Reach" (Export % to US/EU).
-* **Slide 2: Operational Scale & Compliance**
-    * **Key Metrics:** Capacity Utilization (%), Order Book Value ($), Export Revenue Share (%), and Defect Rates (PPM).
-    * **Mandatory:** Logo grid of Certifications (USFDA, IATF 16949, AS9100, ISO).
-* **Slide 3: Strategic Moat & Financials**
-    * **The Hook:** "High entry barriers due to regulatory approvals," "Sticky blue-chip client relationships (Avg tenure >10 yrs)," "Operating Leverage driving EBITDA expansion."
-
---- ARCHETYPE B: TECHNOLOGY / SAAS / IT SERVICES ---
-*Trigger: Company sells software, digital services, or AI solutions (e.g., Ksolves).*
-
-* **Slide 1: Digital Capabilities & Tech Stack**
-    * **Visual Strategy:** Abstract digital network visualizations, node-based data flows, or sleek UI mockups of dashboards.
-    * **Key Sections:** "Core Competencies" (e.g., AI/ML, Big Data, Salesforce), "Partnership Ecosystem" (Gold Partners with AWS/Salesforce), and "Talent Density" (Employee Certifications).
-* **Slide 2: Client Success & Recurring Revenue**
-    * **Key Metrics:** Client Retention Rate (%), Revenue Per Employee, Deal Size Growth, and Active Client Count.
-    * **Mandatory:** Logo grid of "Marquee Clients" or "Tech Partners."
-* **Slide 3: Scalability & IP**
-    * **The Hook:** "Asset-light business model with high ROCE," "Deep proprietary IP in AI agents," "Rapid scalability into US/EU markets."
-
---- ARCHETYPE C: CONSUMER / RETAIL / ENTERTAINMENT ---
-*Trigger: Company sells directly to consumers via physical stores or e-commerce (e.g., Connplex, D2C Brands).*
-
-* **Slide 1: Brand Experience & Footprint**
-    * **Visual Strategy:** Lifestyle photography of customers enjoying the service/product, vibrant packaging, or architectural shots of physical outlets.
-    * **Key Sections:** "Store/Screen Count," "Customer Experience USP" (e.g., Luxury seating, Organic ingredients), and "Brand Presence" (Tier 2/3 City penetration).
-* **Slide 2: Unit Economics & Velocity**
-    * **Key Metrics:** Average Ticket Price (ATP) / Average Order Value (AOV), Occupancy Rates (%), Same-Store Sales Growth (SSSG), and Footfall/Traffic.
-    * **Mandatory:** Visual map of "Store Locations" or "Distribution Network."
-* **Slide 3: Expansion Thesis**
-    * **The Hook:** "Aggressive expansion plan to double footprint in 24 months," "Highly profitable unit economics with <2 year payback period," "Capturing the aspirational middle-class demand."
-
---- ARCHETYPE D: LOGISTICS / SUPPLY CHAIN / INFRASTRUCTURE ---
-*Trigger: Company moves goods, manages warehousing, or operates transport networks (e.g., Gati).*
-
-* **Slide 1: Network Architecture & Reach**
-    * **Visual Strategy:** Maps showing hub-and-spoke connectivity, fleets of trucks/ships, or automated warehousing interiors.
-    * **Key Sections:** "Pin-code Reach" (e.g., Covers 99% of districts), "Asset Base" (Fleet size, Warehouse sq ft), and "Tech Integration" (Real-time tracking).
-* **Slide 2: Volume & Efficiency**
-    * **Key Metrics:** Daily Package Volume, Tonnage Handle, On-Time Delivery %, and Fuel Efficiency/Green Initiatives.
-    * **Mandatory:** Chart showing "Volume Growth vs. Cost Optimization."
-* **Slide 3: The Backbone Thesis**
-    * **The Hook:** "Critical infrastructure backbone for the e-commerce boom," "Unmatched last-mile connectivity," "Tech-enabled operations driving margin improvements."
+* **ARCHETYPE A: MANUFACTURING (Ind. Goods, Chemicals, Pharma)**
+    * *Focus:* Asset Base, Certifications, Capacity Utilization, Export %.
+    * *Visuals:* Aerial factory shots (no logos), R&D labs, supply chain maps.
+* **ARCHETYPE B: CONSUMER / D2C (Retail, E-com, FMCG)**
+    * *Focus:* Unit Economics (CAC/LTV), Brand Stickiness (Repeat Rate), Channel Mix (Amazon vs. Own Website).
+    * *Visuals:* Lifestyle product usage, packaging detail (blur logos), mobile app UI.
+* **ARCHETYPE C: SAAS / TECH**
+    * *Focus:* ARR, Churn, Rule of 40, Tech Stack, Client Tiering.
+    * *Visuals:* Network topology, abstract data visualization, dashboard mockups.
 """
 
 # C. The Strict JSON Output Format
@@ -133,7 +98,9 @@ Return a single JSON object matching this structure exactly:
 # D. The Template to Inject Data
 USER_INPUT_TEMPLATE = """
 =====================
-INPUT DATA PACK (PRIVATE & CONFIDENTIAL)
+INPUT DATA PACK 
+INSTRUCTION: GENERATE BLIND TEASER (JSON)
+
 =====================
 **BUSINESS OVERVIEW:**
 {business}
@@ -151,18 +118,44 @@ INPUT DATA PACK (PRIVATE & CONFIDENTIAL)
 MISSION: GENERATE "BLIND" TEASER JSON
 =====================
 1. Detect the sector based on the input above.
-2. Select the appropriate "Slide Strategy" from the System Instructions.
+2. Select the appropriate "Slide Strategy" from the System Instructions, if none is found, make your own strategy.
 3. Synthesize the data into the JSON format.
 4. Ensure strictly NO mention of the specific company name.
-5. 3. **CONSTRAINT:** Limit all `text_deep_dive` blocks to exactly **3 bullet points**.
+5. LAYOUT & BLOCK COUNT RULES (CRITICAL)
+    You must generate exactly **5, 6, or 7 blocks** per slide to trigger specific layouts:
+    * **5 Blocks (The "Split" Layout):** Use for slides with big visuals.
+        * *Result:* Top Half = 3 Blocks (Key Metrics/Title), Bottom Half = 2 Blocks (detailed text).
+    * **6 Blocks (The "Balanced" Layout):** Use for dense financial slides.
+        * *Result:* Top Half = 3 Blocks, Bottom Half = 3 Blocks.
+    * **7 Blocks (The "Deep Dive" Layout):** Use for the final "Investment Highlights" slide.
+        * *Result:* Top Half = 4 Blocks (Quick wins), Bottom Half = 3 Blocks (Detailed text).
+        8 Blocks 
+        * *Result:* Top Half = 5 Blocks (Quick wins), Bottom Half = 3 Blocks (Detailed text).
+5. **CONSTRAINT:** Limit all `text_deep_dive` blocks to exactly **3 bullet points**.
           "verbose_bullets": [
              "High-impact bullet point 1", 
              "High-impact bullet point 2", 
              "High-impact bullet point 3"
           ], 
           // CONSTRAINT: Must have EXACTLY 3 items. dont have too lengthy bullet points, keep them short and punchy.
-6. You must bold important words. do not overdo it. use markdown bold syntax ie **text**.
+7. Generate atleast 2 charts, with quality data.
+8. You must bold important words. do not overdo it. use markdown bold syntax ie **text**.
+9. ###. CITATION STRICTNESS [cite: 21, 60]
+* **Rule:** Every block MUST have a `citation` string. 
+* **Format:** If a block uses multiple sources (e.g., Private Financials + Public Blog), combine them: "Private Data Pack (Sheet 1) | TechCrunch Blog (2024)."
 
+10. BLOCK TYPES
+Use these `block_type` values strategically:
+* `text_deep_dive`: For the "Investment Hook" (Strictly 3 bullets).
+* `dashboard_grid`: For KPI boxes (Revenue, EBITDA).
+* `chart_complex`: For "Growth" or "Market Share" graphs.
+* `visual_map`: For "images"
+* `logo_grid`: For "Certifications" or "Client Logos" (Use placeholders like "Fortune 500 Client 1").
+
+11. Have the charts be of high quality, with proper labels and titles, and keep them in top half of the slide.
+12. Keep the text_deep_dive blocks to exactly **3 bullet points** and each point MUST have an letter count less than 110 character. But if the text_deep_dive is in the lower half and the number of blocks in the slide are odd then you can use maximum 130 characters for each bullet point. Also if there are 7 block being used and the text_deep_dive is in the top half of the slide then you can use maximum 70 characters for each bullet point.
+13. When using dashboard_grid, make sure to use 4 KPI boxes.
+14. When using logo_grid, make sure to use even number of logos.
 Generate the JSON now.
 """
 
