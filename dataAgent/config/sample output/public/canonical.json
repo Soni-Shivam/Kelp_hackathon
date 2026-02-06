@@ -1,0 +1,78 @@
+{
+  "company_identity": {
+    "official_name": "Kalyani Forge Ltd"
+  },
+  "sections": {
+    "company_profile": {
+      "source": "screener",
+      "raw_text": "About\nIncorporated  in 1979, Kalyani Forge Ltd manufactures high-quality, hot-warm and cold-forged products\n[1]\nKey Points\nBusiness Overview:\n[1]\n[2]\nKFL is an engineering company with expertise in metal forming including hot, warm and cold forging. It manufactures close-tolerance, niche precision forging, fully- machined and sub- assembled products. Company also provides services like product and process design, development, warehousing, door-to-door delivery, and validation support to its customers\nRead More\nWebsite\nBSE\nNSE"
+    },
+    "market_presence": {
+      "source": "screener",
+      "raw_fields": {
+        "Market Cap": "\u20b9\n        222\n        \n          Cr.",
+        "Current Price": "\u20b9\n        605",
+        "High / Low": "\u20b9 890 / 488",
+        "Stock P/E": "29.2",
+        "Book Value": "\u20b9\n        253",
+        "Dividend Yield": "0.66\n        \n          %",
+        "ROCE": "12.3\n        \n          %",
+        "ROE": "9.77\n        \n          %",
+        "Face Value": "\u20b9\n        10.0"
+      }
+    },
+    "peers": {
+      "source": "screener",
+      "companies": [
+        {
+          "name": "Sales+",
+          "market_cap": "73.54"
+        },
+        {
+          "name": "Expenses+",
+          "market_cap": "71.93"
+        },
+        {
+          "name": "Operating Profit",
+          "market_cap": "1.61"
+        },
+        {
+          "name": "OPM %",
+          "market_cap": "2.19%"
+        },
+        {
+          "name": "Other Income+",
+          "market_cap": "0.06"
+        },
+        {
+          "name": "Interest",
+          "market_cap": "0.56"
+        },
+        {
+          "name": "Depreciation",
+          "market_cap": "2.95"
+        },
+        {
+          "name": "Profit before tax",
+          "market_cap": "-1.84"
+        },
+        {
+          "name": "Tax %",
+          "market_cap": "-41.85%"
+        },
+        {
+          "name": "Net Profit+",
+          "market_cap": "-1.08"
+        },
+        {
+          "name": "EPS in Rs",
+          "market_cap": "-2.97"
+        },
+        {
+          "name": "Raw PDF",
+          "market_cap": ""
+        }
+      ]
+    }
+  }
+}

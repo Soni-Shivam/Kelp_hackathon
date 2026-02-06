@@ -1,0 +1,277 @@
+metric,year,value
+- Reserves & Surplus,2014,991.47233
+- Reserves & Surplus,2015,937.83745
+- Reserves & Surplus,2016,940.11233
+- Reserves & Surplus,2017,983.707
+- Reserves & Surplus,2018,1031.408
+- Reserves & Surplus,2019,1079.251
+- Reserves & Surplus,2020,984.838
+- Reserves & Surplus,2021,965.54
+- Reserves & Surplus,2022,992.994
+- Reserves & Surplus,2023,740.631
+- Reserves & Surplus,2024,783.682
+- Reserves & Surplus,2025,860.5
+- Borrowings,2014,493.35312
+- Borrowings,2015,361.99465
+- Borrowings,2016,338.9214
+- Borrowings,2017,570.611
+- Borrowings,2018,571.947
+- Borrowings,2019,376.10999999999996
+- Borrowings,2020,252.212
+- Borrowings,2021,260.983
+- Borrowings,2022,260.636
+- Borrowings,2023,381.926
+- Borrowings,2024,609.121
+- Borrowings,2025,715.7
+- Long term Borrowings,2014,214.40296
+- Long term Borrowings,2015,117.00047
+- Long term Borrowings,2016,45.19005
+- Long term Borrowings,2017,157.71
+- Long term Borrowings,2018,175.761
+- Long term Borrowings,2019,62.234
+- Long term Borrowings,2020,13.446
+- Long term Borrowings,2021,None
+- Long term Borrowings,2022,0.86
+- Long term Borrowings,2023,8.92
+- Long term Borrowings,2024,194.326
+- Long term Borrowings,2025,122.5
+- Short Term Borrowings,2014,278.95016
+- Short Term Borrowings,2015,244.99418
+- Short Term Borrowings,2016,293.73135
+- Short Term Borrowings,2017,412.901
+- Short Term Borrowings,2018,396.186
+- Short Term Borrowings,2019,313.876
+- Short Term Borrowings,2020,238.766
+- Short Term Borrowings,2021,260.983
+- Short Term Borrowings,2022,259.776
+- Short Term Borrowings,2023,373.006
+- Short Term Borrowings,2024,414.795
+- Short Term Borrowings,2025,593.2
+- Other Long Term Liabilities,2014,None
+- Other Long Term Liabilities,2015,None
+- Other Long Term Liabilities,2016,30.9591
+- Other Long Term Liabilities,2017,None
+- Other Long Term Liabilities,2018,None
+- Other Long Term Liabilities,2019,None
+- Other Long Term Liabilities,2020,None
+- Other Long Term Liabilities,2021,None
+- Other Long Term Liabilities,2022,None
+- Other Long Term Liabilities,2023,None
+- Other Long Term Liabilities,2024,None
+- Other Long Term Liabilities,2025,None
+- Deferred tax liabilities (net),2014,39.64543
+- Deferred tax liabilities (net),2015,11.54626
+- Deferred tax liabilities (net),2016,None
+- Deferred tax liabilities (net),2017,None
+- Deferred tax liabilities (net),2018,13.038
+- Deferred tax liabilities (net),2019,None
+- Deferred tax liabilities (net),2020,None
+- Deferred tax liabilities (net),2021,None
+- Deferred tax liabilities (net),2022,None
+- Deferred tax liabilities (net),2023,None
+- Deferred tax liabilities (net),2024,None
+- Deferred tax liabilities (net),2025,None
+- Non-Current Assets,2014,1018.17935
+- Non-Current Assets,2015,836.65497
+- Non-Current Assets,2016,764.69184
+- Non-Current Assets,2017,1073.48
+- Non-Current Assets,2018,978.887
+- Non-Current Assets,2019,839.658
+- Non-Current Assets,2020,736.085
+- Non-Current Assets,2021,618.549
+- Non-Current Assets,2022,546.09
+- Non-Current Assets,2023,480.93
+- Non-Current Assets,2024,687.54
+- Non-Current Assets,2025,820.9
+- Total fixed assets,2014,928.87971
+- Total fixed assets,2015,782.26488
+- Total fixed assets,2016,719.36836
+- Total fixed assets,2017,898.829
+- Total fixed assets,2018,888.482
+- Total fixed assets,2019,787.53
+- Total fixed assets,2020,662.574
+- Total fixed assets,2021,541.628
+- Total fixed assets,2022,462.515
+- Total fixed assets,2023,422.28
+- Total fixed assets,2024,616.21
+- Total fixed assets,2025,760.2
+- Tangible assets,2014,784.30235
+- Tangible assets,2015,608.27256
+- Tangible assets,2016,632.08117
+- Tangible assets,2017,595.359
+- Tangible assets,2018,837.724
+- Tangible assets,2019,782.835
+- Tangible assets,2020,651.932
+- Tangible assets,2021,529.971
+- Tangible assets,2022,439.39
+- Tangible assets,2023,391.204
+- Tangible assets,2024,556.941
+- Tangible assets,2025,603.6
+- Gross fixed assets,2014,0
+- Gross fixed assets,2015,0
+- Gross fixed assets,2016,0
+- Gross fixed assets,2017,0
+- Gross fixed assets,2018,0
+- Gross fixed assets,2019,0
+- Gross fixed assets,2020,0
+- Gross fixed assets,2021,0
+- Gross fixed assets,2022,0
+- Gross fixed assets,2023,0
+- Gross fixed assets,2024,0
+- Gross fixed assets,2025,0
+- Intangible assets,2014,6.25107
+- Intangible assets,2015,4.99741
+- Intangible assets,2016,6.2504
+- Intangible assets,2017,6.027
+- Intangible assets,2018,4.295
+- Intangible assets,2019,1.47
+- Intangible assets,2020,0.82
+- Intangible assets,2021,0.332
+- Intangible assets,2022,0.032
+- Intangible assets,2023,None
+- Intangible assets,2024,6.498
+- Intangible assets,2025,6.1
+- Deferred tax assets (net),2014,None
+- Deferred tax assets (net),2015,None
+- Deferred tax assets (net),2016,2.34406
+- Deferred tax assets (net),2017,10.527
+- Deferred tax assets (net),2018,None
+- Deferred tax assets (net),2019,3.402
+- Deferred tax assets (net),2020,19.559
+- Deferred tax assets (net),2021,22.935
+- Deferred tax assets (net),2022,36.16
+- Deferred tax assets (net),2023,41.629
+- Deferred tax assets (net),2024,35.617
+- Deferred tax assets (net),2025,18.6
+- Other Non-Current Assets,2014,48.57181
+- Other Non-Current Assets,2015,49.42354
+- Other Non-Current Assets,2016,40.6471
+- Other Non-Current Assets,2017,164.074
+- Other Non-Current Assets,2018,90.355
+- Other Non-Current Assets,2019,48.676
+- Other Non-Current Assets,2020,53.902
+- Other Non-Current Assets,2021,53.936
+- Other Non-Current Assets,2022,47.365
+- Other Non-Current Assets,2023,16.971
+- Other Non-Current Assets,2024,35.663
+- Other Non-Current Assets,2025,None
+- Adj Current Assets,2014,None
+- Adj Current Assets,2015,None
+- Adj Current Assets,2016,None
+- Adj Current Assets,2017,None
+- Adj Current Assets,2018,None
+- Adj Current Assets,2019,None
+- Adj Current Assets,2020,None
+- Adj Current Assets,2021,None
+- Adj Current Assets,2022,None
+- Adj Current Assets,2023,None
+- Adj Current Assets,2024,None
+- Adj Current Assets,2025,None
+- Other Current Assets,2014,15.56071
+- Other Current Assets,2015,14.02268
+- Other Current Assets,2016,20.69096
+- Other Current Assets,2017,196.309
+- Other Current Assets,2018,141.934
+- Other Current Assets,2019,146.258
+- Other Current Assets,2020,84.182
+- Other Current Assets,2021,66.235
+- Other Current Assets,2022,22.602
+- Other Current Assets,2023,47.907
+- Other Current Assets,2024,120.933
+- Other Current Assets,2025,0.4
+- Adj Current Liabilities,2014,None
+- Adj Current Liabilities,2015,None
+- Adj Current Liabilities,2016,None
+- Adj Current Liabilities,2017,None
+- Adj Current Liabilities,2018,None
+- Adj Current Liabilities,2019,None
+- Adj Current Liabilities,2020,None
+- Adj Current Liabilities,2021,None
+- Adj Current Liabilities,2022,None
+- Adj Current Liabilities,2023,None
+- Adj Current Liabilities,2024,None
+- Adj Current Liabilities,2025,None
+- Other Current Liabilities,2014,201.83757
+- Other Current Liabilities,2015,207.67631
+- Other Current Liabilities,2016,217.52726
+- Other Current Liabilities,2017,312.663
+- Other Current Liabilities,2018,167.393
+- Other Current Liabilities,2019,253.091
+- Other Current Liabilities,2020,157.994
+- Other Current Liabilities,2021,131.813
+- Other Current Liabilities,2022,113.012
+- Other Current Liabilities,2023,114.253
+- Other Current Liabilities,2024,79.77
+- Other Current Liabilities,2025,96.8
+- Purchase of fixed Assets,2014,-56.67214
+- Purchase of fixed Assets,2015,-18.47033
+- Purchase of fixed Assets,2016,-52.14392
+- Purchase of fixed Assets,2017,-415.33
+- Purchase of fixed Assets,2018,-21.114
+- Purchase of fixed Assets,2019,-68.111
+- Purchase of fixed Assets,2020,-11.911
+- Purchase of fixed Assets,2021,-14.17
+- Purchase of fixed Assets,2022,-46.735
+- Purchase of fixed Assets,2023,-76.452
+- Purchase of fixed Assets,2024,-259.592
+- Purchase of fixed Assets,2025,-243.5
+- Sale of Fixed Assets,2014,0.28979
+- Sale of Fixed Assets,2015,None
+- Sale of Fixed Assets,2016,1.39223
+- Sale of Fixed Assets,2017,0.529
+- Sale of Fixed Assets,2018,0.897
+- Sale of Fixed Assets,2019,0.305
+- Sale of Fixed Assets,2020,None
+- Sale of Fixed Assets,2021,1.525
+- Sale of Fixed Assets,2022,5.368
+- Sale of Fixed Assets,2023,18
+- Sale of Fixed Assets,2024,1.103
+- Sale of Fixed Assets,2025,None
+- Proceeds from Borrowings,2014,-88.14902
+- Proceeds from Borrowings,2015,-96.49406
+- Proceeds from Borrowings,2016,-42.13766
+- Proceeds from Borrowings,2017,None
+- Proceeds from Borrowings,2018,None
+- Proceeds from Borrowings,2019,None
+- Proceeds from Borrowings,2020,None
+- Proceeds from Borrowings,2021,None
+- Proceeds from Borrowings,2022,None
+- Proceeds from Borrowings,2023,None
+- Proceeds from Borrowings,2024,None
+- Proceeds from Borrowings,2025,178.4
+- Repayment of Borrowings,2014,-0.77452
+- Repayment of Borrowings,2015,-33.95598
+- Repayment of Borrowings,2016,-14.98847
+- Repayment of Borrowings,2017,227.131
+- Repayment of Borrowings,2018,-1.658
+- Repayment of Borrowings,2019,-161.614
+- Repayment of Borrowings,2020,-157.887
+- Repayment of Borrowings,2021,-43.29
+- Repayment of Borrowings,2022,None
+- Repayment of Borrowings,2023,None
+- Repayment of Borrowings,2024,None
+- Repayment of Borrowings,2025,-71.9
+- Asset Turnover,2014,0.9637934896774422
+- Asset Turnover,2015,1.1805720518455474
+- Asset Turnover,2016,1.1693726559990356
+- Asset Turnover,2017,1.1799934218270323
+- Asset Turnover,2018,1.1546351148365137
+- Asset Turnover,2019,1.2669979419510338
+- Asset Turnover,2020,0.990233230836544
+- Asset Turnover,2021,0.9918465410516292
+- Asset Turnover,2022,1.3521415092718212
+- Asset Turnover,2023,1.4991410202201612
+- Asset Turnover,2024,1.2493235905454259
+- Asset Turnover,2025,1.0961372700003449
+- fixed asset turnover,2014,None
+- fixed asset turnover,2015,None
+- fixed asset turnover,2016,None
+- fixed asset turnover,2017,None
+- fixed asset turnover,2018,None
+- fixed asset turnover,2019,None
+- fixed asset turnover,2020,None
+- fixed asset turnover,2021,None
+- fixed asset turnover,2022,None
+- fixed asset turnover,2023,None
+- fixed asset turnover,2024,None
+- fixed asset turnover,2025,None

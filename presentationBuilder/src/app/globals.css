@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply bg-kelp-bg-app text-gray-900 font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .slide-card {
+    @apply bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden;
+  }
+
+  .kelp-gradient-text {
+    @apply bg-clip-text text-transparent bg-kelp-gradient;
+  }
+
+  .kelp-gradient-border {
+    position: relative;
+  }
+
+  .kelp-gradient-border::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, #FF69B4, #FF8C00);
+  }
+}

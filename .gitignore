@@ -1,0 +1,20 @@
+node_modules
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Git repository metadata
+.git/
+.env
+.next
+.venv
+__pycache__
+
+/venv
+.env
+dataAgent/data/input
+dataAgent/data/output
+presentationBuilder/Company Data
+presentationBuilder/resources
+presentationBuilder/node_modules
+presentationBuilder/.next

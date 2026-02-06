@@ -1,0 +1,19 @@
+{
+  "private_sections": [
+    "business_description",
+    "key_milestones",
+    "swot",
+    "financials"
+  ],
+  "public_sections": [
+    "company_profile",
+    "market_presence",
+    "peers"
+  ],
+  "financials": [
+    "balance_sheet",
+    "cash_flow",
+    "income_statement",
+    "ratios"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "peers": [
+    {
+      "companies": [
+        {
+          "name": "Sales+",
+          "market_cap": "73.54"
+        },
+        {
+          "name": "Expenses+",
+          "market_cap": "71.93"
+        },
+        {
+          "name": "Operating Profit",
+          "market_cap": "1.61"
+        },
+        {
+          "name": "OPM %",
+          "market_cap": "2.19%"
+        },
+        {
+          "name": "Other Income+",
+          "market_cap": "0.06"
+        },
+        {
+          "name": "Interest",
+          "market_cap": "0.56"
+        },
+        {
+          "name": "Depreciation",
+          "market_cap": "2.95"
+        },
+        {
+          "name": "Profit before tax",
+          "market_cap": "-1.84"
+        },
+        {
+          "name": "Tax %",
+          "market_cap": "-41.85%"
+        },
+        {
+          "name": "Net Profit+",
+          "market_cap": "-1.08"
+        },
+        {
+          "name": "EPS in Rs",
+          "market_cap": "-2.97"
+        },
+        {
+          "name": "Raw PDF",
+          "market_cap": ""
+        }
+      ],
+      "source": "screener",
+      "confidence": 1.0
+    }
+  ]
+}
