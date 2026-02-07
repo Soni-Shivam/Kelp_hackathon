@@ -93,7 +93,7 @@ const renderBlock = (block: SlideBlock, slideNumber: number, isEditMode: boolean
         case 'chart_complex':
             return <ChartBlock heading={block.heading} chartData={block.chart_data} />;
         case 'visual_map':
-            return <VisualMapBlock heading={block.heading} detailed_image_prompt={block.detailed_image_prompt} />;
+            return <VisualMapBlock heading={block.heading} detailed_image_prompt={block.detailed_image_prompt} image_url={block.image_url} />;
         case 'logo_grid':
             return <LogoGridBlock heading={block.heading} logos={block.logos} />;
         case 'composite_block':

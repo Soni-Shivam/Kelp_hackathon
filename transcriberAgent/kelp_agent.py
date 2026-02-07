@@ -39,7 +39,9 @@ CORE DIRECTIVES (NON-NEGOTIABLE):
    - *Good:* "Delivered consistent double-digit top-line growth (10% YoY), underpinned by a pivot to high-margin export markets, signaling strong potential for sustained EBITDA expansion."
 6. **DATA & FACTS:** Use real-world data and facts to support your claims. Avoid speculation and unsubstantiated claims.
 7. **CITATION INTEGRITY:** Every single data point must be traceable. You will output a specific "source_map" for every slide.
-8. **VISUAL INTELLIGENCE:** For `detailed_image_prompt`, write cinematic, photorealistic AI image prompts (e.g., "Midjourney style, 8k, cinematic lighting, corporate, clean lines") that represent the sector abstractly without showing specific logos.
+8. **VISUAL INTELLIGENCE:** For `detailed_image_prompt`, we are going to perfrom a google search using provided keywords, write SIMPLE, factual search queries. 
+     * *Bad:* "Cinematic 8k shot of a futuristic automotive factory with blue lighting"
+     * *Good:* "gujrat solar power plant" or "industrial forging machinery", "facebook logo", "certification logo".
 """
 SECTOR_STRATEGIES = """
 SECTOR RECOGNITION & ADAPTATION LOGIC: (ADAPT & CONQUER)
@@ -157,8 +159,11 @@ Use these `block_type` values strategically:
 13. When using dashboard_grid, make sure to use 4 KPI boxes.
 14. When using logo_grid, make sure to use even number of logos.
 Generate the JSON now.
+15.**IMAGE CONSTRAINT:** - For `visual_map` blocks, you MUST provide `Google Search_keywords`. 
+   
 """
 
+# Assemble the final System Prompt
 # Assemble the final System Prompt
 FULL_SYSTEM_PROMPT = f"{CORE_PERSONA}\n\n{SECTOR_STRATEGIES}\n\n{JSON_SCHEMA}"
 
@@ -309,49 +314,79 @@ Ratios: {get_last_row(ratios)}
 #         print(f"Validation Error: {e}")
 #         return False
 
+import typing_extensions as typing
+
+# 1. Define the Strict Schema in Python
+
+class ChartDataset(typing.TypedDict):
+    label: str
+    data: list[float]
+    type: typing.NotRequired[str]
+
+class ChartData(typing.TypedDict):
+    title: str
+    chart_type: str 
+    labels: list[str]
+    datasets: list[ChartDataset]
+    strategic_analysis: str
+
+class Metric(typing.TypedDict):
+    label: str
+    value: str
+
+class Block(typing.TypedDict):
+    block_id: int
+    block_type: str
+    heading: str
+    citation: str
+    verbose_bullets: list[str]
+    detailed_image_prompt: str
+    # Use list[Metric] instead of dict to avoid "empty object" schema error
+    contextual_metrics: list[Metric] 
+    chart_data: ChartData 
+    logos: list[str]
+    image_url: typing.NotRequired[str]
+
+class Slide(typing.TypedDict):
+    slide_number: int
+    title: str
+    kicker: str
+    blocks: list[Block]
+
+class Presentation(typing.TypedDict):
+    project_code_name: str
+    sector: str
+    slides: list[Slide]
+
+# ==========================================================
+# 4. GENERATOR LOGIC
+# ==========================================================
+
 def validate_json(output):
     try:
         data = json.loads(output)
         
-        # 1. Validate Root
-        if not isinstance(data, dict):
-            print("Validation Fail: Root JSON is not a dictionary.")
-            return False
-
+        # 1. Sanity Check Root
         if "slides" not in data or not isinstance(data["slides"], list):
-            print("Validation Fail: 'slides' key missing or not a list.")
+            print("Validation Fail: Root JSON missing 'slides' list.")
             return False
             
-        if len(data["slides"]) != 3:
-            print(f"Validation Fail: Slide count is {len(data.get('slides', []))}, expected 3")
-            return False
-        
-        # 2. Validate Slides & Blocks
+        # 2. Deep Check
         for i, slide in enumerate(data["slides"]):
-            if not isinstance(slide, dict):
-                print(f"Validation Fail: Slide {i} is not a dictionary.")
-                return False
-                
             if "blocks" not in slide or not isinstance(slide["blocks"], list):
-                print(f"Validation Fail: Slide {i} 'blocks' missing or not a list.")
+                print(f"Validation Fail: Slide {i} missing 'blocks' list.")
                 return False
                 
             for j, block in enumerate(slide["blocks"]):
-                # --- THE FIX: Check if block is a dict before calling .get() ---
+                # --- THE FIX IS HERE ---
+                # Check if 'block' is actually a Dict. If it's a List, fail immediately.
                 if not isinstance(block, dict):
-                    print(f"Validation Fail: Slide {i}, Block {j} is a LIST/STRING, expected DICT. Content: {block}")
+                    print(f"CRITICAL FAIL: Slide {i}, Block {j} is a {type(block).__name__}, expected dict.")
                     return False
                 
-                # Check for forbidden architecture
-                if "sub_blocks" in block or block.get("block_type") == "composite_block":
-                    print("Validation Fail: Forbidden 'composite_block' found.")
+                # Check for forbidden types
+                if block.get("block_type") == "composite_block":
                     return False
-                
-                # Basic field checks
-                b_type = block.get("block_type")
-                if b_type == "text_deep_dive" and "verbose_bullets" not in block: return False
-                if b_type == "dashboard_grid" and "contextual_metrics" not in block: return False
-                if b_type == "chart_complex" and "chart_data" not in block: return False
 
         return True
     except json.JSONDecodeError as e:
@@ -423,7 +458,7 @@ def generate_presentation(api_data):
     presentation = generate(prompt)
     presentation_json = json.loads(presentation)
 
-    # 7. Post-Processing: Fetch Images for Visual Maps
+    # 7. Post-Processing: Fetch Images for Visual Maps & Convert Metrics
     # Add parent directory to path to allow importing imageAgent
     import sys
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -436,9 +471,26 @@ def generate_presentation(api_data):
         if not os.path.exists(static_dir):
             os.makedirs(static_dir)
 
-        print("\n--- Starting Image Enrichment ---")
+        print("\n--- Starting Image Enrichment & Metric Conversion ---")
         for slide in presentation_json.get("slides", []):
             for block in slide.get("blocks", []):
+                
+                # A. Metric Conversion (List[Metric] -> Dict[str, str])
+                if block.get("block_type") == "dashboard_grid":
+                    metrics_list = block.get("contextual_metrics")
+                    # If strictly generated as list of dicts, convert to dict
+                    if isinstance(metrics_list, list):
+                        new_metrics = {}
+                        for m in metrics_list:
+                            if isinstance(m, dict) and 'label' in m and 'value' in m:
+                                new_metrics[m['label']] = m['value']
+                            elif isinstance(m, str): # fallback if it was a list of strings
+                                pass 
+                        # Replace list with dict if conversion successful
+                        if new_metrics:
+                            block["contextual_metrics"] = new_metrics
+                            
+                # B. Visual Map Image Fetching
                 if block.get("block_type") == "visual_map":
                     heading = block.get("heading", "visualization")
                     prompt = block.get("detailed_image_prompt", heading)

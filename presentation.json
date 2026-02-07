@@ -4,29 +4,105 @@
   "slides": [
     {
       "slide_number": 1,
-      "title": "Investment Highlights & Strategic Moat",
+      "title": "Investment Highlights & Strategic Value Proposition",
       "kicker": "EXECUTIVE SUMMARY",
       "blocks": [
         {
           "block_id": 1,
           "block_type": "dashboard_grid",
-          "heading": "Key Performance Indicators",
-          "citation": "Internal Performance Report (FY25) | Leading Credit Agency (2025)",
-          "style_variant": 1,
+          "heading": "Financial & Operational KPIs",
+          "citation": "Internal Management Reports (FY25) | CRISIL Rating Report (2025)",
           "contextual_metrics": {
-            "FY25 PAT": "INR 83 Cr",
-            "New Order Wins": "INR 115 Cr",
-            "Asset Base": "5 Plants",
-            "Market Legacy": "40+ Years"
-          }
+            "FY25 PAT": "\u20b983 Cr",
+            "New Order Wins": "\u20b9115 Cr",
+            "Export Growth": "11% YoY",
+            "Net Worth": "\u20b981.3 Cr"
+          },
+          "style_variant": 1
         },
         {
           "block_id": 2,
+          "block_type": "text_deep_dive",
+          "heading": "Profitability Milestones",
+          "citation": "FY25 Annual Performance Review",
+          "verbose_bullets": [
+            "Achieved **record PAT** of \u20b983 cr in FY25, a 10-year high.",
+            "Secured **\u20b9115 cr** in new order wins, signaling robust demand.",
+            "Targeting **50% export revenue** share to de-risk domestic cycles."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 3,
+          "block_type": "text_deep_dive",
+          "heading": "Operational Scaling",
+          "citation": "Q2 FY26 Capex Program Update",
+          "verbose_bullets": [
+            "Executing a **\u20b925 cr Capex** program to modernize production lines.",
+            "Commissioned **\u20b97 cr** in new projects to boost capacity utilization.",
+            "Implemented **SAP ERP** to automate workflows and enhance audit rigor."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 4,
+          "block_type": "text_deep_dive",
+          "heading": "Market Expansion",
+          "citation": "MNC Client Acquisition Report (2025)",
+          "verbose_bullets": [
+            "Secured a major **MNC Axle contract** adding \u20b910 cr annually.",
+            "Expanding **European footprint** via a dedicated German subsidiary.",
+            "Focusing on **high-margin** turbocharger and driveline components."
+          ],
+          "style_variant": 1
+        },
+        {
+          "block_id": 5,
+          "block_type": "text_deep_dive",
+          "heading": "Institutional Excellence",
+          "citation": "Corporate Governance & Compliance Audit (2025)",
+          "verbose_bullets": [
+            "Leveraging **four decades** of engineering excellence to maintain a dominant position in the precision forging market.",
+            "Implemented **compliance software** to drive operational transparency and institutionalize audit-ready workflows.",
+            "Maintains a **blue-chip client base** including global leaders in automotive, construction, and power generation sectors."
+          ],
+          "style_variant": 2
+        },
+        {
+          "block_id": 6,
+          "block_type": "text_deep_dive",
+          "heading": "Financial Resilience",
+          "citation": "CRISIL Rating Rationale (March 2025)",
+          "verbose_bullets": [
+            "Maintains a **moderate risk profile** with a 0.75x gearing ratio, providing significant headroom for debt-funded expansion.",
+            "Demonstrated **EBITDA expansion** potential through cost-control measures and improvements in operational efficiency.",
+            "Strong **interest coverage** of 2.6x ensures sufficient earnings to service debt while funding aggressive growth initiatives."
+          ],
+          "style_variant": 2
+        },
+        {
+          "block_id": 7,
+          "block_type": "visual_map",
+          "heading": "Precision Engineering Visual",
+          "citation": "Sector Abstract",
+          "detailed_image_prompt": "Midjourney style, 8k, cinematic lighting, a close-up of a high-precision forged steel engine component, metallic textures, glowing orange highlights from heat treatment, clean corporate aesthetic, shallow depth of field.",
+          "style_variant": 1,
+          "image_url": "http://localhost:8001/images/Precision_Engineering_&_Forging_Precision_Engineering_Visual_Midjourney_style,_8k,_cinematic_lightin_0.jpg"
+        }
+      ]
+    },
+    {
+      "slide_number": 2,
+      "title": "Operational Infrastructure & Client Ecosystem",
+      "kicker": "MANUFACTURING EXCELLENCE",
+      "blocks": [
+        {
+          "block_id": 1,
           "block_type": "chart_complex",
           "heading": "Order Win Momentum",
-          "citation": "Company Annual Filings (FY24-FY25)",
+          "citation": "FY24-FY25 Sales Data",
           "chart_data": {
-            "title": "Annual New Business Value (INR Cr)",
+            "title": "Annual New Order Wins (INR Cr)",
             "chart_type": "bar",
             "labels": [
               "FY24",
@@ -34,7 +110,7 @@
             ],
             "datasets": [
               {
-                "label": "New Order Value",
+                "label": "New Business Value",
                 "data": [
                   75,
                   115
@@ -42,226 +118,164 @@
                 "type": "bar"
               }
             ],
-            "strategic_analysis": "The 53% YoY surge in new order wins reflects aggressive market share capture and expanding Tier-1 OEM trust."
-          }
-        },
-        {
-          "block_id": 3,
-          "block_type": "logo_grid",
-          "heading": "Blue-Chip Client Archetypes",
-          "citation": "Customer Relationship Audit (2024)",
-          "logos": [
-            "Global Auto OEM",
-            "Fortune 500 Industrial",
-            "Leading Agri-Tech",
-            "Tier-1 Transmission Leader"
-          ]
-        },
-        {
-          "block_id": 4,
-          "block_type": "visual_map",
-          "heading": "Global Operational Footprint",
-          "citation": "Corporate Strategy Deck (2025)",
-          "detailed_image_prompt": "Cinematic, photorealistic 8k image of a glowing steel ingot being forged in a high-tech facility, sparks flying, industrial atmosphere.",
-          "image_url": "http://localhost:8001/images/Precision_Engineering_&_Forging_Global_Operational_Footprint_Cinematic,_photorealistic_8k_image_of_a_0.jpg"
-        },
-        {
-          "block_id": 5,
-          "block_type": "text_deep_dive",
-          "heading": "Established Market Leadership",
-          "citation": "Market Analysis Report (2025)",
-          "verbose_bullets": [
-            "**40-year legacy** in precision forging ensures deep OEM relationships and high-barrier entry for competitors.",
-            "Record **INR 115cr order wins** in FY25 demonstrate aggressive market share capture and robust customer demand.",
-            "Strategic pivot to **50% export revenue** target leverages European subsidiaries for sustained EBITDA expansion."
-          ]
-        },
-        {
-          "block_id": 6,
-          "block_type": "text_deep_dive",
-          "heading": "Operational Excellence",
-          "citation": "Internal Operational Review (2024)",
-          "verbose_bullets": [
-            "Implementation of **Tier-1 ERP systems** has automated workflows and significantly enhanced audit-related compliance.",
-            "Achieved **highest PAT in 10 years**, signaling a successful transition to high-margin product mixes and cost controls.",
-            "Integrated **manufacturing services** from design to logistics provide a one-stop solution for complex engineering needs."
-          ]
-        },
-        {
-          "block_id": 7,
-          "block_type": "text_deep_dive",
-          "heading": "Future Growth Catalysts",
-          "citation": "Strategic Growth Roadmap (2025-2027)",
-          "verbose_bullets": [
-            "Secured **MNC axle contracts** projected to add significant annual volume, signaling strong forward-looking growth.",
-            "Ongoing **INR 25cr Capex program** is set to modernize capacity and drive long-term margin appreciation.",
-            "Expansion into **high-margin industrial verticals** like Marine and Railways enhances overall portfolio profitability."
-          ]
-        }
-      ]
-    },
-    {
-      "slide_number": 2,
-      "title": "Operational Excellence & Infrastructure",
-      "kicker": "MANUFACTURING CAPABILITIES",
-      "blocks": [
-        {
-          "block_id": 1,
-          "block_type": "dashboard_grid",
-          "heading": "Facility & Tech Metrics",
-          "citation": "Operational Audit (2024) | IATF Certification",
-          "style_variant": 2,
-          "contextual_metrics": {
-            "FY26 Capex": "INR 25 Cr",
-            "Quality Cert": "IATF 16949",
-            "ERP System": "SAP Integrated",
-            "Workforce": "480+ Experts"
-          }
+            "strategic_analysis": "Order wins surged by **53% YoY**, reflecting successful penetration into MNC accounts and driveline segments."
+          },
+          "style_variant": 1
         },
         {
           "block_id": 2,
           "block_type": "chart_complex",
-          "heading": "Capital Expenditure Trend",
-          "citation": "Financial Planning Dept (2025)",
+          "heading": "Export Revenue Trajectory",
+          "citation": "Global Sales Strategy 2025",
           "chart_data": {
-            "title": "Capex Investment (INR Cr)",
+            "title": "Export Growth Target (%)",
             "chart_type": "line",
             "labels": [
-              "FY24",
-              "FY25",
-              "FY26P"
+              "Current",
+              "Target"
             ],
             "datasets": [
               {
-                "label": "Capex Spend",
+                "label": "Export Share",
                 "data": [
-                  15,
-                  24.4,
-                  25
+                  32,
+                  50
                 ],
                 "type": "line"
               }
             ],
-            "strategic_analysis": "Consistent capital reinvestment into modernizing plant infrastructure ensures long-term competitive advantages."
-          }
+            "strategic_analysis": "Aggressive pivot to **international markets** aims to capture higher margins and mitigate domestic cyclicality."
+          },
+          "style_variant": 1
         },
         {
           "block_id": 3,
-          "block_type": "visual_map",
-          "heading": "Precision Engineering Hub",
-          "citation": "Facility Overview (2025)",
-          "detailed_image_prompt": "Clean, modern factory floor with robotic arms and precision CNC machines, soft blue lighting, corporate style, 8k.",
-          "image_url": "http://localhost:8001/images/Precision_Engineering_&_Forging_Precision_Engineering_Hub_Clean,_modern_factory_floor_with_robotic_a_0.jpg"
+          "block_type": "logo_grid",
+          "heading": "Tier-1 Certifications & Clients",
+          "citation": "Quality Assurance Manual",
+          "logos": [
+            "IATF 16949:2016",
+            "ISO 14001:2015",
+            "Fortune 500 OEM 1",
+            "Global Agri Leader",
+            "MNC Construction Giant",
+            "European Auto Leader"
+          ],
+          "style_variant": 1
         },
         {
           "block_id": 4,
           "block_type": "text_deep_dive",
-          "heading": "Technical Capabilities",
-          "citation": "Engineering Specs (2024)",
+          "heading": "Asset Base & Capacity",
+          "citation": "Operational Audit (May 2025)",
           "verbose_bullets": [
-            "Integrated **forging capabilities** allow for complex, mission-critical componentry production.",
-            "Advanced **precision machining** lines cater to high-spec requirements of global Tier-1 OEMs.",
-            "In-house **metallurgical testing** ensures 100% compliance with international quality standards."
-          ]
+            "Operating **5 state-of-the-art plants** with integrated heat treatment and precision machining capabilities.",
+            "Integrated **Lean Manufacturing** principles via a proprietary operating system to minimize waste.",
+            "Advanced **CAD/CAM facilities** and CNC tool rooms enable rapid prototyping and value engineering."
+          ],
+          "style_variant": 2
         },
         {
           "block_id": 5,
           "block_type": "text_deep_dive",
-          "heading": "Digital Transformation",
-          "citation": "IT Strategy Report (2025)",
+          "heading": "Mission-Critical Portfolio",
+          "citation": "Product Vertical Analysis",
           "verbose_bullets": [
-            "Deployment of **compliance software** provides full visibility on regulatory requirements across regions.",
-            "Automated **workflow controls** within the ERP system have reduced operational lead times by 15%.",
-            "Advanced **CAD/CAM facilities** enable rapid prototyping and value engineering for new client wins."
-          ]
+            "Specializing in **fracture-split connecting rods** and turbocharger parts for high-performance engines.",
+            "Diversified across **Industrial verticals** including marine, railways, and renewable power generation.",
+            "Strategic focus on **complex driveline parts** which command higher pricing power and client stickiness."
+          ],
+          "style_variant": 2
         },
         {
           "block_id": 6,
-          "block_type": "text_deep_dive",
-          "heading": "Quality & Compliance",
-          "citation": "Quality Assurance Manual (2024)",
-          "verbose_bullets": [
-            "Adherence to **ISO 14001 and 45001** standards reflects a commitment to sustainable manufacturing.",
-            "Specialized **Marine Application certifications** open high-barrier markets in global shipping sectors.",
-            "Consistent **Green Vendor awards** from top OEMs validate the Company's superior quality protocols."
-          ]
+          "block_type": "visual_map",
+          "heading": "Manufacturing Floor",
+          "citation": "Facility Overview",
+          "detailed_image_prompt": "Photorealistic, 8k, aerial view of a modern industrial manufacturing plant, clean white floors, robotic arms, organized assembly lines, soft natural lighting through skylights, no logos.",
+          "style_variant": 1,
+          "image_url": "http://localhost:8001/images/Precision_Engineering_&_Forging_Manufacturing_Floor_Photorealistic,_8k,_aerial_view_of_a_modern_indu_0.jpg"
         }
       ]
     },
     {
       "slide_number": 3,
-      "title": "Market Position & Financial Trajectory",
-      "kicker": "MARKET & FINANCIALS",
+      "title": "Market Dynamics & Growth Trajectory",
+      "kicker": "FUTURE OUTLOOK",
       "blocks": [
         {
           "block_id": 1,
           "block_type": "dashboard_grid",
-          "heading": "Market & Financial Snapshot",
-          "citation": "Grand View Research (2025) | CRISIL (2024)",
-          "style_variant": 1,
+          "heading": "Market Opportunity",
+          "citation": "Grand View Research | Mordor Intelligence",
           "contextual_metrics": {
-            "Export Growth": "11% YoY",
-            "Global Market": "$468B",
-            "Rev Potential": "25%+",
-            "Net Worth": "INR 81 Cr"
-          }
+            "Global Aftermarket": "$468B",
+            "India Mfg Growth": "9.11%",
+            "Die Casting CAGR": "6.60%",
+            "Industrial Engines": "$6B"
+          },
+          "style_variant": 1
         },
         {
           "block_id": 2,
           "block_type": "chart_complex",
-          "heading": "Export Revenue Target",
-          "citation": "Strategic Growth Plan (2025)",
+          "heading": "Revenue Growth Potential",
+          "citation": "Strategic Growth Plan 2026",
           "chart_data": {
-            "title": "Export % of Total Revenue",
+            "title": "Projected Revenue Upside (%)",
             "chart_type": "doughnut",
             "labels": [
-              "Current Export",
-              "Domestic",
-              "Target Export"
+              "Core Growth",
+              "New MNC Wins",
+              "Export Expansion"
             ],
             "datasets": [
               {
-                "label": "Revenue Mix",
+                "label": "Growth Drivers",
                 "data": [
-                  11,
-                  89,
-                  50
+                  60,
+                  25,
+                  15
                 ],
                 "type": "doughnut"
               }
             ],
-            "strategic_analysis": "The aggressive target to reach 50% export revenue is underpinned by a strong European subsidiary presence."
-          }
+            "strategic_analysis": "The Entity is positioned to deliver **25%+ annual revenue growth** through favorable product mix shifts."
+          },
+          "style_variant": 1
         },
         {
           "block_id": 3,
-          "block_type": "visual_map",
-          "heading": "Industrial Application Scope",
-          "citation": "Sector Diversification Study (2024)",
-          "detailed_image_prompt": "Abstract visualization of global trade routes connecting India to Europe, sleek 3D lines, dark background, professional.",
-          "image_url": "http://localhost:8001/images/Precision_Engineering_&_Forging_Industrial_Application_Scope_Abstract_visualization_of_global_trade__0.jpg"
+          "block_type": "text_deep_dive",
+          "heading": "Strategic Pivot",
+          "citation": "Management Discussion & Analysis",
+          "verbose_bullets": [
+            "Strategic pivot towards **high-margin segments** like Turbochargers to enhance overall EBITDA profile.",
+            "Capitalizing on the **$468B global aftermarket** through a dedicated European sales and logistics hub.",
+            "Leveraging **long-term OEM relationships** to secure recurring revenue and high-barrier-to-entry contracts."
+          ],
+          "style_variant": 1
         },
         {
           "block_id": 4,
           "block_type": "text_deep_dive",
-          "heading": "Sector Diversification",
-          "citation": "Market Analysis (2025)",
+          "heading": "Investment Merits",
+          "citation": "Investment Banking Analysis",
           "verbose_bullets": [
-            "Diversified revenue across **Auto, Construction, and Power** sectors effectively mitigates industry-specific cyclicality.",
-            "Strategic focus on **Turbocharger and Driveline** components aligns with global trends in engine efficiency.",
-            "Expanding footprint in **Agri-infrastructure and Railways** provides a hedge against automotive sector volatility."
-          ]
+            "Robust **promoter holding of 58.8%** ensures strong alignment with long-term value creation and strategic stability.",
+            "Significant **operating leverage** available as new capacity from the FY26 Capex program comes online in high-demand segments.",
+            "Proven ability to pass through **raw material volatility** to customers, protecting margins in a cyclical industrial environment."
+          ],
+          "style_variant": 2
         },
         {
           "block_id": 5,
-          "block_type": "text_deep_dive",
-          "heading": "Financial Resilience",
-          "citation": "Financial Risk Profile (2024)",
-          "verbose_bullets": [
-            "Strong **INR 81.3cr net worth** and moderate gearing provide a robust foundation for future debt-funded expansion.",
-            "Consistent **PAT growth** reaching a 10-year high in FY25 reflects successful operational efficiency initiatives.",
-            "Healthy **interest coverage ratios** ensure the Company maintains a stable credit profile during growth phases."
-          ]
+          "block_type": "visual_map",
+          "heading": "Global Supply Chain",
+          "citation": "Market Reach",
+          "detailed_image_prompt": "Cinematic, 8k, abstract world map with glowing nodes connecting India, Germany, and the USA, representing a global supply chain, dark blue background, sleek digital lines.",
+          "style_variant": 1,
+          "image_url": "http://localhost:8001/images/Precision_Engineering_&_Forging_Global_Supply_Chain_Cinematic,_8k,_abstract_world_map_with_glowing_n_0.jpg"
         }
       ]
     }
