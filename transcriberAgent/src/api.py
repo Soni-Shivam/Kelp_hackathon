@@ -18,6 +18,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from fastapi.staticfiles import StaticFiles
+
+# Mount static images
+# Current file is transcriberAgent/src/api.py
+# Static dir is transcriberAgent/static/images
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+static_images_dir = os.path.join(base_dir, "static", "images")
+
+# Ensure dir exists
+if not os.path.exists(static_images_dir):
+    os.makedirs(static_images_dir)
+
+app.mount("/images", StaticFiles(directory=static_images_dir), name="images")
+
 @app.post("/generate_from_data")
 async def generate_from_data(request: Request):
     try:

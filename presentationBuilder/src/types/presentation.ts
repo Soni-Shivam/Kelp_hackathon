@@ -58,6 +58,7 @@ export interface VisualMapBlock {
     block_type: 'visual_map';
     heading: string;
     detailed_image_prompt: string;
+    image_url?: string;
     citation?: string;
 }
 

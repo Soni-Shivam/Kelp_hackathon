@@ -17,7 +17,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
 
 MODEL_NAME = "gemini-3-flash-preview" 
-MAX_RETRIES = 3
+MAX_RETRIES = 4
 API_URL = "http://localhost:8000/trigger-agent"
 
 # ==========================================================
@@ -184,15 +184,50 @@ def fetch_data_from_api(company_name, md_file_path):
         print(f"Error fetching data from API: {e}")
         return None
 
+# def extract_financials(api_output):
+#     try:
+#         fin_data = api_output.get("output", {}).get("private", {}).get("typed", {}).get("financials", {})
+        
+#         def read_csv_str(filename):
+#             content = fin_data.get(filename)
+#             if content:
+#                 return pd.read_csv(io.StringIO(content))
+#             return pd.DataFrame()
+
+#         return (
+#             read_csv_str("income_statement.csv"),
+#             read_csv_str("balance_sheet.csv"),
+#             read_csv_str("cash_flow.csv"),
+#             read_csv_str("ratios.csv"),
+#         )
+#     except Exception as e:
+#         print(f"Error extracting financials: {e}")
+#         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+
 def extract_financials(api_output):
     try:
-        fin_data = api_output.get("output", {}).get("private", {}).get("typed", {}).get("financials", {})
+        # Safer extraction: Handle case where 'output' might be a list
+        output_data = api_output.get("output", {})
+        if isinstance(output_data, list):
+            output_data = output_data[0] if output_data else {}
+            
+        private_data = output_data.get("private", {})
+        # Handle case where 'private' might be a list
+        if isinstance(private_data, list):
+            private_data = private_data[0] if private_data else {}
+
+        fin_data = private_data.get("typed", {}).get("financials", {})
         
         def read_csv_str(filename):
             content = fin_data.get(filename)
             if content:
-                return pd.read_csv(io.StringIO(content))
-            return pd.DataFrame()
+                # Handle potential list structure for CSV content
+                if isinstance(content, list):
+                    content = content[0] if content else None
+                
+                if content:
+                    return pd.read_csv(io.StringIO(content))
+            return pd.DataFrame()   
 
         return (
             read_csv_str("income_statement.csv"),
@@ -243,18 +278,70 @@ Ratios: {get_last_row(ratios)}
 # 4. GENERATOR LOGIC
 # ==========================================================
 
+# def validate_json(output):
+#     try:
+#         data = json.loads(output)
+        
+#         if "slides" not in data or len(data["slides"]) != 3:
+#             print(f"Validation Fail: Slide count is {len(data.get('slides', []))}, expected 3")
+#             return False
+        
+#         for slide in data["slides"]:
+#             if "blocks" not in slide:
+#                 return False
+#             for block in slide["blocks"]:
+#                 # Check for forbidden architecture
+#                 if "sub_blocks" in block or block.get("block_type") == "composite_block":
+#                     print("Validation Fail: Forbidden 'composite_block' found.")
+#                     return False
+                
+#                 # Basic field checks
+#                 b_type = block.get("block_type")
+#                 if b_type == "text_deep_dive" and "verbose_bullets" not in block: return False
+#                 if b_type == "dashboard_grid" and "contextual_metrics" not in block: return False
+#                 if b_type == "chart_complex" and "chart_data" not in block: return False
+
+#         return True
+#     except json.JSONDecodeError as e:
+#         print(f"JSON Parse Error: {e}")
+#         return False
+#     except Exception as e:
+#         print(f"Validation Error: {e}")
+#         return False
+
 def validate_json(output):
     try:
         data = json.loads(output)
         
-        if "slides" not in data or len(data["slides"]) != 3:
+        # 1. Validate Root
+        if not isinstance(data, dict):
+            print("Validation Fail: Root JSON is not a dictionary.")
+            return False
+
+        if "slides" not in data or not isinstance(data["slides"], list):
+            print("Validation Fail: 'slides' key missing or not a list.")
+            return False
+            
+        if len(data["slides"]) != 3:
             print(f"Validation Fail: Slide count is {len(data.get('slides', []))}, expected 3")
             return False
         
-        for slide in data["slides"]:
-            if "blocks" not in slide:
+        # 2. Validate Slides & Blocks
+        for i, slide in enumerate(data["slides"]):
+            if not isinstance(slide, dict):
+                print(f"Validation Fail: Slide {i} is not a dictionary.")
                 return False
-            for block in slide["blocks"]:
+                
+            if "blocks" not in slide or not isinstance(slide["blocks"], list):
+                print(f"Validation Fail: Slide {i} 'blocks' missing or not a list.")
+                return False
+                
+            for j, block in enumerate(slide["blocks"]):
+                # --- THE FIX: Check if block is a dict before calling .get() ---
+                if not isinstance(block, dict):
+                    print(f"Validation Fail: Slide {i}, Block {j} is a LIST/STRING, expected DICT. Content: {block}")
+                    return False
+                
                 # Check for forbidden architecture
                 if "sub_blocks" in block or block.get("block_type") == "composite_block":
                     print("Validation Fail: Forbidden 'composite_block' found.")
@@ -332,9 +419,83 @@ def generate_presentation(api_data):
         financials=financial_summary
     )
 
-    # Generate
+    # 6. Generate Presentation
     presentation = generate(prompt)
-    return json.loads(presentation)
+    presentation_json = json.loads(presentation)
+
+    # 7. Post-Processing: Fetch Images for Visual Maps
+    # Add parent directory to path to allow importing imageAgent
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    
+    try:
+        from imageAgent.handler import fetch_google_images
+        
+        # Ensure static images directory exists
+        static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
+        if not os.path.exists(static_dir):
+            os.makedirs(static_dir)
+
+        print("\n--- Starting Image Enrichment ---")
+        for slide in presentation_json.get("slides", []):
+            for block in slide.get("blocks", []):
+                if block.get("block_type") == "visual_map":
+                    heading = block.get("heading", "visualization")
+                    prompt = block.get("detailed_image_prompt", heading)
+                    
+                    # Create a search query from the prompt (simplified)
+                    # The prompt is usually long/descriptive, so we might want to extract keywords
+                    # For now using the heading + 'cinematic' as a proxy query or just the prompt
+                    # Let's try to use the prompt but truncated or the heading for better search results
+                    search_query = f"{presentation_json.get('sector', '')} {heading} {block.get('detailed_image_prompt','')} cinematic"
+                    search_query = search_query[:100] # truncate to avoid too long query
+                    
+                    print(f"Fetching image for block {block.get('block_id')}: {search_query}...")
+                    
+                    # We pass a specific folder to the handler
+                    # NOTE: handler.py expects save_folder. We want it in transcriberAgent/static/images
+                    
+                    # We need to modify fetch_google_images in handler.py to return the path or filename
+                    # OR we just list the dir after.
+                    
+                    # Let's clean the directory for this specific query to avoid mixing? No, unique names handle it.
+                    # fetch_google_images handles downloading.
+                    
+                    try:
+                        # fetch 1 image
+                        fetch_google_images(query=search_query, num_images=1, save_folder=static_dir)
+                        
+                        # Find the most recently created file in the directory to assign it?
+                        # Or relying on the handler's naming convention: query_0.jpg
+                        # The handler replaces spaces with underscores.
+                        sanitized_query = search_query.replace(' ', '_')
+                        expected_filename = f"{sanitized_query}_0.jpg"
+                        
+                        # Check provided file exists, or look for *any* new file? 
+                        # Handler logic: f"{query.replace(' ', '_')}_{i}.jpg"
+                        
+                        image_path = os.path.join(static_dir, expected_filename)
+                        
+                        if os.path.exists(image_path):
+                            # Construct the URL for the frontend
+                            # The API serves /static at /images/
+                            # But wait, the API serves `transcriberAgent/static/images` at `/images`
+                            # So URL is http://localhost:8001/images/{filename}
+                            
+                            block["image_url"] = f"http://localhost:8001/images/{expected_filename}"
+                            print(f"Attached Image: {block['image_url']}")
+                        else:
+                            print(f"Warning: Image file not found at {image_path}")
+                            
+                    except Exception as img_err:
+                        print(f"Failed to fetch image for block: {img_err}")
+                        
+    except ImportError:
+        print("Warning: Could not import imageAgent.handler. Image enrichment skipped.")
+    except Exception as e:
+        print(f"Error during image enrichment: {e}")
+
+    return presentation_json
 
 def run_standalone():
     # Example usage

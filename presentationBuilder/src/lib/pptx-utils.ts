@@ -682,6 +682,9 @@ function renderChartBlock(slide: pptxgen.Slide, block: any, x: number, y: number
 // ============================================================================
 // VISUAL MAP BLOCK
 // ============================================================================
+// ============================================================================
+// VISUAL MAP BLOCK
+// ============================================================================
 function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number, y: number, w: number, h: number) {
     const padding = SPACING.padding.sm;
     const gap = SPACING.gap.sm;
@@ -702,6 +705,7 @@ function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number, y: nu
     const contentY = y + padding + headingHeight + gap;
     const contentH = h - padding * 2 - headingHeight - gap;
 
+    // Image Container Background (fallback)
     slide.addShape('rect', {
         x: x + 0.08,
         y: contentY,
@@ -712,18 +716,45 @@ function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number, y: nu
         rectRadius: 0.5 // Soft UI
     });
 
-    slide.addText('[Visual: ' + (block.detailed_image_prompt || 'Image') + ']', {
-        x: x + 0.08,
-        y: contentY,
-        w: w - 0.16,
-        h: contentH,
-        fontFace: TYPOGRAPHY.fontFamily,
-        fontSize: TYPOGRAPHY.sizes.sm.pt,
-        italic: true,
-        color: COLORS.slate600,
-        align: 'center',
-        valign: 'middle'
-    });
+    if (block.image_url) {
+        // Embed Image
+        slide.addImage({
+            path: block.image_url,
+            x: x + 0.08,
+            y: contentY,
+            w: w - 0.16,
+            h: contentH,
+            sizing: { type: 'cover', w: w - 0.16, h: contentH } // Crop to fill
+        });
+
+        // Add prompt overlay text (small, bottom)
+        slide.addText(block.detailed_image_prompt || '', {
+            x: x + 0.08,
+            y: contentY + contentH - 0.3,
+            w: w - 0.16,
+            h: 0.3,
+            fontSize: 8,
+            color: COLORS.white,
+            fill: { color: '000000', transparency: 50 },
+            align: 'center',
+            valign: 'middle'
+        });
+
+    } else {
+        // Fallback Text
+        slide.addText('[Visual: ' + (block.detailed_image_prompt || 'Image') + ']', {
+            x: x + 0.08,
+            y: contentY,
+            w: w - 0.16,
+            h: contentH,
+            fontFace: TYPOGRAPHY.fontFamily,
+            fontSize: TYPOGRAPHY.sizes.sm.pt,
+            italic: true,
+            color: COLORS.slate600,
+            align: 'center',
+            valign: 'middle'
+        });
+    }
 }
 
 // ============================================================================
