@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from src.main import run_data_agent
+from .main import run_data_agent
 
 app = FastAPI()
 

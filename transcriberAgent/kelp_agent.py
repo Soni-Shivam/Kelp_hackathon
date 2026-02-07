@@ -39,9 +39,11 @@ CORE DIRECTIVES (NON-NEGOTIABLE):
    - *Good:* "Delivered consistent double-digit top-line growth (10% YoY), underpinned by a pivot to high-margin export markets, signaling strong potential for sustained EBITDA expansion."
 6. **DATA & FACTS:** Use real-world data and facts to support your claims. Avoid speculation and unsubstantiated claims.
 7. **CITATION INTEGRITY:** Every single data point must be traceable. You will output a specific "source_map" for every slide.
-8. **VISUAL INTELLIGENCE:** For `detailed_image_prompt`, we are going to perfrom a google search using provided keywords, write SIMPLE, factual search queries. 
+8. 6. **VISUAL INTELLIGENCE (DUAL MODE):** You must start with word "GENERATIVE" or "SEARCH" based on the mode you are using.
+   * **Mode A (Generative):** For `detailed_image_prompt`, write cinematic, photorealistic AI image prompts (e.g., "Midjourney style, 8k, cinematic lighting").
+   * **Mode B (Search):** For `Google Search_keywords`, write SIMPLE, factual search queries. 
      * *Bad:* "Cinematic 8k shot of a futuristic automotive factory with blue lighting"
-     * *Good:* "gujrat solar power plant" or "industrial forging machinery", "facebook logo", "certification logo".
+     * *Good:* "automotive assembly line interior" or "industrial forging machinery", or "facebook logo" or "iso certification 9001:2015 logo".
 """
 SECTOR_STRATEGIES = """
 SECTOR RECOGNITION & ADAPTATION LOGIC: (ADAPT & CONQUER)
@@ -133,7 +135,7 @@ MISSION: GENERATE "BLIND" TEASER JSON
         * *Result:* Top Half = 4 Blocks (Quick wins), Bottom Half = 3 Blocks (Detailed text).
         8 Blocks 
         * *Result:* Top Half = 5 Blocks (Quick wins), Bottom Half = 3 Blocks (Detailed text).
-5. **CONSTRAINT:** Limit all `text_deep_dive` blocks to exactly **3 bullet points**.
+6. **CONSTRAINT:** Limit all `text_deep_dive` blocks to exactly **3 bullet points**.
           "verbose_bullets": [
              "High-impact bullet point 1", 
              "High-impact bullet point 2", 
@@ -159,7 +161,6 @@ Use these `block_type` values strategically:
 13. When using dashboard_grid, make sure to use 4 KPI boxes.
 14. When using logo_grid, make sure to use even number of logos.
 Generate the JSON now.
-15.**IMAGE CONSTRAINT:** - For `visual_map` blocks, you MUST provide `Google Search_keywords`. 
    
 """
 
@@ -459,12 +460,21 @@ def generate_presentation(api_data):
     presentation_json = json.loads(presentation)
 
     # 7. Post-Processing: Fetch Images for Visual Maps & Convert Metrics
-    # Add parent directory to path to allow importing imageAgent
+    presentation_json = enrich_presentation_with_images(presentation_json)
+
+    return presentation_json
+
+def enrich_presentation_with_images(presentation_json):
+    """
+    Scans the presentation JSON for 'visual_map' blocks and fetches images.
+    Also fixes 'dashboard_grid' metrics format.
+    """
     import sys
+    # Add parent directory to path to allow importing imageAgent
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     
     try:
-        from imageAgent.handler import fetch_google_images
+        from imageAgent.src.handler import fetch_google_images, generate_images
         
         # Ensure static images directory exists
         static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'images')
@@ -495,55 +505,65 @@ def generate_presentation(api_data):
                     heading = block.get("heading", "visualization")
                     prompt = block.get("detailed_image_prompt", heading)
                     
-                    # Create a search query from the prompt (simplified)
-                    # The prompt is usually long/descriptive, so we might want to extract keywords
-                    # For now using the heading + 'cinematic' as a proxy query or just the prompt
-                    # Let's try to use the prompt but truncated or the heading for better search results
-                    search_query = f"{presentation_json.get('sector', '')} {heading} {block.get('detailed_image_prompt','')} cinematic"
-                    search_query = search_query[:100] # truncate to avoid too long query
-                    
-                    print(f"Fetching image for block {block.get('block_id')}: {search_query}...")
-                    
-                    # We pass a specific folder to the handler
-                    # NOTE: handler.py expects save_folder. We want it in transcriberAgent/static/images
-                    
-                    # We need to modify fetch_google_images in handler.py to return the path or filename
-                    # OR we just list the dir after.
-                    
-                    # Let's clean the directory for this specific query to avoid mixing? No, unique names handle it.
-                    # fetch_google_images handles downloading.
-                    
+                    # Dual Mode Logic
                     try:
-                        # fetch 1 image
-                        fetch_google_images(query=search_query, num_images=1, save_folder=static_dir)
-                        
-                        # Find the most recently created file in the directory to assign it?
-                        # Or relying on the handler's naming convention: query_0.jpg
-                        # The handler replaces spaces with underscores.
-                        sanitized_query = search_query.replace(' ', '_')
-                        expected_filename = f"{sanitized_query}_0.jpg"
-                        
-                        # Check provided file exists, or look for *any* new file? 
-                        # Handler logic: f"{query.replace(' ', '_')}_{i}.jpg"
-                        
-                        image_path = os.path.join(static_dir, expected_filename)
-                        
-                        if os.path.exists(image_path):
-                            # Construct the URL for the frontend
-                            # The API serves /static at /images/
-                            # But wait, the API serves `transcriberAgent/static/images` at `/images`
-                            # So URL is http://localhost:8001/images/{filename}
+                        # 1. Check for Generative Mode
+                        if "GENERATIVE" in prompt.upper():
+                            # Extract the prompt part
+                            # Remove the keyword to get the clean prompt
+                            clean_prompt = re.sub(r'GENERATIVE:?', '', prompt, flags=re.IGNORECASE).strip()
+                            # Fallback if empty
+                            if not clean_prompt: clean_prompt = f"{heading} cinematic detail"
                             
-                            block["image_url"] = f"http://localhost:8001/images/{expected_filename}"
-                            print(f"Attached Image: {block['image_url']}")
+                            print(f"🎨 GENERATIVE MODE detected for block {block.get('block_id')}")
+                            
+                            filename = generate_images(prompt=clean_prompt, save_folder=static_dir)
+                            
+                            if filename:
+                                block["image_url"] = f"http://localhost:8001/images/{filename}"
+                                print(f"Attached Generated Image: {block['image_url']}")
+                            else:
+                                print("Generation failed, falling back to placeholder.")
+                                # Fallback
+                                block["image_url"] = "http://localhost:8001/images/abstract_financial_growth_blue_and_silver_8k_0.jpg"
+
+                        # 2. Search Mode (Default)
                         else:
-                            print(f"Warning: Image file not found at {image_path}")
+                            # Extract search terms if "SEARCH" is present
+                            if "SEARCH" in prompt.upper():
+                                clean_query = re.sub(r'SEARCH:?', '', prompt, flags=re.IGNORECASE).strip()
+                            else:
+                                # Default behavior if no keyword
+                                clean_query = f"{presentation_json.get('sector', '')} {heading} {prompt}"
+                                clean_query = clean_query[:100]
+
+                            print(f"🔍 SEARCH MODE detected for block {block.get('block_id')}: {clean_query}")
                             
+                            # Fetch 1 image
+                            try:
+                                fetch_google_images(query=clean_query, num_images=1, save_folder=static_dir)
+                            except Exception as e:
+                                print(f"Search fetch failed: {e}")
+                            
+                            # Guess filename (Search handler uses query -> filename)
+                            sanitized_query = clean_query.replace(' ', '_')
+                            expected_filename = f"{sanitized_query}_0.jpg"
+                            
+                            image_path = os.path.join(static_dir, expected_filename)
+                            
+                            if os.path.exists(image_path):
+                                block["image_url"] = f"http://localhost:8001/images/{expected_filename}"
+                                print(f"Attached Search Image: {block['image_url']}")
+                            else:
+                                print(f"Warning: Search Image not found at {image_path}. Using fallback.")
+                                block["image_url"] = "http://localhost:8001/images/abstract_financial_growth_blue_and_silver_8k_0.jpg"
+
                     except Exception as img_err:
-                        print(f"Failed to fetch image for block: {img_err}")
+                        print(f"Failed to process image for block: {img_err}")
+                        block["image_url"] = "http://localhost:8001/images/abstract_financial_growth_blue_and_silver_8k_0.jpg"
                         
-    except ImportError:
-        print("Warning: Could not import imageAgent.handler. Image enrichment skipped.")
+    except ImportError as e:
+        print(f"Warning: Could not import imageAgent.handler: {e}. Image enrichment skipped.")
     except Exception as e:
         print(f"Error during image enrichment: {e}")
 

@@ -1,9 +1,9 @@
 import os
 import json
 from pathlib import Path
-from src.private_agent.agent import PrivateDataIngestionAgent
-from src.public_agent.agent import PublicDataAgent
-from src.merge_agent.agent import MergeAgent
+from .private_agent.agent import PrivateDataIngestionAgent
+from .public_agent.agent import PublicDataAgent
+from .merge_agent.agent import MergeAgent
 
 
 def get_directory_structure(root_dir):

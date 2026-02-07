@@ -1,10 +1,10 @@
 from pathlib import Path
 import json
 
-from src.private_agent.parsers.private_md_canonical_parser import parse_private_md
-from src.private_agent.typed.promote_typed import promote_typed
-from src.private_agent.typed.sector_inference import infer_sector
-from src.private_agent.typed.financial_csv_normalizer import generate_financial_csvs
+from .parsers.private_md_canonical_parser import parse_private_md
+from .typed.promote_typed import promote_typed
+from .typed.sector_inference import infer_sector
+from .typed.financial_csv_normalizer import generate_financial_csvs
 
 
 class PrivateDataIngestionAgent:

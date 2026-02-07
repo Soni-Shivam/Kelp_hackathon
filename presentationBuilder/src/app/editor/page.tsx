@@ -7,7 +7,7 @@ import { SlideCanvas } from '@/components/presentation/slide-canvas';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Download, ChevronLeft, MousePointer2 } from 'lucide-react';
-import { exportToPPTX } from '@/lib/api-service';
+import { exportToPPTX, exportCitations } from '@/lib/api-service';
 import { useToast } from '@/components/ui/toast';
 
 export default function EditorPage() {
@@ -15,6 +15,7 @@ export default function EditorPage() {
     const { presentation, currentSlideNumber, setCurrentSlideNumber, setEditMode } = usePresentationStore();
     const [scale, setScale] = useState(0.8);
     const [isExporting, setIsExporting] = useState(false);
+    const [isExportingCitations, setIsExportingCitations] = useState(false);
     const { showToast } = useToast();
 
     // Always enable edit mode
@@ -71,6 +72,19 @@ export default function EditorPage() {
         }
     };
 
+    const handleExportCitations = async () => {
+        if (!presentation || isExportingCitations) return;
+        setIsExportingCitations(true);
+        try {
+            await exportCitations(presentation);
+            showToast('Citations exported successfully!', 'success');
+        } catch (error) {
+            showToast('Failed to export citations. Please try again.', 'error');
+        } finally {
+            setIsExportingCitations(false);
+        }
+    };
+
     return (
         <div className="h-screen w-screen flex flex-col bg-kelp-bg-app overflow-hidden">
             {/* 1. App Header */}
@@ -93,6 +107,16 @@ export default function EditorPage() {
                     </div>
 
                     <span className="text-xs text-slate-400">Autosaved</span>
+
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleExportCitations}
+                        disabled={isExportingCitations}
+                    >
+                        {isExportingCitations ? 'Exporting...' : 'Export Citations'}
+                    </Button>
+
                     <Button
                         variant="gradient"
                         size="sm"

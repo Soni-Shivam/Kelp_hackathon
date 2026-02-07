@@ -1,3 +1,4 @@
+
 import pptxgen from 'pptxgenjs';
 import { Presentation, SlideBlock, ChartData } from '@/types/presentation';
 import { LayoutAllocator } from './layout-engine';
@@ -72,10 +73,10 @@ export async function generatePPTX(presentation: Presentation): Promise<Blob> {
         // 2. Slide Header (pixel-perfect match to slide-header.tsx)
         renderSlideHeader(slide, slideData.kicker, slideData.title);
 
-        // 3. Content Blocks
+        // 3. Content Blocks - await async rendering
         const positions = layoutAllocator.calculatePositions(slideData.blocks);
         for (const pos of positions) {
-            renderBlock(slide, pos);
+            await renderBlock(slide, pos);
         }
 
         // 4. Footer
@@ -181,7 +182,7 @@ function renderFooter(slide: pptxgen.Slide, slideNumber: number) {
 // ============================================================================
 // BLOCK ROUTER
 // ============================================================================
-function renderBlock(slide: pptxgen.Slide, pos: any) {
+async function renderBlock(slide: pptxgen.Slide, pos: any) {
     const { block, left, top, width, height } = pos;
     const x = pxToIn(left);
     const y = pxToIn(top);
@@ -199,7 +200,7 @@ function renderBlock(slide: pptxgen.Slide, pos: any) {
             renderChartBlock(slide, block, x, y, w, h);
             break;
         case 'visual_map':
-            renderVisualMapBlock(slide, block, x, y, w, h);
+            await renderVisualMapBlock(slide, block, x, y, w, h);
             break;
         case 'logo_grid':
             renderLogoGridBlock(slide, block, x, y, w, h);
@@ -301,11 +302,9 @@ function parseRichText(bullets: string[]) {
 
             // 3. BULLET LOGIC: Only the FIRST text node of the line gets the bullet
             if (index === 0) {
+                // FIXED: Removed invalid 'marginPt' from bullet object
                 textObj.options.bullet = {
-                    type: 'bullet',
-                    code: '2022', // Unicode bullet •
-                    color: COLORS.kelpAccentStart,
-                    marginPt: 10
+                    color: COLORS.kelpAccentStart
                 };
                 textObj.options.indentLevel = 0;
             }
@@ -680,12 +679,28 @@ function renderChartBlock(slide: pptxgen.Slide, block: any, x: number, y: number
 }
 
 // ============================================================================
+// HELPER: Convert image URL to base64 data URL
+// ============================================================================
+async function imageUrlToBase64(url: string): Promise<string> {
+    try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+    } catch (error) {
+        console.error('Failed to convert image to base64:', error);
+        throw error;
+    }
+}
+
+// ============================================================================
 // VISUAL MAP BLOCK
 // ============================================================================
-// ============================================================================
-// VISUAL MAP BLOCK
-// ============================================================================
-function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number, y: number, w: number, h: number) {
+async function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number, y: number, w: number, h: number) {
     const padding = SPACING.padding.sm;
     const gap = SPACING.gap.sm;
 
@@ -717,29 +732,48 @@ function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number, y: nu
     });
 
     if (block.image_url) {
-        // Embed Image
-        slide.addImage({
-            path: block.image_url,
-            x: x + 0.08,
-            y: contentY,
-            w: w - 0.16,
-            h: contentH,
-            sizing: { type: 'cover', w: w - 0.16, h: contentH } // Crop to fill
-        });
+        try {
+            // Convert image URL to base64
+            const base64Image = await imageUrlToBase64(block.image_url);
 
-        // Add prompt overlay text (small, bottom)
-        slide.addText(block.detailed_image_prompt || '', {
-            x: x + 0.08,
-            y: contentY + contentH - 0.3,
-            w: w - 0.16,
-            h: 0.3,
-            fontSize: 8,
-            color: COLORS.white,
-            fill: { color: '000000', transparency: 50 },
-            align: 'center',
-            valign: 'middle'
-        });
+            // Embed Image using base64
+            slide.addImage({
+                data: base64Image,
+                x: x + 0.08,
+                y: contentY,
+                w: w - 0.16,
+                h: contentH,
+                sizing: { type: 'cover', w: w - 0.16, h: contentH } // Crop to fill
+            });
 
+            // Add prompt overlay text (small, bottom)
+            slide.addText(block.detailed_image_prompt || '', {
+                x: x + 0.08,
+                y: contentY + contentH - 0.3,
+                w: w - 0.16,
+                h: 0.3,
+                fontSize: 8,
+                color: COLORS.white,
+                fill: { color: '000000', transparency: 50 },
+                align: 'center',
+                valign: 'middle'
+            });
+        } catch (error) {
+            console.error('Failed to load image:', error);
+            // Fallback Text
+            slide.addText('[Visual: Image Load Failed]', {
+                x: x + 0.08,
+                y: contentY,
+                w: w - 0.16,
+                h: contentH,
+                fontFace: TYPOGRAPHY.fontFamily,
+                fontSize: TYPOGRAPHY.sizes.sm.pt,
+                italic: true,
+                color: COLORS.danger,
+                align: 'center',
+                valign: 'middle'
+            });
+        }
     } else {
         // Fallback Text
         slide.addText('[Visual: ' + (block.detailed_image_prompt || 'Image') + ']', {
@@ -915,7 +949,7 @@ function renderUnknownBlock(slide: pptxgen.Slide, block: any, x: number, y: numb
 // ============================================================================
 // SLATE TO PPTX PARSER (with ** bold support)
 // ============================================================================
-function parseSlateToPptx(nodes: SlateNode[], level: number = 0): any[] {
+function parseSlateToPptx(nodes: SlateNode[], level: number = 0, listType: 'ul' | 'ol' = 'ul'): any[] {
     let result: any[] = [];
 
     nodes.forEach(node => {
@@ -934,32 +968,57 @@ function parseSlateToPptx(nodes: SlateNode[], level: number = 0): any[] {
                     }
                 });
             });
-        } else if (node.type === 'ul' || node.type === 'ol') {
+        } else if (node.type === 'ul') {
             if (node.children) {
-                result = [...result, ...parseSlateToPptx(node.children, level)];
+                // Pass level + 1? No, level should match recursion depth of LI
+                // But generally, UL inside UL implies nesting.
+                // We keep level same for root, but increment when recursing.
+                // However, li recurses for its children.
+                // So here we pass level as is, and LI handles increment?
+                // Actually, if we are inside an LI, level is already correct?
+                // Let's rely on LI to increment level for its children.
+                result = [...result, ...parseSlateToPptx(node.children, level, 'ul')];
+            }
+        } else if (node.type === 'ol') {
+            if (node.children) {
+                result = [...result, ...parseSlateToPptx(node.children, level, 'ol')];
             }
         } else if (node.type === 'li') {
+            // Recurse with level + 1 so nested lists get indented
             if (node.children) {
-                const itemParts = parseSlateToPptx(node.children, level);
+                const itemParts = parseSlateToPptx(node.children, level + 1, listType);
                 if (itemParts.length > 0) {
+                    const bulletConfig = listType === 'ol'
+                        ? { type: 'number', color: COLORS.kelpAccentStart }
+                        : { color: COLORS.kelpAccentStart };
+
+                    // Apply bullet and indent to the FIRST text node of the item
                     itemParts[0].options = {
                         ...itemParts[0].options,
-                        bullet: { type: 'bullet', color: COLORS.kelpAccentStart },
+                        bullet: bulletConfig,
                         indentLevel: level
                     };
+
+                    // Force breakLine on the last text part of the list item
+                    const lastPart = itemParts[itemParts.length - 1];
+                    if (!lastPart.options.breakLine) {
+                        lastPart.options.breakLine = true;
+                    }
+
                     result = [...result, ...itemParts];
                 }
             }
         } else if (node.type === 'paragraph') {
             if (node.children) {
-                const pParts = parseSlateToPptx(node.children, level);
+                const pParts = parseSlateToPptx(node.children, level, listType);
                 if (pParts.length > 0) {
-                    pParts[pParts.length - 1].text += '\n';
+                    // Use breakLine:true instead of appending newline char
+                    pParts[pParts.length - 1].options.breakLine = true;
                     result = [...result, ...pParts];
                 }
             }
         } else if (node.children) {
-            result = [...result, ...parseSlateToPptx(node.children, level)];
+            result = [...result, ...parseSlateToPptx(node.children, level, listType)];
         }
     });
 

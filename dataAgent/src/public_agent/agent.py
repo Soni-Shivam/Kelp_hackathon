@@ -1,10 +1,10 @@
 import json
 from pathlib import Path
 
-from src.public_agent.screener_search import search_company
-from src.public_agent.screener_fetch import fetch_company_page
-from src.public_agent.screener_parser import parse_screener
-from src.public_agent.typed.promote_typed import promote_public_typed
+from .screener_search import search_company
+from .screener_fetch import fetch_company_page
+from .screener_parser import parse_screener
+from .typed.promote_typed import promote_public_typed
 
 
 class PublicDataAgent:

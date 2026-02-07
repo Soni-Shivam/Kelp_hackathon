@@ -60,6 +60,56 @@ def fetch_google_images(query, num_images=5, save_folder='./imageAgent/downloade
     except Exception as e:
         print(f"Error fetching search results: {e}")
 
+# --- Generative Image Function ---
+from google import genai
+import base64
+
+def generate_images(prompt, save_folder='./imageAgent/generated_images'):
+    """
+    Generates images using Google's GenAI (Imagen) model via interactions interface.
+    """
+    if not os.path.exists(save_folder):
+        os.makedirs(save_folder)
+
+    print(f"Generating image for prompt: {prompt[:50]}...")
+    
+    try:
+        # Initialize Client - Version auto-negotiated or default
+        client = genai.Client(api_key=API_KEY, http_options={'api_version': 'v1alpha'})
+        
+        # Using Gemini 3 Pro Image Preview as per user snippet
+        try:
+            interaction = client.interactions.create(
+                model="gemini-3-pro-image-preview",
+                input=prompt,
+                response_modalities=["IMAGE"]
+            )
+            
+            for i, output in enumerate(interaction.outputs):
+                if output.type == "image":
+                    # Create a safe filename
+                    safe_prompt = "".join([c for c in prompt if c.isalnum() or c in (' ', '_')]).strip().replace(' ', '_')
+                    filename = f"gen_{safe_prompt[:50]}_{i}.png"
+                    file_path = os.path.join(save_folder, filename)
+                    
+                    # Decocde and save
+                    with open(file_path, "wb") as f:
+                        f.write(base64.b64decode(output.data))
+                        
+                    print(f"Generated and saved: {filename}")
+                    return filename # Return the first filename
+                    
+        except Exception as e:
+            if "quota" in str(e).lower() or "429" in str(e):
+                print(f"Rate Limit Hit for Image Generation. Skipping.")
+                return None
+            print(f"Interaction Error: {e}")
+            return None
+        
+    except Exception as e:
+        print(f"Failed to generate image: {e}")
+        return None
+
 # USAGE
 if __name__ == "__main__":
     fetch_google_images(query="golden retriever puppy", num_images=5)

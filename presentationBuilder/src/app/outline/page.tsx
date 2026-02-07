@@ -1,71 +1,83 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { usePresentationStore } from '@/lib/store/presentation-store';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { ChevronRight, FileText, CheckCircle2, LayoutTemplate } from 'lucide-react';
+import { ArrowLeft, ArrowRight, LayoutTemplate } from 'lucide-react';
 
 export default function OutlinePage() {
     const router = useRouter();
     const { presentation } = usePresentationStore();
 
-    if (!presentation) {
-        router.push('/');
-        return null;
-    }
+    useEffect(() => {
+        if (!presentation) {
+            router.push('/');
+        }
+    }, [presentation, router]);
+
+    if (!presentation) return null;
 
     return (
         <div className="min-h-screen bg-kelp-bg-app flex flex-col">
             {/* Header */}
-            <header className="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-10">
-                <div className="flex items-center gap-2">
-                    <div className="font-bold text-kelp-primary text-xl">KELP</div>
-                    <div className="h-4 w-px bg-slate-300 mx-2" />
-                    <div className="text-slate-500 font-medium">Outline Review</div>
+            <header className="h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 shrink-0">
+                <div className="flex items-center gap-4">
+                    <Button variant="ghost" size="icon" onClick={() => router.push('/')}>
+                        <ArrowLeft className="h-4 w-4" />
+                    </Button>
+                    <div className="flex flex-col">
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Project Outline</span>
+                        <span className="text-sm font-bold text-slate-800">{presentation.project_code_name}</span>
+                    </div>
                 </div>
-                <Button variant="default" onClick={() => router.push('/editor')}>
-                    Confirm & Render Slides
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
+                <div>
+                    <Button onClick={() => router.push('/editor')} variant="gradient">
+                        Continue to Editor <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                </div>
             </header>
 
-            {/* Main Content */}
-            <main className="flex-1 max-w-4xl w-full mx-auto p-8 space-y-6">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-kelp-primary">Proposed Structure</h1>
-                    <p className="text-slate-500 mt-2">We found 3 high-impact areas for {presentation.project_code_name}. Review the outline below.</p>
-                </div>
+            {/* Content */}
+            <main className="flex-1 overflow-y-auto p-8">
+                <div className="max-w-4xl mx-auto space-y-6">
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="p-2 bg-kelp-primary/10 rounded-lg">
+                            <LayoutTemplate className="h-6 w-6 text-kelp-primary" />
+                        </div>
+                        <div>
+                            <h1 className="text-2xl font-bold text-slate-800">Presentation Structure</h1>
+                            <p className="text-slate-500">Review the generated slides before editing details.</p>
+                        </div>
+                    </div>
 
-                <div className="space-y-4">
-                    {presentation.slides.map((slide, index) => (
-                        <Card key={slide.slide_number} className="p-6 border-l-4 border-l-kelp-accent-start hover:shadow-md transition-shadow">
-                            <div className="flex items-start gap-4">
-                                <div className="h-8 w-8 rounded-full bg-kelp-primary/10 text-kelp-primary flex items-center justify-center font-bold text-sm shrink-0">
-                                    {index + 1}
+                    <div className="grid gap-4">
+                        {presentation.slides.map((slide, idx) => (
+                            <div key={slide.slide_number} className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex items-start gap-4 hover:border-kelp-accent-start/50 transition-colors">
+                                <div className="flex-shrink-0 w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-500 text-sm">
+                                    {slide.slide_number}
                                 </div>
                                 <div className="flex-1">
-                                    <div className="text-xs font-bold text-kelp-accent-start uppercase tracking-wider mb-1">
-                                        {slide.kicker}
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-xs font-bold text-kelp-primary uppercase px-2 py-0.5 bg-kelp-primary/10 rounded-full">
+                                            {slide.layout}
+                                        </span>
+                                        <span className="text-xs text-slate-400 font-medium">
+                                            {slide.blocks.length} Blocks
+                                        </span>
                                     </div>
-                                    <h3 className="text-lg font-bold text-slate-800 mb-2">
-                                        {slide.title}
-                                    </h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {slide.blocks.map(block => (
-                                            <span key={block.block_id} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">
-                                                {block.block_type === 'text_deep_dive' && <FileText className="w-3 h-3 mr-1" />}
-                                                {block.block_type === 'dashboard_grid' && <LayoutTemplate className="w-3 h-3 mr-1" />}
-                                                {block.block_type.replace('_', ' ')}
-                                            </span>
-                                        ))}
-                                    </div>
+                                    <h3 className="font-bold text-slate-800 text-lg leading-tight mb-1">{slide.title}</h3>
+                                    <p className="text-sm text-slate-500 font-medium uppercase tracking-wide">{slide.kicker}</p>
                                 </div>
-                                <CheckCircle2 className="h-6 w-6 text-green-500/20" />
                             </div>
-                        </Card>
-                    ))}
+                        ))}
+                    </div>
+
+                    <div className="flex justify-end pt-8 pb-16">
+                        <Button onClick={() => router.push('/editor')} size="lg" variant="gradient">
+                            Continue to Editor <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                    </div>
                 </div>
             </main>
         </div>

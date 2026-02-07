@@ -44,3 +44,26 @@ async def generate_from_data(request: Request):
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
+
+# --- Citation Generator ---
+from fastapi.responses import Response
+from transcriberAgent.citation_generator import generate_citations_text
+import io
+
+@app.post("/generate-citations")
+async def generate_citations_endpoint(request: Request):
+    """
+    Generates a citation text file from the presentation JSON.
+    """
+    try:
+        presentation_data = await request.json()
+        citation_text = generate_citations_text(presentation_data)
+        
+        # Return as a downloadable file response
+        return Response(
+            content=citation_text,
+            media_type="text/plain",
+            headers={"Content-Disposition": "attachment; filename=citations.txt"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

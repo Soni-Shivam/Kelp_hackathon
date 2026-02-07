@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from src.merge_agent.utils import read_json
+from .utils import read_json
 
 
 class MergeAgent:
