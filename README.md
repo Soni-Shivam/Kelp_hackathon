@@ -64,6 +64,13 @@ The system orchestrates three specialized AI agents to produce pixel-perfect, Mc
    cp .env.example .env
    # Edit .env and add your API keys:
    # GOOGLE_API_KEY=your_gemini_api_key
+
+   Key and a Search Engine ID.
+
+Step 1: Get your Credentials
+API Key: Go to the Google Cloud Console, create a new project, enable the "Custom Search API", and create an API Key = SEARCH_API_KEY
+
+Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called cx)=SEARCH_ENGINE_ID
    # SEARCH_API_KEY=your_custom_search_key
    # SEARCH_ENGINE_ID=your_search_engine_id
    ```
@@ -258,8 +265,4 @@ MIT License - See LICENSE file for details
 - **Next.js** for frontend framework
 - **FastAPI** for backend services
 
----
 
-**Built with ❤️ for M&A professionals**
-
-*Strictly Private & Confidential | © 2026 PLEK AI*
