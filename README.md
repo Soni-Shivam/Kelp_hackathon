@@ -14,6 +14,20 @@ PLEK AI is an advanced multi-agent system designed for M&A professionals and inv
 
 The system orchestrates three specialized AI agents to produce pixel-perfect, McKinsey-style presentations in under 2 minutes.
 
+
+![1](https://github.com/user-attachments/assets/6d867901-431d-4d3e-8f04-b7cf9ebbc672)
+
+![2](https://github.com/user-attachments/assets/889e3ffb-e247-4747-b492-7b3037861b67)
+
+<img width="1920" height="923" alt="Screenshot from 2026-02-07 15-40-57" src="https://github.com/user-attachments/assets/8ae8e42f-8a9c-46e5-836e-9f973bda4989" />
+
+
+<img width="1920" height="923" alt="Screenshot from 2026-02-07 15-40-54" src="https://github.com/user-attachments/assets/d235dcf6-f84d-4b97-8891-460d20f0e969" />
+
+
+<img width="1920" height="923" alt="Screenshot from 2026-02-07 15-40-50" src="https://github.com/user-attachments/assets/5c5afae4-016a-4621-97b9-3ed038996596" />
+
+
 ## 🏗️ Architecture
 
 ```
@@ -70,7 +84,7 @@ The system orchestrates three specialized AI agents to produce pixel-perfect, Mc
    Step 1: Get your Credentials
    API Key: Go to the Google Cloud Console, create a new project, enable the "Custom Search API", and create an API Key = SEARCH_API_KEY
 
-   Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called cx)=SEARCH_ENGINE_ID
+Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called cx)=SEARCH_ENGINE_ID
    SEARCH_API_KEY=your_custom_search_key
    SEARCH_ENGINE_ID=your_search_engine_id
    ```
