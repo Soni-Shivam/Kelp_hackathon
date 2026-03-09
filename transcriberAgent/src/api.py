@@ -18,9 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
-# Mount static images
 # Current file is transcriberAgent/src/api.py
 # Static dir is transcriberAgent/static/images
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,7 +29,13 @@ static_images_dir = os.path.join(base_dir, "static", "images")
 if not os.path.exists(static_images_dir):
     os.makedirs(static_images_dir)
 
-app.mount("/images", StaticFiles(directory=static_images_dir), name="images")
+@app.get("/images/{filename}")
+async def get_image(filename: str):
+    file_path = os.path.join(static_images_dir, filename)
+    if os.path.exists(file_path):
+        headers = {"Access-Control-Allow-Origin": "*"}
+        return FileResponse(file_path, headers=headers)
+    raise HTTPException(status_code=404, detail="Image not found")
 
 @app.post("/generate_from_data")
 async def generate_from_data(request: Request):

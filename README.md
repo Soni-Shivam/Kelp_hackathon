@@ -67,12 +67,12 @@ The system orchestrates three specialized AI agents to produce pixel-perfect, Mc
 
    Key and a Search Engine ID.
 
-Step 1: Get your Credentials
-API Key: Go to the Google Cloud Console, create a new project, enable the "Custom Search API", and create an API Key = SEARCH_API_KEY
+   Step 1: Get your Credentials
+   API Key: Go to the Google Cloud Console, create a new project, enable the "Custom Search API", and create an API Key = SEARCH_API_KEY
 
-Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called cx)=SEARCH_ENGINE_ID
-   # SEARCH_API_KEY=your_custom_search_key
-   # SEARCH_ENGINE_ID=your_search_engine_id
+   Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called cx)=SEARCH_ENGINE_ID
+   SEARCH_API_KEY=your_custom_search_key
+   SEARCH_ENGINE_ID=your_search_engine_id
    ```
 
 3. **Install Python dependencies**
@@ -210,10 +210,7 @@ Modify `transcriberAgent/kelp_agent.py`:
 - Retry logic and fallback strategies
 
 ### Image Fallbacks
-When API quotas are exceeded, the system uses:
-```
-transcriberAgent/static/images/abstract_financial_growth_blue_and_silver_8k_0.jpg
-```
+When API quotas are exceeded, the system uses fallback imgs
 
 ## 🐛 Troubleshooting
 
@@ -244,19 +241,6 @@ transcriberAgent/static/images/abstract_financial_growth_blue_and_silver_8k_0.jp
 - API keys stored in `.env` (gitignored)
 - Anonymization of sensitive financial data
 - CORS protection on all API endpoints
-
-## 🛣️ Roadmap
-
-- [ ] Multi-language support
-- [ ] Custom brand theme editor
-- [ ] Real-time collaboration
-- [ ] Cloud deployment (AWS/GCP)
-- [ ] Advanced chart types (waterfall, Gantt)
-- [ ] PDF export option
-
-## 📄 License
-
-MIT License - See LICENSE file for details
 
 ## 🙏 Acknowledgments
 

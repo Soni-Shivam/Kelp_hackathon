@@ -19,3 +19,5 @@ presentationBuilder/resources
 presentationBuilder/node_modules
 presentationBuilder/.next
 transcriberAgent/static/images
+imageAgent/downloaded_images
+imageAgent/generated_images

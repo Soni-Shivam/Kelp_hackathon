@@ -1,0 +1,19 @@
+{
+  "market_presence": [
+    {
+      "fields": {
+        "Market Cap": "\u20b9\n        206\n        \n          Cr.",
+        "Current Price": "\u20b9\n        565",
+        "High / Low": "\u20b9 890 / 495",
+        "Stock P/E": "36.3",
+        "Book Value": "\u20b9\n        253",
+        "Dividend Yield": "0.70\n        \n          %",
+        "ROCE": "12.3\n        \n          %",
+        "ROE": "9.77\n        \n          %",
+        "Face Value": "\u20b9\n        10.0"
+      },
+      "source": "screener",
+      "confidence": 1.0
+    }
+  ]
+}

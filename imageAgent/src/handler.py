@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_KEY = os.getenv('SEARCH_API_KEY')
+GEN_API_KEY = os.getenv('GOOGLE_API_KEY')
 SEARCH_ENGINE_ID = os.getenv('SEARCH_ENGINE_ID')
 
 
@@ -59,10 +60,20 @@ def fetch_google_images(query, num_images=5, save_folder='./imageAgent/downloade
 
     except Exception as e:
         print(f"Error fetching search results: {e}")
+        raise e
 
 # --- Generative Image Function ---
 from google import genai
 import base64
+import sys
+
+# Add parent directory to path to allow import shared_logger
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from shared_logger import LLMLogger
+    img_llm_logger = LLMLogger("imageAgent")
+except ImportError:
+    img_llm_logger = None
 
 def generate_images(prompt, save_folder='./imageAgent/generated_images'):
     """
@@ -75,7 +86,7 @@ def generate_images(prompt, save_folder='./imageAgent/generated_images'):
     
     try:
         # Initialize Client - Version auto-negotiated or default
-        client = genai.Client(api_key=API_KEY, http_options={'api_version': 'v1alpha'})
+        client = genai.Client(api_key=GEN_API_KEY, http_options={'api_version': 'v1alpha'})
         
         # Using Gemini 3 Pro Image Preview as per user snippet
         try:
@@ -96,18 +107,27 @@ def generate_images(prompt, save_folder='./imageAgent/generated_images'):
                     with open(file_path, "wb") as f:
                         f.write(base64.b64decode(output.data))
                         
+                    if img_llm_logger:
+                        img_llm_logger.log_response(prompt=prompt, response_text=f"[IMAGE GENERATED] Saved to: {filename}", model_name="gemini-3-pro-image-preview")
+
                     print(f"Generated and saved: {filename}")
                     return filename # Return the first filename
                     
         except Exception as e:
             if "quota" in str(e).lower() or "429" in str(e):
                 print(f"Rate Limit Hit for Image Generation. Skipping.")
+                if img_llm_logger:
+                    img_llm_logger.log_response(prompt=prompt, response_text="[RATE LIMIT HIT]", model_name="gemini-3-pro-image-preview")
                 return None
             print(f"Interaction Error: {e}")
+            if img_llm_logger:
+                img_llm_logger.log_response(prompt=prompt, response_text=f"[ERROR] {e}", model_name="gemini-3-pro-image-preview")
             return None
         
     except Exception as e:
         print(f"Failed to generate image: {e}")
+        if img_llm_logger:
+            img_llm_logger.log_response(prompt=prompt, response_text=f"[EXCEPTION] {e}", model_name="gemini-3-pro-image-preview")
         return None
 
 # USAGE

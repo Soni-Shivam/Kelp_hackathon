@@ -20,7 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static images
+from fastapi.responses import FileResponse
+
 # Current file is imageAgent/src/api.py
 # Static dir is imageAgent/downloaded_images and imageAgent/generated_images
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,14 +32,21 @@ generated_dir = os.path.join(base_dir, "generated_images")
 os.makedirs(downloaded_dir, exist_ok=True)
 os.makedirs(generated_dir, exist_ok=True)
 
-# We mount both potentially, or just one unified "images" route if we move them there.
-# For now, let's mount them separately to be safe, or just one common one if they shared a parent. 
-# But the handler saves to specific folders. 
-# Let's map /images/downloaded -> downloaded_images
-# and /images/generated -> generated_images
+@app.get("/images/downloaded/{filename}")
+async def get_downloaded_image(filename: str):
+    file_path = os.path.join(downloaded_dir, filename)
+    if os.path.exists(file_path):
+        headers = {"Access-Control-Allow-Origin": "*"}
+        return FileResponse(file_path, headers=headers)
+    raise HTTPException(status_code=404, detail="Image not found")
 
-app.mount("/images/downloaded", StaticFiles(directory=downloaded_dir), name="downloaded_images")
-app.mount("/images/generated", StaticFiles(directory=generated_dir), name="generated_images")
+@app.get("/images/generated/{filename}")
+async def get_generated_image(filename: str):
+    file_path = os.path.join(generated_dir, filename)
+    if os.path.exists(file_path):
+        headers = {"Access-Control-Allow-Origin": "*"}
+        return FileResponse(file_path, headers=headers)
+    raise HTTPException(status_code=404, detail="Image not found")
 
 @app.get("/fetch")
 async def fetch_images_endpoint(query: str, num_images: int = 1):

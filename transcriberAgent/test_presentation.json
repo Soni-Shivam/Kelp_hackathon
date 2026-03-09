@@ -1,0 +1,30 @@
+{
+    "project_code_name": "Project Silver Screen - Stress Test",
+    "sector": "Entertainment & Media",
+    "slides": [
+        {
+            "slide_number": 1,
+            "title": "ConnPlex: High-Density Operational Overview",
+            "blocks": [
+                {
+                    "heading": "Business Architecture",
+                    "citation": "Source: Business Description"
+                },
+                {
+                    "heading": "Financial Velocity (H1 FY26)",
+                    "citation": "Source: Financials Status"
+                }
+            ]
+        },
+        {
+            "slide_number": 2,
+            "title": "Deep Dive: P&L Structure & Profitability",
+            "blocks": [
+                {
+                    "heading": "Margin Analysis",
+                    "citation": "Source: Ratio Analysis"
+                }
+            ]
+        }
+    ]
+}

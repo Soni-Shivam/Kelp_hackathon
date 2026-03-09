@@ -1,0 +1,11 @@
+{
+  "private_sections": [
+    "financials"
+  ],
+  "public_sections": [
+    "peers",
+    "market_presence",
+    "company_profile"
+  ],
+  "financials": []
+}

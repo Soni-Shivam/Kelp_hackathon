@@ -294,7 +294,7 @@ export default function DashboardPage() {
                         PLEK (Private Layer & External Knowledge)
                     </p>
                     <p className="text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed">
-                        A hybrid intelligence engine that fuses Private Layer financials with External Knowledge to autonomously generate anonymized, fully editable 3-slide investment teasers.
+                        A hybrid intelligence engine that fuses Private Layer data with External Knowledge to autonomously generate anonymized, fully editable 3-slide investment teasers.
                     </p>
                 </div>
 
@@ -334,7 +334,7 @@ export default function DashboardPage() {
                     <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/50 max-w-2xl mx-auto space-y-6 text-left transition-all hover:shadow-2xl">
 
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-slate-700 ml-1">Company Name</label>
+                            <label className="text-sm font-semibold text-slate-700 ml-1">Company Name (as titled on Screener)</label>
                             <Input
                                 placeholder="e.g. Kalyani Forge Ltd"
                                 className="h-14 text-lg bg-white/50"

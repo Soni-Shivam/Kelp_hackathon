@@ -34,12 +34,13 @@ CORE DIRECTIVES (NON-NEGOTIABLE):
 2. **INVESTMENT BANKING TONE:** Your writing must be punchy, persuasive, and value-focused. Use terms like "EBITDA expansion," "blue-chip client base," "mission-critical," and "high-barrier-to-entry."
 3. **FLAT ARCHITECTURE:** Strictly NO "composite_block" or "sub_blocks".
 4. **DENSITY & VERBOSITY:** Each slide must contain 5 to 8 blocks. 
-5. **THE "VALUE" FORMULA:** Every bullet point in `verbose_bullets` must follow this structure: [Key Metric/Fact] + [Operational Driver] + [Forward-Looking Investment Merits].
+5. THE SLIDES SHOULD BE LIMITED TO ONLY 3. 
+6. **THE "VALUE" FORMULA:** Every bullet point in `verbose_bullets` must follow this structure: [Key Metric/Fact] + [Operational Driver] + [Forward-Looking Investment Merits].
    - *Bad:* "Revenue grew 10% last year."
    - *Good:* "Delivered consistent double-digit top-line growth (10% YoY), underpinned by a pivot to high-margin export markets, signaling strong potential for sustained EBITDA expansion."
-6. **DATA & FACTS:** Use real-world data and facts to support your claims. Avoid speculation and unsubstantiated claims.
-7. **CITATION INTEGRITY:** Every single data point must be traceable. You will output a specific "source_map" for every slide.
-8. 6. **VISUAL INTELLIGENCE (DUAL MODE):** You must start with word "GENERATIVE" or "SEARCH" based on the mode you are using.
+7. **DATA & FACTS:** Use real-world data and facts to support your claims. Avoid speculation and unsubstantiated claims.
+8. **CITATION INTEGRITY:** Every single data point must be traceable. You will output a specific "source_map" for every slide.
+9. **VISUAL INTELLIGENCE (DUAL MODE):** You must start with word "GENERATIVE" or "SEARCH" based on the mode you are using.
    * **Mode A (Generative):** For `detailed_image_prompt`, write cinematic, photorealistic AI image prompts (e.g., "Midjourney style, 8k, cinematic lighting").
    * **Mode B (Search):** For `Google Search_keywords`, write SIMPLE, factual search queries. 
      * *Bad:* "Cinematic 8k shot of a futuristic automotive factory with blue lighting"
@@ -397,6 +398,15 @@ def validate_json(output):
         print(f"Validation Error: {e}")
         return False
 
+import sys
+# Add parent directory to path to allow import shared_logger
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from shared_logger import LLMLogger
+    llm_logger = LLMLogger("transcriberAgent")
+except ImportError:
+    llm_logger = None
+
 def generate(prompt):
     # Initialize the model using the FULL_SYSTEM_PROMPT constructed at the top
     model = genai.GenerativeModel(
@@ -414,6 +424,9 @@ def generate(prompt):
         try:
             response = model.generate_content(prompt)
             output = response.text
+            
+            if llm_logger:
+                llm_logger.log_response(prompt=prompt, response_text=output, model_name=MODEL_NAME)
             
             # Clean formatting
             output = re.sub(r"```json", "", output)
