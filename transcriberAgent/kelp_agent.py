@@ -211,63 +211,68 @@ def fetch_data_from_api(company_name, md_file_path):
 #         print(f"Error extracting financials: {e}")
 #         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
 
-def extract_financials(api_output):
-    try:
-        # Safer extraction: Handle case where 'output' might be a list
-        output_data = api_output.get("output", {})
-        if isinstance(output_data, list):
-            output_data = output_data[0] if output_data else {}
-            
-        private_data = output_data.get("private", {})
-        # Handle case where 'private' might be a list
-        if isinstance(private_data, list):
-            private_data = private_data[0] if private_data else {}
+def get_merged_canonical(api_data):
+    """
+    Retrieves merged/canonical.json from the run directory identified by run_id.
+    Falls back to reading directly from the nested output dict if the file is not found.
+    """
+    run_id = api_data.get("run_id")
+    if run_id:
+        canonical_path = os.path.join("data", "output", run_id, "merged", "canonical.json")
+        if os.path.exists(canonical_path):
+            with open(canonical_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        print(f"Warning: canonical.json not found at {canonical_path}, falling back to response dict.")
 
-        fin_data = private_data.get("typed", {}).get("financials", {})
-        
-        def read_csv_str(filename):
-            content = fin_data.get(filename)
-            if content:
-                # Handle potential list structure for CSV content
-                if isinstance(content, list):
-                    content = content[0] if content else None
-                
-                if content:
-                    return pd.read_csv(io.StringIO(content))
-            return pd.DataFrame()   
+    # Fallback: read from nested output dict (legacy or test mode)
+    output = api_data.get("output", {})
+    merged = output.get("merged", {})
+    canonical_data = merged.get("canonical.json", {})
+    return canonical_data
 
-        return (
-            read_csv_str("income_statement.csv"),
-            read_csv_str("balance_sheet.csv"),
-            read_csv_str("cash_flow.csv"),
-            read_csv_str("ratios.csv"),
-        )
-    except Exception as e:
-        print(f"Error extracting financials: {e}")
-        return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
 
-def extract_private_jsons(api_output):
-    try:
-        typed_data = api_output.get("output", {}).get("private", {}).get("typed", {})
-        
-        def get_json(filename):
-            return typed_data.get(filename, {})
+def extract_text_from_section(section_data):
+    """Extracts text strings from a section's data list."""
+    text = ""
+    data_block = section_data.get("data", {})
+    for key, items in data_block.items():
+        if isinstance(items, list):
+            for item in items:
+                if isinstance(item, dict):
+                    text += item.get("text", "") + "\n"
+    return text.strip()
 
-        return (
-            get_json("business_description.json"),
-            get_json("swot.json"),
-            get_json("key_milestones.json")
-        )
-    except Exception as e:
-        print(f"Error extracting private JSONs: {e}")
-        return {}, {}, {}
 
 def extract_text(block, key):
+    """Legacy helper kept for backward compatibility."""
     text = ""
     if key in block:
         for item in block[key]:
             text += item.get("text", "") + "\n"
     return text
+
+
+def extract_financials_from_merged(merged_canonical):
+    """
+    Reads financial CSVs from the file paths stored in merged/canonical.json.
+    Falls back to empty DataFrames if files are unavailable.
+    """
+    fin_data = merged_canonical.get("private", {}).get("financials", {})
+
+    def read_csv_by_path(sheet_name):
+        sheet = fin_data.get(sheet_name, {})
+        csv_path = sheet.get("path", "")
+        if csv_path and os.path.exists(csv_path):
+            return pd.read_csv(csv_path)
+        return pd.DataFrame()
+
+    return (
+        read_csv_by_path("income_statement"),
+        read_csv_by_path("balance_sheet"),
+        read_csv_by_path("cash_flow"),
+        read_csv_by_path("ratios"),
+    )
+
 
 def summarize_financials(income, balance, cashflow, ratios):
     def get_last_row(df):
@@ -280,6 +285,21 @@ Balance: {get_last_row(balance)}
 Cashflow: {get_last_row(cashflow)}
 Ratios: {get_last_row(ratios)}
 """
+
+
+def build_public_context(merged_canonical):
+    """Builds a formatted string from public sections (company profile, market, peers)."""
+    public = merged_canonical.get("public", {})
+    if not public:
+        return ""
+
+    lines = ["\n===== PUBLIC / MARKET DATA ====="]
+    for section_name, section_data in public.items():
+        section_text = extract_text_from_section(section_data)
+        if section_text:
+            lines.append(f"\n[{section_name.upper()}]\n{section_text}")
+
+    return "\n".join(lines)
 
 # ==========================================================
 # 4. GENERATOR LOGIC
@@ -450,22 +470,30 @@ def generate_presentation(api_data):
     if not api_data:
         raise Exception("No API data provided")
 
-    # Extract Data
-    income, balance, cashflow, ratios = extract_financials(api_data)
-    business_json, swot_json, milestone_json = extract_private_jsons(api_data)
+    # 1. Get merged canonical which has both private + public data
+    merged_canonical = get_merged_canonical(api_data)
+    print(f"Merged sections — private: {list(merged_canonical.get('private', {}).keys())}, public: {list(merged_canonical.get('public', {}).keys())}")
 
-    # Process Text
-    business_text = extract_text(business_json, "business_description")
-    swot_text = extract_text(swot_json, "swot")
-    milestone_text = extract_text(milestone_json, "key_milestones")
+    private = merged_canonical.get("private", {})
+
+    # 2. Extract private text sections
+    business_text = extract_text_from_section(private.get("business_description", {}))
+    swot_text = extract_text_from_section(private.get("swot", {}))
+    milestone_text = extract_text_from_section(private.get("key_milestones", {}))
+
+    # 3. Extract financials via file paths from canonical
+    income, balance, cashflow, ratios = extract_financials_from_merged(merged_canonical)
     financial_summary = summarize_financials(income, balance, cashflow, ratios)
 
-    # Build Prompt using the Template at the top
+    # 4. Build public context block
+    public_context = build_public_context(merged_canonical)
+
+    # 5. Build Prompt — append public context after financials
     prompt = USER_INPUT_TEMPLATE.format(
         business=business_text,
         swot=swot_text,
         milestones=milestone_text,
-        financials=financial_summary
+        financials=financial_summary + public_context
     )
 
     # 6. Generate Presentation

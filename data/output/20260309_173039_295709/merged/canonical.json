@@ -16,7 +16,7 @@
       },
       "citation": {
         "source_type": "private",
-        "source_file": "data/output/private/typed/swot.json"
+        "source_file": "data/output/20260309_173039_295709/private/typed/swot.json"
       }
     },
     "business_description": {
@@ -31,7 +31,7 @@
       },
       "citation": {
         "source_type": "private",
-        "source_file": "data/output/private/typed/business_description.json"
+        "source_file": "data/output/20260309_173039_295709/private/typed/business_description.json"
       }
     },
     "key_milestones": {
@@ -46,13 +46,13 @@
       },
       "citation": {
         "source_type": "private",
-        "source_file": "data/output/private/typed/key_milestones.json"
+        "source_file": "data/output/20260309_173039_295709/private/typed/key_milestones.json"
       }
     },
     "financials": {
       "cash_flow": {
         "type": "csv",
-        "path": "data/output/private/typed/financials/cash_flow.csv",
+        "path": "data/output/20260309_173039_295709/private/typed/financials/cash_flow.csv",
         "citation": {
           "source_type": "private",
           "source_file": "cash_flow.csv"
@@ -60,7 +60,7 @@
       },
       "income_statement": {
         "type": "csv",
-        "path": "data/output/private/typed/financials/income_statement.csv",
+        "path": "data/output/20260309_173039_295709/private/typed/financials/income_statement.csv",
         "citation": {
           "source_type": "private",
           "source_file": "income_statement.csv"
@@ -68,7 +68,7 @@
       },
       "ratios": {
         "type": "csv",
-        "path": "data/output/private/typed/financials/ratios.csv",
+        "path": "data/output/20260309_173039_295709/private/typed/financials/ratios.csv",
         "citation": {
           "source_type": "private",
           "source_file": "ratios.csv"
@@ -76,7 +76,7 @@
       },
       "balance_sheet": {
         "type": "csv",
-        "path": "data/output/private/typed/financials/balance_sheet.csv",
+        "path": "data/output/20260309_173039_295709/private/typed/financials/balance_sheet.csv",
         "citation": {
           "source_type": "private",
           "source_file": "balance_sheet.csv"
@@ -146,7 +146,7 @@
       },
       "citation": {
         "source_type": "public",
-        "source_file": "data/output/public/typed/peers.json",
+        "source_file": "data/output/20260309_173039_295709/public/typed/peers.json",
         "source_url": "/company/KALYANIFRG/"
       }
     },
@@ -172,7 +172,7 @@
       },
       "citation": {
         "source_type": "public",
-        "source_file": "data/output/public/typed/market_presence.json",
+        "source_file": "data/output/20260309_173039_295709/public/typed/market_presence.json",
         "source_url": "/company/KALYANIFRG/"
       }
     },
@@ -188,7 +188,7 @@
       },
       "citation": {
         "source_type": "public",
-        "source_file": "data/output/public/typed/company_profile.json",
+        "source_file": "data/output/20260309_173039_295709/public/typed/company_profile.json",
         "source_url": "/company/KALYANIFRG/"
       }
     }

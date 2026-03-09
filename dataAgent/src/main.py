@@ -1,6 +1,7 @@
 import os
 import json
 from pathlib import Path
+from datetime import datetime
 from .private_agent.agent import PrivateDataIngestionAgent
 from .public_agent.agent import PublicDataAgent
 from .merge_agent.agent import MergeAgent
@@ -46,6 +47,12 @@ def get_directory_structure(root_dir):
 
 
 def run_data_agent(company_name: str, md_content: str = None):
+    # Generate a unique run ID using a timestamp
+    run_id = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    base_output_dir = Path("data/output")
+    output_dir = base_output_dir / run_id
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     # Handle Input File
     if md_content:
         input_path = Path("data/input/Company_OnePager.md")
@@ -54,24 +61,24 @@ def run_data_agent(company_name: str, md_content: str = None):
 
     private_agent = PrivateDataIngestionAgent(
         input_dir="data/input",
-        output_dir="data/output"
+        output_dir=str(output_dir)
     )
     private_agent.run()
 
     #take from input
     public_agent = PublicDataAgent(
         company_name=company_name,
-        output_dir="data/output"
+        output_dir=str(output_dir)
     )
     public_agent.run()
 
-    merge_agent = MergeAgent("data/output")
+    merge_agent = MergeAgent(str(output_dir))
     merge_agent.run()
 
     # Read all output
-    output_data = get_directory_structure("data/output")
+    output_data = get_directory_structure(str(output_dir))
 
-    return {"status": "success", "company": company_name, "output": output_data}
+    return {"status": "success", "company": company_name, "run_id": run_id, "output": output_data}
 
 
 def main():
