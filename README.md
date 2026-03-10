@@ -1,16 +1,16 @@
 # PLEK AI - Private Layer & External Knowledge
 
-![PLEK AI](https://img.shields.io/badge/PLEK-AI-8B5CF6?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
-
 > A hybrid intelligence engine that fuses Private Layer financials with External Knowledge to autonomously generate anonymized, fully editable 3-slide investment teasers.
 
-## 🎯 Overview
+## Overview
 
 PLEK AI is an advanced multi-agent system designed for M&A professionals and investment analysts. It automatically generates consulting-grade pitch decks by combining:
 
 - **Private Layer**: Confidential company financials and proprietary data
 - **External Knowledge**: Public market data, industry benchmarks, and web research
+
+
+[Presentation](<https://www.canva.com/design/DAHDaCSpEdw/fS_uLfxG0c_sRNalbWu0lA/edit>)
 
 The system orchestrates three specialized AI agents to produce pixel-perfect, McKinsey-style presentations in under 2 minutes.
 
@@ -28,33 +28,10 @@ The system orchestrates three specialized AI agents to produce pixel-perfect, Mc
 <img width="1920" height="923" alt="Screenshot from 2026-02-07 15-40-50" src="https://github.com/user-attachments/assets/5c5afae4-016a-4621-97b9-3ed038996596" />
 
 
-## 🏗️ Architecture
+## Architecture
+<img width="2560" height="1720" alt="all" src="https://github.com/user-attachments/assets/e35e3250-89ef-47d0-b860-805dcb82b4cd" />
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Frontend (Next.js)                        │
-│              presentationBuilder/                            │
-│  • Interactive slide editor with real-time preview          │
-│  • PPTX export with base64 image embedding                  │
-│  • Particle network background animations                   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  Agent Orchestration Layer                   │
-├─────────────────┬─────────────────┬─────────────────────────┤
-│   Data Agent    │ Transcriber     │    Image Agent          │
-│   (Port 8000)   │   Agent         │    (Port 8002)          │
-│                 │ (Port 8001)     │                         │
-│ • Private MD    │ • LLM-based     │ • Google Custom Search  │
-│   parsing       │   slide gen     │ • Imagen 3 generation   │
-│ • Public data   │ • Layout engine │ • Fallback handling     │
-│   scraping      │ • JSON schema   │                         │
-│ • Data merging  │   validation    │                         │
-└─────────────────┴─────────────────┴─────────────────────────┘
-```
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -76,18 +53,18 @@ The system orchestrates three specialized AI agents to produce pixel-perfect, Mc
 2. **Set up environment variables**
    ```bash
    cp .env.example .env
-   # Edit .env and add your API keys:
-   # GOOGLE_API_KEY=your_gemini_api_key
+   ```
+   Edit .env and add your API keys:
+   GOOGLE_API_KEY=your_gemini_api_key
 
    Key and a Search Engine ID.
-
    Step 1: Get your Credentials
    API Key: Go to the Google Cloud Console, create a new project, enable the "Custom Search API", and create an API Key = SEARCH_API_KEY
 
-Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called cx)=SEARCH_ENGINE_ID
-   SEARCH_API_KEY=your_custom_search_key
-   SEARCH_ENGINE_ID=your_search_engine_id
-   ```
+   Step 2: Search Engine ID (CX): Go to Programmable Search Engine, create a new search engine, enable "Image search" in the settings, and copy the "Search engine ID" (often called     cx)=SEARCH_ENGINE_ID
+   SEARCH_API_KEY = your_custom_search_key
+   SEARCH_ENGINE_ID = your_search_engine_id
+   
 
 3. **Install Python dependencies**
    ```bash
@@ -126,7 +103,7 @@ npm run dev
 
 Access the application at: **http://localhost:3000**
 
-## 📋 Usage
+## Usage
 
 1. **Enter Company Information**
    - Company name (e.g., "Kalyani Forge Ltd")
@@ -140,54 +117,13 @@ Access the application at: **http://localhost:3000**
    - Review and edit slides in the interactive editor
    - Export to PPTX format
    - Generate citations document
-
-## 🧩 Project Structure
-
-```
-kelp-hackathon/
-├── dataAgent/              # Data ingestion & processing
-│   ├── src/
-│   │   ├── private_agent/  # Private data parser
-│   │   ├── public_agent/   # Web scraping & search
-│   │   └── merge_agent/    # Data consolidation
-│   └── data/               # Input/output storage
-│
-├── transcriberAgent/       # Presentation generation
-│   ├── src/
-│   │   └── api.py          # FastAPI endpoints
-│   ├── kelp_agent.py       # LLM orchestration
-│   └── static/images/      # Image storage
-│
-├── imageAgent/             # Image fetching & generation
-│   ├── src/
-│   │   ├── handler.py      # Image processing logic
-│   │   └── api.py          # Image service API
-│   ├── downloaded_images/  # Search results
-│   └── generated_images/   # AI-generated images
-│
-└── presentationBuilder/    # Next.js frontend
-    ├── src/
-    │   ├── app/            # Pages & routing
-    │   ├── components/     # React components
-    │   ├── lib/            # Utilities & engines
-    │   │   ├── layout-engine.ts
-    │   │   ├── pptx-utils.ts
-    │   │   └── design-system.ts
-    │   └── types/          # TypeScript definitions
-    └── public/             # Static assets
-```
-
-## 🎨 Features
+     
+## Features
 
 ### Multi-Agent System
 - **Data Agent**: Ingests private markdown files and scrapes public data
-- **Transcriber Agent**: Uses Gemini 2.0 to generate structured slide content
-- **Image Agent**: Fetches relevant images via Google Custom Search or generates with Imagen 3
-
-### Intelligent Layout Engine
-- Automatic space allocation across slides
-- Dynamic block sizing and positioning
-- Responsive grid system for metrics and charts
+- **Transcriber Agent**: Uses Gemini to generate structured slide content
+- **Image Agent**: Fetches relevant images via Google Custom Search or generates with Google Nano Banana
 
 ### Rich Content Blocks
 - **Text Deep Dive**: Bullet points with markdown support
@@ -202,65 +138,4 @@ kelp-hackathon/
 - Base64 image embedding (no external dependencies)
 - Custom fonts and brand colors
 - Fallback handling for missing assets
-
-### UI/UX Enhancements
-- Particle network background with constant animation
-- Glassmorphism design elements
-- Real-time slide preview
-- Drag-and-drop file upload
-
-## 🔧 Configuration
-
-### Design System
-Edit `presentationBuilder/src/lib/design-system.ts`:
-- Colors: Brand palette (Kelp Purple, Accent Gradients)
-- Typography: Font sizes, weights, spacing
-- Layout: Slide dimensions, padding, gaps
-
-### LLM Prompts
-Modify `transcriberAgent/kelp_agent.py`:
-- System prompts for slide generation
-- JSON schema validation rules
-- Retry logic and fallback strategies
-
-### Image Fallbacks
-When API quotas are exceeded, the system uses fallback imgs
-
-## 🐛 Troubleshooting
-
-### Images Not Loading
-- **Issue**: `xhr.onerror` when exporting PPTX
-- **Solution**: Images are now converted to base64 automatically
-- **Fallback**: System uses placeholder image if APIs fail
-
-### API Quota Exceeded
-- **Google Custom Search**: 100 queries/day limit
-- **Generative Language API**: Enable in Google Cloud Console
-- **Workaround**: Fallback images are used automatically
-
-### Module Import Errors
-- Ensure all agents use **relative imports** (`from .module import`)
-- Run from project root: `uvicorn dataAgent.src.api:app`
-
-## 📊 Performance
-
-- **Generation Time**: ~90-120 seconds
-- **Slide Count**: 3 slides (configurable)
-- **Image Processing**: Parallel fetching with fallbacks
-- **PPTX Size**: ~2-5 MB (with embedded images)
-
-## 🔐 Security & Privacy
-
-- Private company data never leaves local environment
-- API keys stored in `.env` (gitignored)
-- Anonymization of sensitive financial data
-- CORS protection on all API endpoints
-
-## 🙏 Acknowledgments
-
-- **Gemini 2.0 Flash** for LLM capabilities
-- **pptxgenjs** for PowerPoint generation
-- **Next.js** for frontend framework
-- **FastAPI** for backend services
-
 
