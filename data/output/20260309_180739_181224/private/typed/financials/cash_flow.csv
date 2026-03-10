@@ -1,0 +1,193 @@
+metric,year,value
+- Cash & Bank Balances,2014,42.85821
+- Cash & Bank Balances,2015,71.15764
+- Cash & Bank Balances,2016,102.24929
+- Cash & Bank Balances,2017,23.046
+- Cash & Bank Balances,2018,49.169
+- Cash & Bank Balances,2019,50.334
+- Cash & Bank Balances,2020,56.438
+- Cash & Bank Balances,2021,27.213
+- Cash & Bank Balances,2022,48.976
+- Cash & Bank Balances,2023,54.643
+- Cash & Bank Balances,2024,59.341
+- Cash & Bank Balances,2025,29
+- Net cash flow from operating activities,2014,191.96527
+- Net cash flow from operating activities,2015,254.40554
+- Net cash flow from operating activities,2016,192.25876
+- Net cash flow from operating activities,2017,154.788
+- Net cash flow from operating activities,2018,123.425
+- Net cash flow from operating activities,2019,299.767
+- Net cash flow from operating activities,2020,240.675
+- Net cash flow from operating activities,2021,74.225
+- Net cash flow from operating activities,2022,111.217
+- Net cash flow from operating activities,2023,-25
+- Net cash flow from operating activities,2024,100.039
+- Net cash flow from operating activities,2025,218.3
+- Cash Inflow/Outflow due to working capital changes,2014,-20.4009
+- Cash Inflow/Outflow due to working capital changes,2015,94.45709
+- Cash Inflow/Outflow due to working capital changes,2016,-7.40351
+- Cash Inflow/Outflow due to working capital changes,2017,None
+- Cash Inflow/Outflow due to working capital changes,2018,None
+- Cash Inflow/Outflow due to working capital changes,2019,None
+- Cash Inflow/Outflow due to working capital changes,2020,None
+- Cash Inflow/Outflow due to working capital changes,2021,None
+- Cash Inflow/Outflow due to working capital changes,2022,None
+- Cash Inflow/Outflow due to working capital changes,2023,None
+- Cash Inflow/Outflow due to working capital changes,2024,None
+- Cash Inflow/Outflow due to working capital changes,2025,-33.8
+- Cash flow generated from operations,2014,236.40371
+- Cash flow generated from operations,2015,265.64244
+- Cash flow generated from operations,2016,202.86201
+- Cash flow generated from operations,2017,215.676
+- Cash flow generated from operations,2018,146.807
+- Cash flow generated from operations,2019,293.408
+- Cash flow generated from operations,2020,255.27
+- Cash flow generated from operations,2021,72.766
+- Cash flow generated from operations,2022,126.286
+- Cash flow generated from operations,2023,-8.159
+- Cash flow generated from operations,2024,123.836
+- Cash flow generated from operations,2025,220.8
+- Cash inflow or (outflow) from extraordinary items,2014,None
+- Cash inflow or (outflow) from extraordinary items,2015,None
+- Cash inflow or (outflow) from extraordinary items,2016,None
+- Cash inflow or (outflow) from extraordinary items,2017,None
+- Cash inflow or (outflow) from extraordinary items,2018,None
+- Cash inflow or (outflow) from extraordinary items,2019,None
+- Cash inflow or (outflow) from extraordinary items,2020,None
+- Cash inflow or (outflow) from extraordinary items,2021,None
+- Cash inflow or (outflow) from extraordinary items,2022,None
+- Cash inflow or (outflow) from extraordinary items,2023,None
+- Cash inflow or (outflow) from extraordinary items,2024,None
+- Cash inflow or (outflow) from extraordinary items,2025,None
+- Cash (outflow) due to miscellaneous expenditure,2014,None
+- Cash (outflow) due to miscellaneous expenditure,2015,None
+- Cash (outflow) due to miscellaneous expenditure,2016,None
+- Cash (outflow) due to miscellaneous expenditure,2017,None
+- Cash (outflow) due to miscellaneous expenditure,2018,None
+- Cash (outflow) due to miscellaneous expenditure,2019,None
+- Cash (outflow) due to miscellaneous expenditure,2020,None
+- Cash (outflow) due to miscellaneous expenditure,2021,None
+- Cash (outflow) due to miscellaneous expenditure,2022,None
+- Cash (outflow) due to miscellaneous expenditure,2023,None
+- Cash (outflow) due to miscellaneous expenditure,2024,None
+- Cash (outflow) due to miscellaneous expenditure,2025,None
+- Net cash flow from investment activities,2014,-56.38235
+- Net cash flow from investment activities,2015,-18.46433
+- Net cash flow from investment activities,2016,-50.75169
+- Net cash flow from investment activities,2017,-414.801
+- Net cash flow from investment activities,2018,-20.197
+- Net cash flow from investment activities,2019,-67.8
+- Net cash flow from investment activities,2020,-11.911
+- Net cash flow from investment activities,2021,-12.645
+- Net cash flow from investment activities,2022,-41.367
+- Net cash flow from investment activities,2023,-58.452
+- Net cash flow from investment activities,2024,-258.489
+- Net cash flow from investment activities,2025,-243.5
+- Dividend Received,2014,None
+- Dividend Received,2015,0.006
+- Dividend Received,2016,None
+- Dividend Received,2017,None
+- Dividend Received,2018,0.02
+- Dividend Received,2019,0.006
+- Dividend Received,2020,None
+- Dividend Received,2021,None
+- Dividend Received,2022,None
+- Dividend Received,2023,None
+- Dividend Received,2024,None
+- Dividend Received,2025,None
+- Net cash flow from financing activities,2014,-152.91765
+- Net cash flow from financing activities,2015,-203.56415
+- Net cash flow from financing activities,2016,-108.56562
+- Net cash flow from financing activities,2017,185.248
+- Net cash flow from financing activities,2018,-78.735
+- Net cash flow from financing activities,2019,-251.858
+- Net cash flow from financing activities,2020,-229.147
+- Net cash flow from financing activities,2021,-74.934
+- Net cash flow from financing activities,2022,-52.213
+- Net cash flow from financing activities,2023,75.078
+- Net cash flow from financing activities,2024,157.339
+- Net cash flow from financing activities,2025,25.9
+- Dividend Paid,2014,-10.58976
+- Dividend Paid,2015,-10.56279
+- Dividend Paid,2016,-0.09511
+- Dividend Paid,2017,-8.82
+- Dividend Paid,2018,-11.991
+- Dividend Paid,2019,-16.09
+- Dividend Paid,2020,-17.515
+- Dividend Paid,2021,-3.638
+- Dividend Paid,2022,-7.612
+- Dividend Paid,2023,-8.213
+- Dividend Paid,2024,-10.843
+- Dividend Paid,2025,-10.2
+- cf_net_change_in_cash_ncash_eq,2014,None
+- cf_net_change_in_cash_ncash_eq,2015,None
+- cf_net_change_in_cash_ncash_eq,2016,None
+- cf_net_change_in_cash_ncash_eq,2017,None
+- cf_net_change_in_cash_ncash_eq,2018,None
+- cf_net_change_in_cash_ncash_eq,2019,None
+- cf_net_change_in_cash_ncash_eq,2020,None
+- cf_net_change_in_cash_ncash_eq,2021,None
+- cf_net_change_in_cash_ncash_eq,2022,None
+- cf_net_change_in_cash_ncash_eq,2023,None
+- cf_net_change_in_cash_ncash_eq,2024,None
+- cf_net_change_in_cash_ncash_eq,2025,None
+- cf_cash_ncash_eq_beg,2014,None
+- cf_cash_ncash_eq_beg,2015,None
+- cf_cash_ncash_eq_beg,2016,None
+- cf_cash_ncash_eq_beg,2017,None
+- cf_cash_ncash_eq_beg,2018,None
+- cf_cash_ncash_eq_beg,2019,None
+- cf_cash_ncash_eq_beg,2020,None
+- cf_cash_ncash_eq_beg,2021,None
+- cf_cash_ncash_eq_beg,2022,None
+- cf_cash_ncash_eq_beg,2023,None
+- cf_cash_ncash_eq_beg,2024,None
+- cf_cash_ncash_eq_beg,2025,None
+- cf_cash_ncash_eq_end,2014,None
+- cf_cash_ncash_eq_end,2015,None
+- cf_cash_ncash_eq_end,2016,None
+- cf_cash_ncash_eq_end,2017,None
+- cf_cash_ncash_eq_end,2018,None
+- cf_cash_ncash_eq_end,2019,None
+- cf_cash_ncash_eq_end,2020,None
+- cf_cash_ncash_eq_end,2021,None
+- cf_cash_ncash_eq_end,2022,None
+- cf_cash_ncash_eq_end,2023,None
+- cf_cash_ncash_eq_end,2024,None
+- cf_cash_ncash_eq_end,2025,None
+- Net change in cash and cash equivalents,2014,-17.33473
+- Net change in cash and cash equivalents,2015,32.37705
+- Net change in cash and cash equivalents,2016,32.94145
+- Net change in cash and cash equivalents,2017,-74.765
+- Net change in cash and cash equivalents,2018,24.493
+- Net change in cash and cash equivalents,2019,-19.891
+- Net change in cash and cash equivalents,2020,-0.383
+- Net change in cash and cash equivalents,2021,-13.354
+- Net change in cash and cash equivalents,2022,17.637
+- Net change in cash and cash equivalents,2023,-8.374
+- Net change in cash and cash equivalents,2024,-1.111
+- Net change in cash and cash equivalents,2025,0.7
+- Cash and cash equivalents as at the beginning of the year,2014,38.67043
+- Cash and cash equivalents as at the beginning of the year,2015,-32.37705
+- Cash and cash equivalents as at the beginning of the year,2016,53.71274
+- Cash and cash equivalents as at the beginning of the year,2017,86.008
+- Cash and cash equivalents as at the beginning of the year,2018,11.307
+- Cash and cash equivalents as at the beginning of the year,2019,34.654
+- Cash and cash equivalents as at the beginning of the year,2020,14.763
+- Cash and cash equivalents as at the beginning of the year,2021,14.38
+- Cash and cash equivalents as at the beginning of the year,2022,1.024
+- Cash and cash equivalents as at the beginning of the year,2023,18.661
+- Cash and cash equivalents as at the beginning of the year,2024,10.287
+- Cash and cash equivalents as at the beginning of the year,2025,9.2
+- Cash and cash equivalents as at the end of the year,2014,21.33569
+- Cash and cash equivalents as at the end of the year,2015,None
+- Cash and cash equivalents as at the end of the year,2016,86.65419
+- Cash and cash equivalents as at the end of the year,2017,11.305
+- Cash and cash equivalents as at the end of the year,2018,34.654
+- Cash and cash equivalents as at the end of the year,2019,14.763
+- Cash and cash equivalents as at the end of the year,2020,14.38
+- Cash and cash equivalents as at the end of the year,2021,1.026
+- Cash and cash equivalents as at the end of the year,2022,18.661
+- Cash and cash equivalents as at the end of the year,2023,10.287
+- Cash and cash equivalents as at the end of the year,2024,9.176
+- Cash and cash equivalents as at the end of the year,2025,9.9

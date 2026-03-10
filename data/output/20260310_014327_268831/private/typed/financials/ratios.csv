@@ -1,0 +1,517 @@
+metric,year,value
+"- Total Export Turnover Goods, Gross",2014,None
+"- Total Export Turnover Goods, Gross",2015,None
+"- Total Export Turnover Goods, Gross",2016,None
+"- Total Export Turnover Goods, Gross",2017,None
+"- Total Export Turnover Goods, Gross",2018,None
+"- Total Export Turnover Goods, Gross",2019,None
+"- Total Export Turnover Goods, Gross",2020,None
+"- Total Export Turnover Goods, Gross",2021,None
+"- Total Export Turnover Goods, Gross",2022,None
+"- Total Export Turnover Goods, Gross",2023,None
+"- Total Export Turnover Goods, Gross",2024,None
+"- Total Export Turnover Goods, Gross",2025,None
+- Export Sale Traded Goods,2014,None
+- Export Sale Traded Goods,2015,None
+- Export Sale Traded Goods,2016,None
+- Export Sale Traded Goods,2017,None
+- Export Sale Traded Goods,2018,None
+- Export Sale Traded Goods,2019,None
+- Export Sale Traded Goods,2020,None
+- Export Sale Traded Goods,2021,None
+- Export Sale Traded Goods,2022,None
+- Export Sale Traded Goods,2023,None
+- Export Sale Traded Goods,2024,None
+- Export Sale Traded Goods,2025,None
+- Export Sale Manufactured Goods,2014,None
+- Export Sale Manufactured Goods,2015,None
+- Export Sale Manufactured Goods,2016,None
+- Export Sale Manufactured Goods,2017,None
+- Export Sale Manufactured Goods,2018,None
+- Export Sale Manufactured Goods,2019,None
+- Export Sale Manufactured Goods,2020,None
+- Export Sale Manufactured Goods,2021,None
+- Export Sale Manufactured Goods,2022,None
+- Export Sale Manufactured Goods,2023,None
+- Export Sale Manufactured Goods,2024,None
+- Export Sale Manufactured Goods,2025,None
+"- Total Domestic Turnover Goods, Gross",2014,None
+"- Total Domestic Turnover Goods, Gross",2015,None
+"- Total Domestic Turnover Goods, Gross",2016,None
+"- Total Domestic Turnover Goods, Gross",2017,None
+"- Total Domestic Turnover Goods, Gross",2018,None
+"- Total Domestic Turnover Goods, Gross",2019,None
+"- Total Domestic Turnover Goods, Gross",2020,None
+"- Total Domestic Turnover Goods, Gross",2021,None
+"- Total Domestic Turnover Goods, Gross",2022,None
+"- Total Domestic Turnover Goods, Gross",2023,None
+"- Total Domestic Turnover Goods, Gross",2024,None
+"- Total Domestic Turnover Goods, Gross",2025,None
+- Domestic Sale Traded Goods,2014,None
+- Domestic Sale Traded Goods,2015,None
+- Domestic Sale Traded Goods,2016,None
+- Domestic Sale Traded Goods,2017,None
+- Domestic Sale Traded Goods,2018,None
+- Domestic Sale Traded Goods,2019,None
+- Domestic Sale Traded Goods,2020,None
+- Domestic Sale Traded Goods,2021,None
+- Domestic Sale Traded Goods,2022,None
+- Domestic Sale Traded Goods,2023,None
+- Domestic Sale Traded Goods,2024,None
+- Domestic Sale Traded Goods,2025,None
+- Domestic Sale Manufactured Goods,2014,None
+- Domestic Sale Manufactured Goods,2015,None
+- Domestic Sale Manufactured Goods,2016,None
+- Domestic Sale Manufactured Goods,2017,None
+- Domestic Sale Manufactured Goods,2018,None
+- Domestic Sale Manufactured Goods,2019,None
+- Domestic Sale Manufactured Goods,2020,None
+- Domestic Sale Manufactured Goods,2021,None
+- Domestic Sale Manufactured Goods,2022,None
+- Domestic Sale Manufactured Goods,2023,None
+- Domestic Sale Manufactured Goods,2024,None
+- Domestic Sale Manufactured Goods,2025,None
+- Material Costs,2014,None
+- Material Costs,2015,None
+- Material Costs,2016,None
+- Material Costs,2017,None
+- Material Costs,2018,None
+- Material Costs,2019,None
+- Material Costs,2020,None
+- Material Costs,2021,None
+- Material Costs,2022,None
+- Material Costs,2023,None
+- Material Costs,2024,None
+- Material Costs,2025,None
+- Cost of material consumed,2014,None
+- Cost of material consumed,2015,None
+- Cost of material consumed,2016,None
+- Cost of material consumed,2017,None
+- Cost of material consumed,2018,None
+- Cost of material consumed,2019,None
+- Cost of material consumed,2020,None
+- Cost of material consumed,2021,None
+- Cost of material consumed,2022,None
+- Cost of material consumed,2023,None
+- Cost of material consumed,2024,None
+- Cost of material consumed,2025,None
+- Purchases of stock-in-trade,2014,None
+- Purchases of stock-in-trade,2015,None
+- Purchases of stock-in-trade,2016,None
+- Purchases of stock-in-trade,2017,None
+- Purchases of stock-in-trade,2018,None
+- Purchases of stock-in-trade,2019,None
+- Purchases of stock-in-trade,2020,None
+- Purchases of stock-in-trade,2021,None
+- Purchases of stock-in-trade,2022,None
+- Purchases of stock-in-trade,2023,38.2
+- Purchases of stock-in-trade,2024,210.6
+- Purchases of stock-in-trade,2025,222.7
+"- Changes in inventories of FG, WIP and SIT",2014,None
+"- Changes in inventories of FG, WIP and SIT",2015,None
+"- Changes in inventories of FG, WIP and SIT",2016,None
+"- Changes in inventories of FG, WIP and SIT",2017,None
+"- Changes in inventories of FG, WIP and SIT",2018,None
+"- Changes in inventories of FG, WIP and SIT",2019,None
+"- Changes in inventories of FG, WIP and SIT",2020,None
+"- Changes in inventories of FG, WIP and SIT",2021,None
+"- Changes in inventories of FG, WIP and SIT",2022,-1.2
+"- Changes in inventories of FG, WIP and SIT",2023,-19.1
+"- Changes in inventories of FG, WIP and SIT",2024,-23.6
+"- Changes in inventories of FG, WIP and SIT",2025,-29.9
+- Material Margin,2014,None
+- Material Margin,2015,None
+- Material Margin,2016,None
+- Material Margin,2017,None
+- Material Margin,2018,None
+- Material Margin,2019,None
+- Material Margin,2020,None
+- Material Margin,2021,None
+- Material Margin,2022,None
+- Material Margin,2023,None
+- Material Margin,2024,None
+- Material Margin,2025,None
+- EBIT,2014,None
+- EBIT,2015,None
+- EBIT,2016,None
+- EBIT,2017,None
+- EBIT,2018,None
+- EBIT,2019,None
+- EBIT,2020,None
+- EBIT,2021,None
+- EBIT,2022,12.3
+- EBIT,2023,22.100000000000016
+- EBIT,2024,55.29999999999993
+- EBIT,2025,252.8
+- Finance Cost,2014,None
+- Finance Cost,2015,None
+- Finance Cost,2016,None
+- Finance Cost,2017,None
+- Finance Cost,2018,None
+- Finance Cost,2019,None
+- Finance Cost,2020,None
+- Finance Cost,2021,None
+- Finance Cost,2022,0.3
+- Finance Cost,2023,0.4
+- Finance Cost,2024,0.6
+- Finance Cost,2025,1.3
+- Equities,2014,None
+- Equities,2015,None
+- Equities,2016,None
+- Equities,2017,None
+- Equities,2018,None
+- Equities,2019,None
+- Equities,2020,None
+- Equities,2021,None
+- Equities,2022,None
+- Equities,2023,None
+- Equities,2024,None
+- Equities,2025,None
+- Share Capital,2014,None
+- Share Capital,2015,None
+- Share Capital,2016,None
+- Share Capital,2017,None
+- Share Capital,2018,None
+- Share Capital,2019,None
+- Share Capital,2020,None
+- Share Capital,2021,None
+- Share Capital,2022,5
+- Share Capital,2023,5
+- Share Capital,2024,5
+- Share Capital,2025,140
+- Long Term Provisions,2014,None
+- Long Term Provisions,2015,None
+- Long Term Provisions,2016,None
+- Long Term Provisions,2017,None
+- Long Term Provisions,2018,None
+- Long Term Provisions,2019,None
+- Long Term Provisions,2020,None
+- Long Term Provisions,2021,None
+- Long Term Provisions,2022,None
+- Long Term Provisions,2023,None
+- Long Term Provisions,2024,1.1
+- Long Term Provisions,2025,1.6
+- Sources of Funds,2014,None
+- Sources of Funds,2015,None
+- Sources of Funds,2016,None
+- Sources of Funds,2017,None
+- Sources of Funds,2018,None
+- Sources of Funds,2019,None
+- Sources of Funds,2020,None
+- Sources of Funds,2021,None
+- Sources of Funds,2022,None
+- Sources of Funds,2023,None
+- Sources of Funds,2024,None
+- Sources of Funds,2025,None
+- Accumulated depreciation and impairment,2014,None
+- Accumulated depreciation and impairment,2015,None
+- Accumulated depreciation and impairment,2016,None
+- Accumulated depreciation and impairment,2017,None
+- Accumulated depreciation and impairment,2018,None
+- Accumulated depreciation and impairment,2019,None
+- Accumulated depreciation and impairment,2020,None
+- Accumulated depreciation and impairment,2021,None
+- Accumulated depreciation and impairment,2022,0
+- Accumulated depreciation and impairment,2023,0
+- Accumulated depreciation and impairment,2024,0
+- Accumulated depreciation and impairment,2025,0
+- CWIP,2014,None
+- CWIP,2015,None
+- CWIP,2016,None
+- CWIP,2017,None
+- CWIP,2018,None
+- CWIP,2019,None
+- CWIP,2020,None
+- CWIP,2021,None
+- CWIP,2022,14.7
+- CWIP,2023,29.3
+- CWIP,2024,31.9
+- CWIP,2025,24.4
+- Non Current Investments,2014,None
+- Non Current Investments,2015,None
+- Non Current Investments,2016,None
+- Non Current Investments,2017,None
+- Non Current Investments,2018,None
+- Non Current Investments,2019,None
+- Non Current Investments,2020,None
+- Non Current Investments,2021,None
+- Non Current Investments,2022,None
+- Non Current Investments,2023,None
+- Non Current Investments,2024,None
+- Non Current Investments,2025,None
+- Long Term Loans and Advances,2014,None
+- Long Term Loans and Advances,2015,None
+- Long Term Loans and Advances,2016,None
+- Long Term Loans and Advances,2017,None
+- Long Term Loans and Advances,2018,None
+- Long Term Loans and Advances,2019,None
+- Long Term Loans and Advances,2020,None
+- Long Term Loans and Advances,2021,None
+- Long Term Loans and Advances,2022,15
+- Long Term Loans and Advances,2023,23.5
+- Long Term Loans and Advances,2024,41
+- Long Term Loans and Advances,2025,77.4
+- Current Investments,2014,None
+- Current Investments,2015,None
+- Current Investments,2016,None
+- Current Investments,2017,None
+- Current Investments,2018,None
+- Current Investments,2019,None
+- Current Investments,2020,None
+- Current Investments,2021,None
+- Current Investments,2022,None
+- Current Investments,2023,None
+- Current Investments,2024,3.5
+- Current Investments,2025,37.8
+- Inventories,2014,None
+- Inventories,2015,None
+- Inventories,2016,None
+- Inventories,2017,None
+- Inventories,2018,None
+- Inventories,2019,None
+- Inventories,2020,None
+- Inventories,2021,None
+- Inventories,2022,1.3
+- Inventories,2023,20.3
+- Inventories,2024,43.9
+- Inventories,2025,73.8
+- Trade Receivables,2014,None
+- Trade Receivables,2015,None
+- Trade Receivables,2016,None
+- Trade Receivables,2017,None
+- Trade Receivables,2018,None
+- Trade Receivables,2019,None
+- Trade Receivables,2020,None
+- Trade Receivables,2021,None
+- Trade Receivables,2022,8.7
+- Trade Receivables,2023,12.4
+- Trade Receivables,2024,37.8
+- Trade Receivables,2025,129.9
+- Short Term Loans and Advances,2014,None
+- Short Term Loans and Advances,2015,None
+- Short Term Loans and Advances,2016,None
+- Short Term Loans and Advances,2017,None
+- Short Term Loans and Advances,2018,None
+- Short Term Loans and Advances,2019,None
+- Short Term Loans and Advances,2020,None
+- Short Term Loans and Advances,2021,None
+- Short Term Loans and Advances,2022,36.7
+- Short Term Loans and Advances,2023,30.9
+- Short Term Loans and Advances,2024,28.9
+- Short Term Loans and Advances,2025,92.9
+- Trade Payables,2014,None
+- Trade Payables,2015,None
+- Trade Payables,2016,None
+- Trade Payables,2017,None
+- Trade Payables,2018,None
+- Trade Payables,2019,None
+- Trade Payables,2020,None
+- Trade Payables,2021,None
+- Trade Payables,2022,14.5
+- Trade Payables,2023,15.1
+- Trade Payables,2024,53.9
+- Trade Payables,2025,62
+- Short Term Provisions,2014,None
+- Short Term Provisions,2015,None
+- Short Term Provisions,2016,None
+- Short Term Provisions,2017,None
+- Short Term Provisions,2018,None
+- Short Term Provisions,2019,None
+- Short Term Provisions,2020,None
+- Short Term Provisions,2021,None
+- Short Term Provisions,2022,0.4
+- Short Term Provisions,2023,2.9
+- Short Term Provisions,2024,14.5
+- Short Term Provisions,2025,68.3
+- Use of Funds,2014,None
+- Use of Funds,2015,None
+- Use of Funds,2016,None
+- Use of Funds,2017,None
+- Use of Funds,2018,None
+- Use of Funds,2019,None
+- Use of Funds,2020,None
+- Use of Funds,2021,None
+- Use of Funds,2022,None
+- Use of Funds,2023,None
+- Use of Funds,2024,None
+- Use of Funds,2025,None
+- Purchase of Investments,2014,None
+- Purchase of Investments,2015,None
+- Purchase of Investments,2016,None
+- Purchase of Investments,2017,None
+- Purchase of Investments,2018,None
+- Purchase of Investments,2019,None
+- Purchase of Investments,2020,None
+- Purchase of Investments,2021,None
+- Purchase of Investments,2022,None
+- Purchase of Investments,2023,None
+- Purchase of Investments,2024,-4.5
+- Purchase of Investments,2025,-34.4
+- Sale of Investments,2014,None
+- Sale of Investments,2015,None
+- Sale of Investments,2016,None
+- Sale of Investments,2017,None
+- Sale of Investments,2018,None
+- Sale of Investments,2019,None
+- Sale of Investments,2020,None
+- Sale of Investments,2021,None
+- Sale of Investments,2022,None
+- Sale of Investments,2023,None
+- Sale of Investments,2024,None
+- Sale of Investments,2025,0.9
+- Interest Received,2014,None
+- Interest Received,2015,None
+- Interest Received,2016,None
+- Interest Received,2017,None
+- Interest Received,2018,None
+- Interest Received,2019,None
+- Interest Received,2020,None
+- Interest Received,2021,None
+- Interest Received,2022,None
+- Interest Received,2023,None
+- Interest Received,2024,3.8
+- Interest Received,2025,3.9
+- Proceeds from Share Issue / Share Warrants,2014,None
+- Proceeds from Share Issue / Share Warrants,2015,None
+- Proceeds from Share Issue / Share Warrants,2016,None
+- Proceeds from Share Issue / Share Warrants,2017,None
+- Proceeds from Share Issue / Share Warrants,2018,None
+- Proceeds from Share Issue / Share Warrants,2019,None
+- Proceeds from Share Issue / Share Warrants,2020,None
+- Proceeds from Share Issue / Share Warrants,2021,None
+- Proceeds from Share Issue / Share Warrants,2022,4.9
+- Proceeds from Share Issue / Share Warrants,2023,None
+- Proceeds from Share Issue / Share Warrants,2024,None
+- Proceeds from Share Issue / Share Warrants,2025,None
+- Redemption or Buyback of Capital,2014,None
+- Redemption or Buyback of Capital,2015,None
+- Redemption or Buyback of Capital,2016,None
+- Redemption or Buyback of Capital,2017,None
+- Redemption or Buyback of Capital,2018,None
+- Redemption or Buyback of Capital,2019,None
+- Redemption or Buyback of Capital,2020,None
+- Redemption or Buyback of Capital,2021,None
+- Redemption or Buyback of Capital,2022,None
+- Redemption or Buyback of Capital,2023,None
+- Redemption or Buyback of Capital,2024,None
+- Redemption or Buyback of Capital,2025,None
+- Interest Paid,2014,None
+- Interest Paid,2015,None
+- Interest Paid,2016,None
+- Interest Paid,2017,None
+- Interest Paid,2018,None
+- Interest Paid,2019,None
+- Interest Paid,2020,None
+- Interest Paid,2021,None
+- Interest Paid,2022,-0.3
+- Interest Paid,2023,-0.3
+- Interest Paid,2024,-0.6
+- Interest Paid,2025,-1.1
+- Material Margin,2014,None
+- Material Margin,2015,None
+- Material Margin,2016,None
+- Material Margin,2017,None
+- Material Margin,2018,None
+- Material Margin,2019,None
+- Material Margin,2020,None
+- Material Margin,2021,None
+- Material Margin,2022,None
+- Material Margin,2023,None
+- Material Margin,2024,None
+- Material Margin,2025,None
+- roic,2014,None
+- roic,2015,None
+- roic,2016,None
+- roic,2017,None
+- roic,2018,None
+- roic,2019,None
+- roic,2020,None
+- roic,2021,None
+- roic,2022,None
+- roic,2023,None
+- roic,2024,None
+- roic,2025,None
+- RoCE,2014,None
+- RoCE,2015,None
+- RoCE,2016,None
+- RoCE,2017,None
+- RoCE,2018,None
+- RoCE,2019,None
+- RoCE,2020,None
+- RoCE,2021,None
+- RoCE,2022,9.097633136094675
+- RoCE,2023,8.728278041074255
+- RoCE,2024,19.665718349928856
+- RoCE,2025,22.303985412867934
+- ROE,2014,None
+- ROE,2015,None
+- ROE,2016,None
+- ROE,2017,None
+- ROE,2018,None
+- ROE,2019,None
+- ROE,2020,None
+- ROE,2021,None
+- ROE,2022,None
+- ROE,2023,290.6250000000002
+- ROE,2024,111.72413793103428
+- ROE,2025,51.72555464256368
+- networking capital,2014,None
+- networking capital,2015,None
+- networking capital,2016,None
+- networking capital,2017,None
+- networking capital,2018,None
+- networking capital,2019,None
+- networking capital,2020,None
+- networking capital,2021,None
+- networking capital,2022,None
+- networking capital,2023,None
+- networking capital,2024,None
+- networking capital,2025,None
+- core net work cap,2014,None
+- core net work cap,2015,None
+- core net work cap,2016,None
+- core net work cap,2017,None
+- core net work cap,2018,None
+- core net work cap,2019,None
+- core net work cap,2020,None
+- core net work cap,2021,None
+- core net work cap,2022,None
+- core net work cap,2023,None
+- core net work cap,2024,None
+- core net work cap,2025,None
+- inventory_days,2014,None
+- inventory_days,2015,None
+- inventory_days,2016,None
+- inventory_days,2017,None
+- inventory_days,2018,None
+- inventory_days,2019,None
+- inventory_days,2020,None
+- inventory_days,2021,None
+- inventory_days,2022,None
+- inventory_days,2023,None
+- inventory_days,2024,None
+- inventory_days,2025,None
+- receivable_days,2014,None
+- receivable_days,2015,None
+- receivable_days,2016,None
+- receivable_days,2017,None
+- receivable_days,2018,None
+- receivable_days,2019,None
+- receivable_days,2020,None
+- receivable_days,2021,None
+- receivable_days,2022,None
+- receivable_days,2023,None
+- receivable_days,2024,None
+- receivable_days,2025,None
+- payable_days,2014,None
+- payable_days,2015,None
+- payable_days,2016,None
+- payable_days,2017,None
+- payable_days,2018,None
+- payable_days,2019,None
+- payable_days,2020,None
+- payable_days,2021,None
+- payable_days,2022,None
+- payable_days,2023,None
+- payable_days,2024,None
+- payable_days,2025,None

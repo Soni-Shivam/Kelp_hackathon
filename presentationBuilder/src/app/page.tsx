@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { usePresentationStore } from '@/lib/store/presentation-store';
-import { Sparkles, ArrowRight, Loader2, Code2, X, FileText } from 'lucide-react';
+import { Sparkles, ArrowRight, Loader2, Code2, X, FileText, Terminal } from 'lucide-react';
 import { useToast } from '@/components/ui/toast';
 
 // ============================================
@@ -197,7 +197,20 @@ export default function DashboardPage() {
     const [generationStatus, setGenerationStatus] = useState('');
     const [showDevMode, setShowDevMode] = useState(false);
     const [jsonInput, setJsonInput] = useState('');
+    const [logs, setLogs] = useState<{ id: number; text: string; type: 'info' | 'success' | 'warn' | 'step' }[]>([]);
+    const logsEndRef = useRef<HTMLDivElement>(null);
+    const logIdRef = useRef(0);
     const { showToast } = useToast();
+
+    // Auto-scroll logs to bottom
+    useEffect(() => {
+        logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [logs]);
+
+    const pushLog = (text: string, type: 'info' | 'success' | 'warn' | 'step' = 'info') => {
+        const id = ++logIdRef.current;
+        setLogs(prev => [...prev, { id, text, type }]);
+    };
 
     const {
         setPresentation,
@@ -212,12 +225,20 @@ export default function DashboardPage() {
         }
 
         setIsGenerating(true);
+        setLogs([]);
         startLoading();
-        setGenerationStatus('Initializing Agents...');
+
+        pushLog(`Booting PLEK AI for "${companyInput}"...`, 'step');
+        pushLog('Initializing multi-agent pipeline...', 'info');
 
         try {
             // Step 1: Data Agent
-            setGenerationStatus('Ingesting & Analyzing Data (Data Agent)...');
+            setGenerationStatus('Data Agent');
+            pushLog('', 'info');
+            pushLog('[AGENT 1 / 3] ► DATA AGENT', 'step');
+            pushLog('  → Parsing Company OnePager Markdown...', 'info');
+            pushLog('  → Extracting private data sections (business, SWOT, milestones, financials)...', 'info');
+
             const dataResponse = await fetch('http://localhost:8000/trigger-agent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -230,8 +251,16 @@ export default function DashboardPage() {
             if (!dataResponse.ok) throw new Error('Data Agent Failed');
             const apiData = await dataResponse.json();
 
-            // Step 2: Transcriber Agent
-            setGenerationStatus('Synthesizing Slides (Transcriber Agent)...');
+            pushLog('  → Running Public Data Agent (Screener scrape)...', 'info');
+            pushLog('  → Merging private + public into unified canonical...', 'info');
+            pushLog(`  ✔ Data pipeline complete. Run ID: ${apiData.run_id || 'N/A'}`, 'success');
+
+            // Step 2: Transcriber Agent — streamed NDJSON
+            setGenerationStatus('Transcriber Agent');
+            pushLog('', 'info');
+            pushLog('[AGENT 2/3] ► TRANSCRIBER + IMAGE AGENT (LLM)', 'step');
+            pushLog('  → Connecting to transcriber stream...', 'info');
+
             const transcriberResponse = await fetch('http://localhost:8001/generate_from_data', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -239,19 +268,71 @@ export default function DashboardPage() {
             });
 
             if (!transcriberResponse.ok) throw new Error('Transcriber Agent Failed');
-            const presentationJson = await transcriberResponse.json();
+            if (!transcriberResponse.body) throw new Error('No response stream');
 
-            if (!presentationJson.slides) {
-                throw new Error("Invalid format received from agent");
+            const reader = transcriberResponse.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
+            let presentationJson: any = null;
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() ?? ''; // keep incomplete line in buffer
+
+                for (const line of lines) {
+                    if (!line.trim()) continue;
+                    try {
+                        const msg = JSON.parse(line);
+                        if (msg.type === 'log') {
+                            const level =
+                                msg.level === 'success' ? 'success' :
+                                    msg.level === 'warn' ? 'warn' :
+                                        msg.level === 'step' ? 'step' :
+                                            'info';
+                            pushLog(msg.text, level);
+                            // Update agent label in titlebar based on step markers
+                            if (msg.text.includes('LLM GENERATION')) setGenerationStatus('LLM Generation');
+                            if (msg.text.includes('IMAGE ENRICHMENT')) setGenerationStatus('Image Agent');
+                            if (msg.text.includes('GENERATIVE MODE') || msg.text.includes('SEARCH MODE') || msg.text.includes('Fetching logo')) {
+                                setGenerationStatus('Image Agent');
+                            }
+                        } else if (msg.type === 'result') {
+                            presentationJson = msg.data;
+                        } else if (msg.type === 'error') {
+                            throw new Error(msg.detail);
+                        }
+                    } catch (parseErr) {
+                        // Skip unparseable lines silently
+                    }
+                }
             }
+
+            if (!presentationJson || !presentationJson.slides) {
+                throw new Error('Invalid format received from agent');
+            }
+
+            const slideCount = presentationJson.slides.length;
+            const blockCount = presentationJson.slides.reduce((acc: number, s: any) => acc + s.blocks.length, 0);
+            pushLog(`  ✔ Pipeline complete — ${slideCount} slides, ${blockCount} blocks.`, 'success');
+
+            pushLog('', 'info');
+            pushLog('✅ PLEK AI pipeline complete. Redirecting to outline...', 'success');
 
             setPresentation(presentationJson);
             showToast('Presentation Generated Successfully!', 'success');
             finishLoading();
+
+            // Short delay so user can read final log
+            await new Promise(r => setTimeout(r, 900));
             router.push('/outline');
 
         } catch (error: any) {
             console.error(error);
+            pushLog(`❌ ERROR: ${error.message || error}`, 'warn');
             showToast(`Generation Failed: ${error.message || error}`, 'error');
             setIsGenerating(false);
             finishLoading();
@@ -391,21 +472,64 @@ export default function DashboardPage() {
                         </Button>
                     </div>
                 ) : (
-                    <div className="bg-white/95 backdrop-blur-md p-10 rounded-2xl shadow-2xl border border-white/50 max-w-lg mx-auto w-full">
-                        <div className="flex flex-col items-center space-y-6">
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-kelp-accent-start/20 rounded-full blur-xl animate-pulse" />
-                                <Loader2 className="h-16 w-16 text-kelp-accent-start animate-spin relative z-10" />
+                    // ── LIVE LOG PANEL (light theme) ──
+                    <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-slate-200 max-w-2xl mx-auto w-full font-mono text-sm">
+                        {/* Panel titlebar */}
+                        <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-200">
+                            <div className="p-1.5 bg-gradient-to-br from-kelp-accent-start to-kelp-accent-end rounded-lg">
+                                <Terminal className="h-3.5 w-3.5 text-white" />
                             </div>
-
-                            <h3 className="text-2xl font-bold text-kelp-primary animate-pulse text-center">{generationStatus}</h3>
-
-                            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden border border-slate-200">
-                                <div className="h-full bg-gradient-to-r from-kelp-accent-start via-purple-500 to-kelp-accent-end animate-progress origin-left w-full transition-all duration-1000" />
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">PLEK AI</span>
+                                <span className="text-xs font-semibold text-kelp-primary">{generationStatus || 'Initializing...'}</span>
                             </div>
-
-                            <p className="text-sm text-slate-500 font-medium">Orchestrating agents... This may take up to 2 minutes</p>
+                            <div className="ml-auto flex items-center gap-2">
+                                <span className="text-[10px] text-slate-400">working</span>
+                                <Loader2 className="h-3.5 w-3.5 text-kelp-accent-start animate-spin" />
+                            </div>
                         </div>
+
+                        {/* Log lines */}
+                        <div className="h-64 overflow-y-auto space-y-0.5 pr-1">
+                            {logs.map((log, i) => {
+                                const isLatest = i === logs.length - 1;
+                                const colorClass =
+                                    log.type === 'success' ? 'text-emerald-600' :
+                                        log.type === 'warn' ? 'text-amber-600' :
+                                            log.type === 'step' ? 'text-kelp-primary font-bold' :
+                                                'text-slate-600';
+                                return (
+                                    <div
+                                        key={log.id}
+                                        className={`leading-relaxed transition-opacity duration-700 ${isLatest ? 'opacity-100' :
+                                                i >= logs.length - 4 ? 'opacity-70' :
+                                                    i >= logs.length - 8 ? 'opacity-40' :
+                                                        'opacity-20'
+                                            } ${colorClass} animate-in slide-in-from-bottom-1`}
+                                        style={{ animationDuration: '200ms' }}
+                                    >
+                                        {log.text === '' ? <br /> : (
+                                            <span>
+                                                {log.type !== 'step' && (
+                                                    <span className="text-slate-300 mr-2 select-none">›</span>
+                                                )}
+                                                {log.text}
+                                                {isLatest && (
+                                                    <span className="inline-block w-1.5 h-3 bg-kelp-accent-start ml-1 animate-pulse align-middle rounded-sm" />
+                                                )}
+                                            </span>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                            <div ref={logsEndRef} />
+                        </div>
+
+                        {/* Progress bar */}
+                        <div className="mt-4 w-full bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200">
+                            <div className="h-full bg-gradient-to-r from-kelp-accent-start via-purple-500 to-kelp-accent-end animate-progress origin-left w-full" />
+                        </div>
+                        <p className="text-xs text-slate-400 mt-2 text-center">This may take up to 2 minutes · agents are working</p>
                     </div>
                 )}
 

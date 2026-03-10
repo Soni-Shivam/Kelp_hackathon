@@ -203,7 +203,7 @@ async function renderBlock(slide: pptxgen.Slide, pos: any) {
             await renderVisualMapBlock(slide, block, x, y, w, h);
             break;
         case 'logo_grid':
-            renderLogoGridBlock(slide, block, x, y, w, h);
+            await renderLogoGridBlock(slide, block, x, y, w, h);
             break;
         case 'composite_block':
             renderCompositeBlock(slide, block, x, y, w, h);
@@ -794,7 +794,7 @@ async function renderVisualMapBlock(slide: pptxgen.Slide, block: any, x: number,
 // ============================================================================
 // LOGO GRID BLOCK
 // ============================================================================
-function renderLogoGridBlock(slide: pptxgen.Slide, block: any, x: number, y: number, w: number, h: number) {
+async function renderLogoGridBlock(slide: pptxgen.Slide, block: any, x: number, y: number, w: number, h: number) {
     const padding = SPACING.padding.sm;
     const gap = SPACING.gap.md;
 
@@ -811,7 +811,8 @@ function renderLogoGridBlock(slide: pptxgen.Slide, block: any, x: number, y: num
     const headingHeight = renderBlockHeader(slide, block.heading, x, y + padding, w);
 
     // Logo grid
-    const logos = block.logos || [];
+    const logos: string[] = block.logos || [];
+    const logoUrls: (string | undefined)[] = block.logo_urls || [];
     const cols = 4;
     const contentY = y + padding + headingHeight + gap;
     const contentH = h - padding * 2 - headingHeight - gap;
@@ -819,35 +820,70 @@ function renderLogoGridBlock(slide: pptxgen.Slide, block: any, x: number, y: num
     const rows = Math.ceil(logos.length / cols);
     const cellSize = Math.min((contentW - gap * (cols - 1)) / cols, (contentH - gap * (rows - 1)) / rows);
 
-    logos.forEach((logo: string, idx: number) => {
+    for (let idx = 0; idx < logos.length; idx++) {
+        const logo = logos[idx];
+        const logoUrl = logoUrls[idx];
         const row = Math.floor(idx / cols);
         const col = idx % cols;
         const cellX = x + 0.08 + col * (cellSize + gap);
         const cellY = contentY + row * (cellSize + gap);
 
+        // White circle background
         slide.addShape('ellipse', {
             x: cellX,
             y: cellY,
             w: cellSize,
             h: cellSize,
-            fill: { color: COLORS.slate50 },
+            fill: { color: COLORS.white },
             line: { color: COLORS.kelpAccentStart, width: 2, transparency: 50 }
         });
 
-        slide.addText(logo, {
-            x: cellX,
-            y: cellY,
-            w: cellSize,
-            h: cellSize,
-            fontFace: TYPOGRAPHY.fontFamily,
-            fontSize: 7,
-            bold: true,
-            color: COLORS.kelpPrimary,
-            align: 'center',
-            valign: 'middle',
-            shrinkText: true
-        });
-    });
+        if (logoUrl) {
+            try {
+                const base64Logo = await imageUrlToBase64(logoUrl);
+                // Inset the image within the circle — use ~80% of size to avoid edge clipping
+                const inset = cellSize * 0.1;
+                slide.addImage({
+                    data: base64Logo,
+                    x: cellX + inset,
+                    y: cellY + inset,
+                    w: cellSize - inset * 2,
+                    h: cellSize - inset * 2,
+                    sizing: { type: 'contain', w: cellSize - inset * 2, h: cellSize - inset * 2 }
+                });
+            } catch {
+                // Fallback: render text label in circle
+                slide.addText(logo, {
+                    x: cellX,
+                    y: cellY,
+                    w: cellSize,
+                    h: cellSize,
+                    fontFace: TYPOGRAPHY.fontFamily,
+                    fontSize: 7,
+                    bold: true,
+                    color: COLORS.kelpPrimary,
+                    align: 'center',
+                    valign: 'middle',
+                    shrinkText: true
+                });
+            }
+        } else {
+            // No URL — render text label
+            slide.addText(logo, {
+                x: cellX,
+                y: cellY,
+                w: cellSize,
+                h: cellSize,
+                fontFace: TYPOGRAPHY.fontFamily,
+                fontSize: 7,
+                bold: true,
+                color: COLORS.kelpPrimary,
+                align: 'center',
+                valign: 'middle',
+                shrinkText: true
+            });
+        }
+    }
 }
 
 // ============================================================================

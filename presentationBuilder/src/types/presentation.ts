@@ -67,6 +67,7 @@ export interface LogoGridBlock {
     block_type: 'logo_grid';
     heading: string;
     logos: string[];
+    logo_urls?: string[]; // Resolved image URLs, parallel to logos[]
     citation?: string;
 }
 

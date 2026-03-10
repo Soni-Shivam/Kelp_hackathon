@@ -1,8 +1,12 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from transcriberAgent.kelp_agent import generate_presentation
+from fastapi.responses import StreamingResponse, FileResponse
+from transcriberAgent.kelp_agent import generate_presentation, set_log_queue, clear_log_queue
 import sys
 import os
+import json
+import queue
+import threading
 
 # Add parent directory to path to allow imports if running from subdir
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -17,8 +21,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-from fastapi.responses import FileResponse
 
 # Current file is transcriberAgent/src/api.py
 # Static dir is transcriberAgent/static/images
@@ -39,16 +41,54 @@ async def get_image(filename: str):
 
 @app.post("/generate_from_data")
 async def generate_from_data(request: Request):
-    try:
-        api_data = await request.json()
-        result = generate_presentation(api_data)
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    api_data = await request.json()
+
+    log_q: queue.Queue = queue.Queue(maxsize=500)
+    result_holder = {}
+
+    def run_generation():
+        set_log_queue(log_q)
+        try:
+            result = generate_presentation(api_data)
+            result_holder["data"] = result
+        except Exception as e:
+            result_holder["error"] = str(e)
+        finally:
+            clear_log_queue()
+            # Signal done
+            log_q.put(None)
+
+    thread = threading.Thread(target=run_generation, daemon=True)
+    thread.start()
+
+    def event_stream():
+        while True:
+            try:
+                item = log_q.get(timeout=120)  # 2-min timeout per item
+            except queue.Empty:
+                yield json.dumps({"type": "error", "detail": "Generation timed out"}) + "\n"
+                break
+
+            if item is None:
+                # Generation finished — emit final result
+                if "error" in result_holder:
+                    yield json.dumps({"type": "error", "detail": result_holder["error"]}) + "\n"
+                else:
+                    yield json.dumps({"type": "result", "data": result_holder["data"]}) + "\n"
+                break
+            else:
+                yield json.dumps(item) + "\n"
+
+    return StreamingResponse(
+        event_stream(),
+        media_type="application/x-ndjson",
+        headers={"Access-Control-Allow-Origin": "*"}
+    )
 
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
+
 
 # --- Citation Generator ---
 from fastapi.responses import Response

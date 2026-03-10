@@ -1,0 +1,12 @@
+{
+  "sector": {
+    "sector": "technology",
+    "sub_sector": "software_services",
+    "confidence": 0.85
+  },
+  "sections_present": [
+    "business_description",
+    "key_milestones",
+    "swot"
+  ]
+}

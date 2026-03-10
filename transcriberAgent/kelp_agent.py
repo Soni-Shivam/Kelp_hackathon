@@ -4,10 +4,39 @@ import os
 import re
 import requests
 import io
+import queue
+import threading
 import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
+
+# ==========================================================
+# STREAMING LOG QUEUE (thread-safe, per-request)
+# ==========================================================
+_log_queue: queue.Queue = None  # type: ignore
+_log_lock = threading.Lock()
+
+def set_log_queue(q: queue.Queue):
+    global _log_queue
+    with _log_lock:
+        _log_queue = q
+
+def clear_log_queue():
+    global _log_queue
+    with _log_lock:
+        _log_queue = None
+
+def plog(msg: str, level: str = "info"):
+    """Print to stdout AND push to streaming log queue if one is active."""
+    print(msg)
+    with _log_lock:
+        if _log_queue is not None:
+            try:
+                _log_queue.put_nowait({"type": "log", "text": msg, "level": level})
+            except queue.Full:
+                pass
+
 
 # ==========================================================
 # 1. CONFIGURATION
@@ -15,8 +44,10 @@ load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
+MODEL_NAME = "gemini-3.1-pro-preview" 
 
-MODEL_NAME = "gemini-3-flash-preview" 
+# MODEL_NAME = "gemini-3-flash-preview" 
+# MODEL_NAME = "gemini-2.5-flash-lite"
 MAX_RETRIES = 4
 API_URL = "http://localhost:8000/trigger-agent"
 
@@ -147,7 +178,7 @@ MISSION: GENERATE "BLIND" TEASER JSON
 8. You must bold important words. do not overdo it. use markdown bold syntax ie **text**.
 9. ###. CITATION STRICTNESS [cite: 21, 60]
 * **Rule:** Every block MUST have a `citation` string. 
-* **Format:** If a block uses multiple sources (e.g., Private Financials + Public Blog), combine them: "Private Data Pack (Sheet 1) | TechCrunch Blog (2024)."
+* **Format:** If a block uses multiple sources (e.g., Private Financials + Public Blog), combine them: "Private: Paragraph Reference | Public: Screener URL"
 
 10. BLOCK TYPES
 Use these `block_type` values strategically:
@@ -155,7 +186,7 @@ Use these `block_type` values strategically:
 * `dashboard_grid`: For KPI boxes (Revenue, EBITDA).
 * `chart_complex`: For "Growth" or "Market Share" graphs.
 * `visual_map`: For "images"
-* `logo_grid`: For "Certifications" or "Client Logos" (Use placeholders like "Fortune 500 Client 1").
+* `logo_grid`: Only for "Certifications" or "Customers", use the actual logo names.
 
 11. Have the charts be of high quality, with proper labels and titles, and keep them in top half of the slide.
 12. Keep the text_deep_dive blocks to exactly **3 bullet points** and each point MUST have an letter count less than 110 character. But if the text_deep_dive is in the lower half and the number of blocks in the slide are odd then you can use maximum 130 characters for each bullet point. Also if there are 7 block being used and the text_deep_dive is in the top half of the slide then you can use maximum 70 characters for each bullet point.
@@ -440,7 +471,7 @@ def generate(prompt):
     )
 
     for i in range(MAX_RETRIES):
-        print(f"Generating... Attempt {i+1}")
+        plog(f"  → Calling {MODEL_NAME}... attempt {i+1}/{MAX_RETRIES}")
         try:
             response = model.generate_content(prompt)
             output = response.text
@@ -453,12 +484,13 @@ def generate(prompt):
             output = re.sub(r"```", "", output).strip()
 
             if validate_json(output):
+                plog(f"  ✔ JSON validated on attempt {i+1}", "success")
                 return output
             else:
-                print(f"Retry {i+1}: JSON Validation failed.")
+                plog(f"  ✘ JSON validation failed (attempt {i+1}), retrying...", "warn")
                 
         except Exception as e:
-            print(f"Retry {i+1} failed with error: {e}")
+            plog(f"  ✘ Attempt {i+1} error: {e}", "warn")
 
     raise Exception("Failed to generate valid JSON after retries")
 
@@ -471,17 +503,23 @@ def generate_presentation(api_data):
         raise Exception("No API data provided")
 
     # 1. Get merged canonical which has both private + public data
+    plog("  → Loading merged canonical (private + public)...")
     merged_canonical = get_merged_canonical(api_data)
-    print(f"Merged sections — private: {list(merged_canonical.get('private', {}).keys())}, public: {list(merged_canonical.get('public', {}).keys())}")
+    private_keys = list(merged_canonical.get('private', {}).keys())
+    public_keys = list(merged_canonical.get('public', {}).keys())
+    plog(f"  → Private sections: {private_keys}")
+    plog(f"  → Public sections: {public_keys}")
 
     private = merged_canonical.get("private", {})
 
     # 2. Extract private text sections
+    plog("  → Extracting text: business description, SWOT, milestones...")
     business_text = extract_text_from_section(private.get("business_description", {}))
     swot_text = extract_text_from_section(private.get("swot", {}))
     milestone_text = extract_text_from_section(private.get("key_milestones", {}))
 
     # 3. Extract financials via file paths from canonical
+    plog("  → Reading financial CSVs from canonical paths...")
     income, balance, cashflow, ratios = extract_financials_from_merged(merged_canonical)
     financial_summary = summarize_financials(income, balance, cashflow, ratios)
 
@@ -489,6 +527,7 @@ def generate_presentation(api_data):
     public_context = build_public_context(merged_canonical)
 
     # 5. Build Prompt — append public context after financials
+    plog("  → Building LLM prompt...")
     prompt = USER_INPUT_TEMPLATE.format(
         business=business_text,
         swot=swot_text,
@@ -497,10 +536,18 @@ def generate_presentation(api_data):
     )
 
     # 6. Generate Presentation
+    plog("", "info")
+    plog("--- LLM GENERATION ---", "step")
     presentation = generate(prompt)
     presentation_json = json.loads(presentation)
 
+    slide_count = len(presentation_json.get("slides", []))
+    block_count = sum(len(s.get("blocks", [])) for s in presentation_json.get("slides", []))
+    plog(f"  ✔ Generated {slide_count} slides, {block_count} blocks", "success")
+
     # 7. Post-Processing: Fetch Images for Visual Maps & Convert Metrics
+    plog("", "info")
+    plog("--- IMAGE ENRICHMENT ---", "step")
     presentation_json = enrich_presentation_with_images(presentation_json)
 
     return presentation_json
@@ -522,7 +569,7 @@ def enrich_presentation_with_images(presentation_json):
         if not os.path.exists(static_dir):
             os.makedirs(static_dir)
 
-        print("\n--- Starting Image Enrichment & Metric Conversion ---")
+        plog("  → Scanning all blocks for visual_map, logo_grid, dashboard_grid...")
         for slide in presentation_json.get("slides", []):
             for block in slide.get("blocks", []):
                 
@@ -556,16 +603,16 @@ def enrich_presentation_with_images(presentation_json):
                             # Fallback if empty
                             if not clean_prompt: clean_prompt = f"{heading} cinematic detail"
                             
-                            print(f"🎨 GENERATIVE MODE detected for block {block.get('block_id')}")
+                            plog(f"🎨 GENERATIVE MODE detected for block {block.get('block_id')} — '{heading}'")
+                            plog(f"   Generating image for prompt: {clean_prompt[:80]}...")
                             
                             filename = generate_images(prompt=clean_prompt, save_folder=static_dir)
                             
                             if filename:
                                 block["image_url"] = f"http://localhost:8001/images/{filename}"
-                                print(f"Attached Generated Image: {block['image_url']}")
+                                plog(f"   ✔ Attached Generated Image: {filename}", "success")
                             else:
-                                print("Generation failed, falling back to placeholder.")
-                                # Fallback
+                                plog("   ✘ Generation failed, using placeholder.", "warn")
                                 block["image_url"] = "http://localhost:8001/images/abstract_financial_growth_blue_and_silver_8k_0.jpg"
 
                         # 2. Search Mode (Default)
@@ -578,13 +625,13 @@ def enrich_presentation_with_images(presentation_json):
                                 clean_query = f"{presentation_json.get('sector', '')} {heading} {prompt}"
                                 clean_query = clean_query[:100]
 
-                            print(f"🔍 SEARCH MODE detected for block {block.get('block_id')}: {clean_query}")
+                            plog(f"🔍 SEARCH MODE for block {block.get('block_id')}: '{clean_query[:60]}...'") 
                             
                             # Fetch 1 image
                             try:
                                 fetch_google_images(query=clean_query, num_images=1, save_folder=static_dir)
                             except Exception as e:
-                                print(f"Search fetch failed: {e}")
+                                plog(f"   ✘ Search fetch failed: {e}", "warn")
                             
                             # Guess filename (Search handler uses query -> filename)
                             sanitized_query = clean_query.replace(' ', '_')
@@ -594,14 +641,44 @@ def enrich_presentation_with_images(presentation_json):
                             
                             if os.path.exists(image_path):
                                 block["image_url"] = f"http://localhost:8001/images/{expected_filename}"
-                                print(f"Attached Search Image: {block['image_url']}")
+                                plog(f"   ✔ Attached Search Image: {expected_filename}", "success")
                             else:
-                                print(f"Warning: Search Image not found at {image_path}. Using fallback.")
+                                plog(f"   ✘ Search image not found, using placeholder.", "warn")
                                 block["image_url"] = "http://localhost:8001/images/abstract_financial_growth_blue_and_silver_8k_0.jpg"
 
                     except Exception as img_err:
-                        print(f"Failed to process image for block: {img_err}")
+                        plog(f"   ✘ Image processing failed: {img_err}", "warn")
                         block["image_url"] = "http://localhost:8001/images/abstract_financial_growth_blue_and_silver_8k_0.jpg"
+
+                # C. Logo Grid: Fetch actual logos via Google Image Search
+                if block.get("block_type") == "logo_grid":
+                    logos = block.get("logos", [])
+                    logo_urls = []
+
+                    for logo_name in logos:
+                        try:
+                            search_query = f"{logo_name} company logo"
+                            search_query = search_query[:80]
+
+                            plog(f"🏷️  Fetching logo for: {logo_name}")
+                            fetch_google_images(query=search_query, num_images=1, save_folder=static_dir)
+
+                            sanitized = search_query.replace(' ', '_')
+                            expected_filename = f"{sanitized}_0.jpg"
+                            image_path = os.path.join(static_dir, expected_filename)
+
+                            if os.path.exists(image_path):
+                                url = f"http://localhost:8001/images/{expected_filename}"
+                                logo_urls.append(url)
+                                plog(f"   ✔ Logo: {logo_name} → {expected_filename}", "success")
+                            else:
+                                logo_urls.append(None)
+                                plog(f"   ✘ Logo not found for: {logo_name}", "warn")
+                        except Exception as logo_err:
+                            plog(f"   ✘ Logo fetch error for '{logo_name}': {logo_err}", "warn")
+                            logo_urls.append(None)
+
+                    block["logo_urls"] = logo_urls
                         
     except ImportError as e:
         print(f"Warning: Could not import imageAgent.handler: {e}. Image enrichment skipped.")

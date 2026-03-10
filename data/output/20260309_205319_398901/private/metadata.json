@@ -1,0 +1,12 @@
+{
+  "sector": {
+    "sector": "manufacturing",
+    "sub_sector": "industrial_components",
+    "confidence": 0.9
+  },
+  "sections_present": [
+    "business_description",
+    "key_milestones",
+    "swot"
+  ]
+}

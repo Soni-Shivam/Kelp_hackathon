@@ -1,0 +1,217 @@
+metric,year,value
+- Revenue From Operations,2014,None
+- Revenue From Operations,2015,None
+- Revenue From Operations,2016,None
+- Revenue From Operations,2017,None
+- Revenue From Operations,2018,None
+- Revenue From Operations,2019,None
+- Revenue From Operations,2020,None
+- Revenue From Operations,2021,None
+- Revenue From Operations,2022,68.2
+- Revenue From Operations,2023,253.7
+- Revenue From Operations,2024,611.5
+- Revenue From Operations,2025,959.9
+- Revenue From Sale of Products,2014,None
+- Revenue From Sale of Products,2015,None
+- Revenue From Sale of Products,2016,None
+- Revenue From Sale of Products,2017,None
+- Revenue From Sale of Products,2018,None
+- Revenue From Sale of Products,2019,None
+- Revenue From Sale of Products,2020,None
+- Revenue From Sale of Products,2021,None
+- Revenue From Sale of Products,2022,None
+- Revenue From Sale of Products,2023,0.2
+- Revenue From Sale of Products,2024,None
+- Revenue From Sale of Products,2025,1.2
+- Revenue From Sale of Services,2014,None
+- Revenue From Sale of Services,2015,None
+- Revenue From Sale of Services,2016,None
+- Revenue From Sale of Services,2017,None
+- Revenue From Sale of Services,2018,None
+- Revenue From Sale of Services,2019,None
+- Revenue From Sale of Services,2020,None
+- Revenue From Sale of Services,2021,None
+- Revenue From Sale of Services,2022,68.2
+- Revenue From Sale of Services,2023,253.5
+- Revenue From Sale of Services,2024,611.5
+- Revenue From Sale of Services,2025,958.7
+- Export Revenue Services,2014,None
+- Export Revenue Services,2015,None
+- Export Revenue Services,2016,None
+- Export Revenue Services,2017,None
+- Export Revenue Services,2018,None
+- Export Revenue Services,2019,None
+- Export Revenue Services,2020,None
+- Export Revenue Services,2021,None
+- Export Revenue Services,2022,None
+- Export Revenue Services,2023,None
+- Export Revenue Services,2024,None
+- Export Revenue Services,2025,None
+- Domestic Revenue Services,2014,None
+- Domestic Revenue Services,2015,None
+- Domestic Revenue Services,2016,None
+- Domestic Revenue Services,2017,None
+- Domestic Revenue Services,2018,None
+- Domestic Revenue Services,2019,None
+- Domestic Revenue Services,2020,None
+- Domestic Revenue Services,2021,None
+- Domestic Revenue Services,2022,None
+- Domestic Revenue Services,2023,None
+- Domestic Revenue Services,2024,None
+- Domestic Revenue Services,2025,None
+- Employee Benefit Expense,2014,None
+- Employee Benefit Expense,2015,None
+- Employee Benefit Expense,2016,None
+- Employee Benefit Expense,2017,None
+- Employee Benefit Expense,2018,None
+- Employee Benefit Expense,2019,None
+- Employee Benefit Expense,2020,None
+- Employee Benefit Expense,2021,None
+- Employee Benefit Expense,2022,10.1
+- Employee Benefit Expense,2023,20.1
+- Employee Benefit Expense,2024,35.5
+- Employee Benefit Expense,2025,52.5
+- Other Total Expenses,2014,None
+- Other Total Expenses,2015,None
+- Other Total Expenses,2016,None
+- Other Total Expenses,2017,None
+- Other Total Expenses,2018,None
+- Other Total Expenses,2019,None
+- Other Total Expenses,2020,None
+- Other Total Expenses,2021,None
+- Other Total Expenses,2022,None
+- Other Total Expenses,2023,None
+- Other Total Expenses,2024,None
+- Other Total Expenses,2025,None
+- Operating EBITDA,2014,None
+- Operating EBITDA,2015,None
+- Operating EBITDA,2016,None
+- Operating EBITDA,2017,None
+- Operating EBITDA,2018,None
+- Operating EBITDA,2019,None
+- Operating EBITDA,2020,None
+- Operating EBITDA,2021,None
+- Operating EBITDA,2022,14
+- Operating EBITDA,2023,26.300000000000015
+- Operating EBITDA,2024,61.999999999999936
+- Operating EBITDA,2025,262.50000000000006
+"- Total depreciation, depletion and amortisation expense",2014,None
+"- Total depreciation, depletion and amortisation expense",2015,None
+"- Total depreciation, depletion and amortisation expense",2016,None
+"- Total depreciation, depletion and amortisation expense",2017,None
+"- Total depreciation, depletion and amortisation expense",2018,None
+"- Total depreciation, depletion and amortisation expense",2019,None
+"- Total depreciation, depletion and amortisation expense",2020,None
+"- Total depreciation, depletion and amortisation expense",2021,None
+"- Total depreciation, depletion and amortisation expense",2022,3.2
+"- Total depreciation, depletion and amortisation expense",2023,6.4
+"- Total depreciation, depletion and amortisation expense",2024,11.6
+"- Total depreciation, depletion and amortisation expense",2025,15.6
+- Other Income,2014,None
+- Other Income,2015,None
+- Other Income,2016,None
+- Other Income,2017,None
+- Other Income,2018,None
+- Other Income,2019,None
+- Other Income,2020,None
+- Other Income,2021,None
+- Other Income,2022,1.5
+- Other Income,2023,2.2
+- Other Income,2024,4.9
+- Other Income,2025,5.9
+- PBT,2014,None
+- PBT,2015,None
+- PBT,2016,None
+- PBT,2017,None
+- PBT,2018,None
+- PBT,2019,None
+- PBT,2020,None
+- PBT,2021,None
+- PBT,2022,12
+- PBT,2023,21.700000000000017
+- PBT,2024,54.69999999999993
+- PBT,2025,251.5
+- Tax expense,2014,None
+- Tax expense,2015,None
+- Tax expense,2016,None
+- Tax expense,2017,None
+- Tax expense,2018,None
+- Tax expense,2019,None
+- Tax expense,2020,None
+- Tax expense,2021,None
+- Tax expense,2022,3.2
+- Tax expense,2023,3.1
+- Tax expense,2024,14.2
+- Tax expense,2025,67.6
+- PAT,2014,None
+- PAT,2015,None
+- PAT,2016,None
+- PAT,2017,None
+- PAT,2018,None
+- PAT,2019,None
+- PAT,2020,None
+- PAT,2021,None
+- PAT,2022,8.8
+- PAT,2023,18.600000000000016
+- PAT,2024,40.49999999999993
+- PAT,2025,183.9
+- Net profit before tax and extra ordinary income,2014,None
+- Net profit before tax and extra ordinary income,2015,None
+- Net profit before tax and extra ordinary income,2016,None
+- Net profit before tax and extra ordinary income,2017,None
+- Net profit before tax and extra ordinary income,2018,None
+- Net profit before tax and extra ordinary income,2019,None
+- Net profit before tax and extra ordinary income,2020,None
+- Net profit before tax and extra ordinary income,2021,None
+- Net profit before tax and extra ordinary income,2022,11.8
+- Net profit before tax and extra ordinary income,2023,21.9
+- Net profit before tax and extra ordinary income,2024,55.1
+- Net profit before tax and extra ordinary income,2025,257.4
+- Adjustments for non-cash and non-operating expenses and income,2014,None
+- Adjustments for non-cash and non-operating expenses and income,2015,None
+- Adjustments for non-cash and non-operating expenses and income,2016,None
+- Adjustments for non-cash and non-operating expenses and income,2017,None
+- Adjustments for non-cash and non-operating expenses and income,2018,None
+- Adjustments for non-cash and non-operating expenses and income,2019,None
+- Adjustments for non-cash and non-operating expenses and income,2020,None
+- Adjustments for non-cash and non-operating expenses and income,2021,None
+- Adjustments for non-cash and non-operating expenses and income,2022,3.4
+- Adjustments for non-cash and non-operating expenses and income,2023,6.7
+- Adjustments for non-cash and non-operating expenses and income,2024,8.1
+- Adjustments for non-cash and non-operating expenses and income,2025,6
+- Revenue From Operations,2014,None
+- Revenue From Operations,2015,None
+- Revenue From Operations,2016,None
+- Revenue From Operations,2017,None
+- Revenue From Operations,2018,None
+- Revenue From Operations,2019,None
+- Revenue From Operations,2020,None
+- Revenue From Operations,2021,None
+- Revenue From Operations,2022,68.2
+- Revenue From Operations,2023,253.7
+- Revenue From Operations,2024,611.5
+- Revenue From Operations,2025,959.9
+- Operating EBITDA,2014,None
+- Operating EBITDA,2015,None
+- Operating EBITDA,2016,None
+- Operating EBITDA,2017,None
+- Operating EBITDA,2018,None
+- Operating EBITDA,2019,None
+- Operating EBITDA,2020,None
+- Operating EBITDA,2021,None
+- Operating EBITDA,2022,14
+- Operating EBITDA,2023,26.300000000000015
+- Operating EBITDA,2024,61.999999999999936
+- Operating EBITDA,2025,262.50000000000006
+- PAT Margin,2014,None
+- PAT Margin,2015,None
+- PAT Margin,2016,None
+- PAT Margin,2017,None
+- PAT Margin,2018,None
+- PAT Margin,2019,None
+- PAT Margin,2020,None
+- PAT Margin,2021,None
+- PAT Margin,2022,12.625538020086083
+- PAT Margin,2023,7.268464243845258
+- PAT Margin,2024,6.570408825438016
+- PAT Margin,2025,19.041209360115968

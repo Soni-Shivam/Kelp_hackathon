@@ -1,0 +1,78 @@
+{
+  "company_identity": {
+    "official_name": "Connplex Cinemas Ltd"
+  },
+  "sections": {
+    "company_profile": {
+      "source": "screener",
+      "raw_text": "About\nIncorporated in 2015, Connplex Cinemas Ltd is in the business of running a chain of cinemas\n[1]\nKey Points\nBusiness Overview:\n[1]\nCCL is an entertainment company which does business under the brand name\nCONNPLEX\nand other Brands registered under the name of the company. It deals in:\na)\nDevelopment of theatres\nb)\nEntering into the franchise agreements specializing for exhibition and distribution of films\nc)\nSharing revenue of screening of\nmovies, sale of food & beverages and advertisements at various Franchised\nCinema, and other related business\nd)\nCollaboration with filmmakers and\nstudios to distribute films across its\ntheatres and digital platforms, focusing\non marketing to maximize audience reach.\ne)\nIt also provides event spaces for private screenings, corporate events, and community gatherings, creating additional revenue streams\nRead More\nWebsite\nNSE\n                - SM"
+    },
+    "market_presence": {
+      "source": "screener",
+      "raw_fields": {
+        "Market Cap": "\u20b9\n        454\n        \n          Cr.",
+        "Current Price": "\u20b9\n        238",
+        "High / Low": "\u20b9 293 / 177",
+        "Stock P/E": "20.2",
+        "Book Value": "\u20b9\n        63.5",
+        "Dividend Yield": "0.00\n        \n          %",
+        "ROCE": "163\n        \n          %",
+        "ROE": "124\n        \n          %",
+        "Face Value": "\u20b9\n        10.0"
+      }
+    },
+    "peers": {
+      "source": "screener",
+      "companies": [
+        {
+          "name": "Sales+",
+          "market_cap": "41"
+        },
+        {
+          "name": "Expenses+",
+          "market_cap": "28"
+        },
+        {
+          "name": "Operating Profit",
+          "market_cap": "13"
+        },
+        {
+          "name": "OPM %",
+          "market_cap": "31%"
+        },
+        {
+          "name": "Other Income+",
+          "market_cap": "1"
+        },
+        {
+          "name": "Interest",
+          "market_cap": "0"
+        },
+        {
+          "name": "Depreciation",
+          "market_cap": "1"
+        },
+        {
+          "name": "Profit before tax",
+          "market_cap": "13"
+        },
+        {
+          "name": "Tax %",
+          "market_cap": "25%"
+        },
+        {
+          "name": "Net Profit+",
+          "market_cap": "10"
+        },
+        {
+          "name": "EPS in Rs",
+          "market_cap": "191.80"
+        },
+        {
+          "name": "Raw PDF",
+          "market_cap": ""
+        }
+      ]
+    }
+  }
+}

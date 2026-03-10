@@ -95,7 +95,7 @@ const renderBlock = (block: SlideBlock, slideNumber: number, isEditMode: boolean
         case 'visual_map':
             return <VisualMapBlock heading={block.heading} detailed_image_prompt={block.detailed_image_prompt} image_url={block.image_url} />;
         case 'logo_grid':
-            return <LogoGridBlock heading={block.heading} logos={block.logos} />;
+            return <LogoGridBlock heading={block.heading} logos={block.logos} logo_urls={block.logo_urls} />;
         case 'composite_block':
             return <CompositeBlock heading={block.heading} subBlocks={block.sub_blocks} subBlockHeadings={block.sub_block_headings} slideNumber={slideNumber} />;
         default:
