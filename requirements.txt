@@ -1,0 +1,21 @@
+# Core API Framework
+fastapi
+uvicorn[standard]
+pydantic
+
+# Google AI SDKs
+google-generativeai
+google-genai
+
+# Environment & Config
+python-dotenv
+
+# HTTP & Web Scraping
+requests
+beautifulsoup4
+
+# Data Processing
+pandas
+
+# Typing
+typing-extensions
